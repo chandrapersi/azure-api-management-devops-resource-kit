@@ -1,0 +1,1897 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "apimServiceName": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis",
+      "name": "[concat(parameters('apimServiceName'), '/echo-api')]",
+      "dependsOn": [],
+      "properties": {
+        "authenticationSettings": {
+          "subscriptionKeyRequired": false
+        },
+        "subscriptionKeyParameterNames": {
+          "header": "Ocp-Apim-Subscription-Key",
+          "query": "subscription-key"
+        },
+        "apiRevision": "1",
+        "isCurrent": true,
+        "subscriptionRequired": true,
+        "displayName": "Echo API",
+        "serviceUrl": "http://echoapi.cloudapp.net/api",
+        "path": "echo",
+        "protocols": [
+          "https"
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730')]",
+      "dependsOn": [],
+      "properties": {
+        "description": "This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
+        "authenticationSettings": {
+          "subscriptionKeyRequired": false
+        },
+        "subscriptionKeyParameterNames": {
+          "header": "Ocp-Apim-Subscription-Key",
+          "query": "subscription-key"
+        },
+        "apiRevision": "1",
+        "isCurrent": true,
+        "subscriptionRequired": true,
+        "displayName": "Swagger Petstore",
+        "serviceUrl": "https://petstore.swagger.io/v2",
+        "path": "petstore",
+        "protocols": [
+          "http",
+          "https"
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/schemas",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/626677474634610edcbff8bc')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730')]"
+      ],
+      "properties": {
+        "contentType": "application/vnd.ms-azure-apim.swagger.definitions+json",
+        "document": {
+          "definitions": {
+            "ApiResponse": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            },
+            "Category": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "xml": {
+                "name": "Category"
+              }
+            },
+            "Pet": {
+              "type": "object",
+              "required": [
+                "name",
+                "photoUrls"
+              ],
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "category": {
+                  "$ref": "#/definitions/Category"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "doggie"
+                },
+                "photoUrls": {
+                  "type": "array",
+                  "xml": {
+                    "wrapped": true
+                  },
+                  "items": {
+                    "type": "string",
+                    "xml": {
+                      "name": "photoUrl"
+                    }
+                  }
+                },
+                "tags": {
+                  "type": "array",
+                  "xml": {
+                    "wrapped": true
+                  },
+                  "items": {
+                    "xml": {
+                      "name": "tag"
+                    },
+                    "$ref": "#/definitions/Tag"
+                  }
+                },
+                "status": {
+                  "type": "string",
+                  "description": "pet status in the store",
+                  "enum": [
+                    "available",
+                    "pending",
+                    "sold"
+                  ]
+                }
+              },
+              "xml": {
+                "name": "Pet"
+              }
+            },
+            "Tag": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "xml": {
+                "name": "Tag"
+              }
+            },
+            "Order": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "petId": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "quantity": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "shipDate": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "status": {
+                  "type": "string",
+                  "description": "Order Status",
+                  "enum": [
+                    "placed",
+                    "approved",
+                    "delivered"
+                  ]
+                },
+                "complete": {
+                  "type": "boolean"
+                }
+              },
+              "xml": {
+                "name": "Order"
+              }
+            },
+            "User": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "username": {
+                  "type": "string"
+                },
+                "firstName": {
+                  "type": "string"
+                },
+                "lastName": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "phone": {
+                  "type": "string"
+                },
+                "userStatus": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "User Status"
+                }
+              },
+              "xml": {
+                "name": "User"
+              }
+            },
+            "PetArray": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Pet"
+              }
+            },
+            "StoreInventoryGet200ApplicationJsonResponse": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "UserArray": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            },
+            "UserLoginGet200ApplicationJsonResponse": {
+              "type": "string"
+            },
+            "UserLoginGet200ApplicationXmlResponse": {
+              "type": "string"
+            }
+          },
+          "value": "{\r\n  \"ApiResponse\": {\r\n    \"type\": \"object\",\r\n    \"properties\": {\r\n      \"code\": {\r\n        \"type\": \"integer\",\r\n        \"format\": \"int32\"\r\n      },\r\n      \"type\": {\r\n        \"type\": \"string\"\r\n      },\r\n      \"message\": {\r\n        \"type\": \"string\"\r\n      }\r\n    }\r\n  },\r\n  \"Category\": {\r\n    \"type\": \"object\",\r\n    \"properties\": {\r\n      \"id\": {\r\n        \"type\": \"integer\",\r\n        \"format\": \"int64\"\r\n      },\r\n      \"name\": {\r\n        \"type\": \"string\"\r\n      }\r\n    },\r\n    \"xml\": {\r\n      \"name\": \"Category\"\r\n    }\r\n  },\r\n  \"Pet\": {\r\n    \"type\": \"object\",\r\n    \"required\": [\r\n      \"name\",\r\n      \"photoUrls\"\r\n    ],\r\n    \"properties\": {\r\n      \"id\": {\r\n        \"type\": \"integer\",\r\n        \"format\": \"int64\"\r\n      },\r\n      \"category\": {\r\n        \"$ref\": \"#/definitions/Category\"\r\n      },\r\n      \"name\": {\r\n        \"type\": \"string\",\r\n        \"example\": \"doggie\"\r\n      },\r\n      \"photoUrls\": {\r\n        \"type\": \"array\",\r\n        \"xml\": {\r\n          \"wrapped\": true\r\n        },\r\n        \"items\": {\r\n          \"type\": \"string\",\r\n          \"xml\": {\r\n            \"name\": \"photoUrl\"\r\n          }\r\n        }\r\n      },\r\n      \"tags\": {\r\n        \"type\": \"array\",\r\n        \"xml\": {\r\n          \"wrapped\": true\r\n        },\r\n        \"items\": {\r\n          \"xml\": {\r\n            \"name\": \"tag\"\r\n          },\r\n          \"$ref\": \"#/definitions/Tag\"\r\n        }\r\n      },\r\n      \"status\": {\r\n        \"type\": \"string\",\r\n        \"description\": \"pet status in the store\",\r\n        \"enum\": [\r\n          \"available\",\r\n          \"pending\",\r\n          \"sold\"\r\n        ]\r\n      }\r\n    },\r\n    \"xml\": {\r\n      \"name\": \"Pet\"\r\n    }\r\n  },\r\n  \"Tag\": {\r\n    \"type\": \"object\",\r\n    \"properties\": {\r\n      \"id\": {\r\n        \"type\": \"integer\",\r\n        \"format\": \"int64\"\r\n      },\r\n      \"name\": {\r\n        \"type\": \"string\"\r\n      }\r\n    },\r\n    \"xml\": {\r\n      \"name\": \"Tag\"\r\n    }\r\n  },\r\n  \"Order\": {\r\n    \"type\": \"object\",\r\n    \"properties\": {\r\n      \"id\": {\r\n        \"type\": \"integer\",\r\n        \"format\": \"int64\"\r\n      },\r\n      \"petId\": {\r\n        \"type\": \"integer\",\r\n        \"format\": \"int64\"\r\n      },\r\n      \"quantity\": {\r\n        \"type\": \"integer\",\r\n        \"format\": \"int32\"\r\n      },\r\n      \"shipDate\": {\r\n        \"type\": \"string\",\r\n        \"format\": \"date-time\"\r\n      },\r\n      \"status\": {\r\n        \"type\": \"string\",\r\n        \"description\": \"Order Status\",\r\n        \"enum\": [\r\n          \"placed\",\r\n          \"approved\",\r\n          \"delivered\"\r\n        ]\r\n      },\r\n      \"complete\": {\r\n        \"type\": \"boolean\"\r\n      }\r\n    },\r\n    \"xml\": {\r\n      \"name\": \"Order\"\r\n    }\r\n  },\r\n  \"User\": {\r\n    \"type\": \"object\",\r\n    \"properties\": {\r\n      \"id\": {\r\n        \"type\": \"integer\",\r\n        \"format\": \"int64\"\r\n      },\r\n      \"username\": {\r\n        \"type\": \"string\"\r\n      },\r\n      \"firstName\": {\r\n        \"type\": \"string\"\r\n      },\r\n      \"lastName\": {\r\n        \"type\": \"string\"\r\n      },\r\n      \"email\": {\r\n        \"type\": \"string\"\r\n      },\r\n      \"password\": {\r\n        \"type\": \"string\"\r\n      },\r\n      \"phone\": {\r\n        \"type\": \"string\"\r\n      },\r\n      \"userStatus\": {\r\n        \"type\": \"integer\",\r\n        \"format\": \"int32\",\r\n        \"description\": \"User Status\"\r\n      }\r\n    },\r\n    \"xml\": {\r\n      \"name\": \"User\"\r\n    }\r\n  },\r\n  \"PetArray\": {\r\n    \"type\": \"array\",\r\n    \"items\": {\r\n      \"$ref\": \"#/definitions/Pet\"\r\n    }\r\n  },\r\n  \"StoreInventoryGet200ApplicationJsonResponse\": {\r\n    \"type\": \"object\",\r\n    \"additionalProperties\": {\r\n      \"type\": \"integer\",\r\n      \"format\": \"int32\"\r\n    }\r\n  },\r\n  \"UserArray\": {\r\n    \"type\": \"array\",\r\n    \"items\": {\r\n      \"$ref\": \"#/definitions/User\"\r\n    }\r\n  },\r\n  \"UserLoginGet200ApplicationJsonResponse\": {\r\n    \"type\": \"string\"\r\n  },\r\n  \"UserLoginGet200ApplicationXmlResponse\": {\r\n    \"type\": \"string\"\r\n  }\r\n}"
+        }
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/diagnostics",
+      "name": "[concat(parameters('apimServiceName'), '/applicationinsights')]",
+      "dependsOn": [],
+      "properties": {
+        "alwaysLog": "allErrors",
+        "loggerId": "/subscriptions/510e61ea-804b-489a-b0d1-775d711fe7c0/resourceGroups/APIM-POC/providers/Microsoft.ApiManagement/service/p-apim-poc/loggers/appi-psl-dev-g7iea-logs",
+        "httpCorrelationProtocol": "Legacy",
+        "logClientIp": true,
+        "sampling": {
+          "samplingType": "fixed",
+          "percentage": 100.0
+        },
+        "frontend": {
+          "request": {}
+        },
+        "backend": {
+          "request": {}
+        }
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/starter/echo-api')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), 'echo-api')]"
+      ],
+      "properties": {
+        "displayName": "Starter",
+        "description": "Subscribers will be able to run 5 calls/minute up to a maximum of 100 calls/week.",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/unlimited/echo-api')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'starter', 'echo-api')]"
+      ],
+      "properties": {
+        "displayName": "Unlimited",
+        "description": "Subscribers have completely unlimited access to the API. Administrator approval is required.",
+        "subscriptionRequired": true,
+        "approvalRequired": true,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/cfd6560de1594b03bab78e1073aa1724/6b60079d96b446329099b0c406643730')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730')]"
+      ],
+      "properties": {
+        "displayName": "Pet Store Product",
+        "description": "Product giving access to Petstore api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/echo-api/create-resource')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), 'echo-api')]"
+      ],
+      "properties": {
+        "displayName": "Create resource",
+        "method": "POST",
+        "urlTemplate": "/resource",
+        "description": "A demonstration of a POST call based on the echo backend above. The request body is expected to contain JSON-formatted data (see example below). A policy is used to automatically transform any request sent in JSON directly to XML. In a real-world scenario this could be used to enable modern clients to speak to a legacy backend.",
+        "templateParameters": [],
+        "request": {
+          "headers": [],
+          "queryParameters": [],
+          "representations": [
+            {
+              "contentType": "application/json",
+              "sample": "{\r\n\t\"vehicleType\": \"train\",\r\n\t\"maxSpeed\": 125,\r\n\t\"avgSpeed\": 90,\r\n\t\"speedUnit\": \"mph\"\r\n}"
+            }
+          ]
+        },
+        "responses": [
+          {
+            "headers": [],
+            "representations": [],
+            "statusCode": 200
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/echo-api/modify-resource')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), 'echo-api')]"
+      ],
+      "properties": {
+        "displayName": "Modify Resource",
+        "method": "PUT",
+        "urlTemplate": "/resource",
+        "description": "A demonstration of a PUT call handled by the same \"echo\" backend as above. You can now specify a request body in addition to headers and it will be returned as well.",
+        "templateParameters": [],
+        "responses": [
+          {
+            "headers": [],
+            "representations": [],
+            "statusCode": 200
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/echo-api/remove-resource')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), 'echo-api')]"
+      ],
+      "properties": {
+        "displayName": "Remove resource",
+        "method": "DELETE",
+        "urlTemplate": "/resource",
+        "description": "A demonstration of a DELETE call which traditionally deletes the resource. It is based on the same \"echo\" backend as in all other operations so nothing is actually deleted.",
+        "templateParameters": [],
+        "responses": [
+          {
+            "headers": [],
+            "representations": [],
+            "statusCode": 200
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/echo-api/retrieve-header-only')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), 'echo-api')]"
+      ],
+      "properties": {
+        "displayName": "Retrieve header only",
+        "method": "HEAD",
+        "urlTemplate": "/resource",
+        "description": "The HEAD operation returns only headers. In this demonstration a policy is used to set additional headers when the response is returned and to enable JSONP.",
+        "templateParameters": [],
+        "responses": [
+          {
+            "headers": [],
+            "representations": [],
+            "statusCode": 200
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/echo-api/retrieve-resource')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), 'echo-api')]"
+      ],
+      "properties": {
+        "displayName": "Retrieve resource",
+        "method": "GET",
+        "urlTemplate": "/resource",
+        "description": "A demonstration of a GET call on a sample resource. It is handled by an \"echo\" backend which returns a response equal to the request (the supplied headers and body are being returned as received).",
+        "templateParameters": [],
+        "request": {
+          "headers": [],
+          "queryParameters": [
+            {
+              "defaultValue": "sample",
+              "description": "A sample parameter that is required and has a default value of \"sample\".",
+              "name": "param1",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "description": "Another sample parameter, set to not required.",
+              "name": "param2",
+              "required": false,
+              "type": "number"
+            }
+          ],
+          "representations": []
+        },
+        "responses": [
+          {
+            "description": "Returned in all cases.",
+            "headers": [],
+            "representations": [],
+            "statusCode": 200
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/echo-api/retrieve-resource-cached')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), 'echo-api')]"
+      ],
+      "properties": {
+        "displayName": "Retrieve resource (cached)",
+        "method": "GET",
+        "urlTemplate": "/resource-cached",
+        "description": "A demonstration of a GET call with caching enabled on the same \"echo\" backend as above. Cache TTL is set to 1 hour. When you make the first request the headers you supplied will be cached. Subsequent calls will return the same headers as the first time even if you change them in your request.",
+        "templateParameters": [],
+        "request": {
+          "headers": [],
+          "queryParameters": [
+            {
+              "defaultValue": "sample",
+              "description": "A sample parameter that is required and has a default value of \"sample\".",
+              "name": "param1",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "description": "Another sample parameter, set to not required.",
+              "name": "param2",
+              "required": false,
+              "type": "string"
+            }
+          ],
+          "representations": []
+        },
+        "responses": [
+          {
+            "headers": [],
+            "representations": [],
+            "statusCode": 200
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/addPet')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', '626677474634610edcbff8bc')]"
+      ],
+      "properties": {
+        "displayName": "Add a new pet to the store",
+        "method": "POST",
+        "urlTemplate": "/pet",
+        "description": "",
+        "templateParameters": [],
+        "request": {
+          "description": "Pet object that needs to be added to the store",
+          "headers": [],
+          "queryParameters": [],
+          "representations": [
+            {
+              "contentType": "application/json",
+              "schemaId": "626677474634610edcbff8bc",
+              "typeName": "Pet",
+              "sample": "{\r\n  \"id\": 0,\r\n  \"category\": {\r\n    \"id\": 0,\r\n    \"name\": \"string\"\r\n  },\r\n  \"name\": \"doggie\",\r\n  \"photoUrls\": [\r\n    \"string\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"string\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}"
+            },
+            {
+              "contentType": "application/xml",
+              "schemaId": "626677474634610edcbff8bc",
+              "typeName": "Pet",
+              "sample": "<Pet>\r\n  <id>0</id>\r\n  <Category>\r\n    <id>0</id>\r\n    <name>string</name>\r\n  </Category>\r\n  <name>doggie</name>\r\n  <photoUrls>\r\n    <photoUrl>string</photoUrl>\r\n  </photoUrls>\r\n  <tags>\r\n    <Tag>\r\n      <id>0</id>\r\n      <name>string</name>\r\n    </Tag>\r\n  </tags>\r\n  <status>available</status>\r\n</Pet>"
+            }
+          ]
+        },
+        "responses": [
+          {
+            "description": "Invalid input",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json"
+              },
+              {
+                "contentType": "application/xml"
+              }
+            ],
+            "statusCode": 405
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/createUser')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', '626677474634610edcbff8bc')]"
+      ],
+      "properties": {
+        "displayName": "Create user",
+        "method": "POST",
+        "urlTemplate": "/user",
+        "description": "This can only be done by the logged in user.",
+        "templateParameters": [],
+        "request": {
+          "description": "Created user object",
+          "headers": [],
+          "queryParameters": [],
+          "representations": [
+            {
+              "contentType": "application/json",
+              "schemaId": "626677474634610edcbff8bc",
+              "typeName": "User",
+              "sample": "{\r\n  \"id\": 0,\r\n  \"username\": \"string\",\r\n  \"firstName\": \"string\",\r\n  \"lastName\": \"string\",\r\n  \"email\": \"string\",\r\n  \"password\": \"string\",\r\n  \"phone\": \"string\",\r\n  \"userStatus\": 0\r\n}"
+            }
+          ]
+        },
+        "responses": [
+          {
+            "description": "successful operation",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json"
+              },
+              {
+                "contentType": "application/xml"
+              }
+            ],
+            "statusCode": 200
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/createUsersWithListInput')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', '626677474634610edcbff8bc')]"
+      ],
+      "properties": {
+        "displayName": "Creates list of users with given input array",
+        "method": "POST",
+        "urlTemplate": "/user/createWithList",
+        "description": "",
+        "templateParameters": [],
+        "request": {
+          "description": "List of user object",
+          "headers": [],
+          "queryParameters": [],
+          "representations": [
+            {
+              "contentType": "application/json",
+              "schemaId": "626677474634610edcbff8bc",
+              "typeName": "UserArray",
+              "sample": "[\r\n  {\r\n    \"id\": 0,\r\n    \"username\": \"string\",\r\n    \"firstName\": \"string\",\r\n    \"lastName\": \"string\",\r\n    \"email\": \"string\",\r\n    \"password\": \"string\",\r\n    \"phone\": \"string\",\r\n    \"userStatus\": 0\r\n  }\r\n]"
+            }
+          ]
+        },
+        "responses": [
+          {
+            "description": "successful operation",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json"
+              },
+              {
+                "contentType": "application/xml"
+              }
+            ],
+            "statusCode": 200
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/createUsersWithArrayInput')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', '626677474634610edcbff8bc')]"
+      ],
+      "properties": {
+        "displayName": "Creates list of users with given input array",
+        "method": "POST",
+        "urlTemplate": "/user/createWithArray",
+        "description": "",
+        "templateParameters": [],
+        "request": {
+          "description": "List of user object",
+          "headers": [],
+          "queryParameters": [],
+          "representations": [
+            {
+              "contentType": "application/json",
+              "schemaId": "626677474634610edcbff8bc",
+              "typeName": "UserArray",
+              "sample": "[\r\n  {\r\n    \"id\": 0,\r\n    \"username\": \"string\",\r\n    \"firstName\": \"string\",\r\n    \"lastName\": \"string\",\r\n    \"email\": \"string\",\r\n    \"password\": \"string\",\r\n    \"phone\": \"string\",\r\n    \"userStatus\": 0\r\n  }\r\n]"
+            }
+          ]
+        },
+        "responses": [
+          {
+            "description": "successful operation",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json"
+              },
+              {
+                "contentType": "application/xml"
+              }
+            ],
+            "statusCode": 200
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/deleteOrder')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730')]"
+      ],
+      "properties": {
+        "displayName": "Delete purchase order by ID",
+        "method": "DELETE",
+        "urlTemplate": "/store/order/{orderId}",
+        "description": "For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors",
+        "templateParameters": [
+          {
+            "name": "orderId",
+            "description": "Format - int64. ID of the order that needs to be deleted",
+            "type": "integer",
+            "required": true,
+            "values": []
+          }
+        ],
+        "responses": [
+          {
+            "description": "Invalid ID supplied",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json"
+              },
+              {
+                "contentType": "application/xml"
+              }
+            ],
+            "statusCode": 400
+          },
+          {
+            "description": "Order not found",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json"
+              },
+              {
+                "contentType": "application/xml"
+              }
+            ],
+            "statusCode": 404
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/deleteUser')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730')]"
+      ],
+      "properties": {
+        "displayName": "Delete user",
+        "method": "DELETE",
+        "urlTemplate": "/user/{username}",
+        "description": "This can only be done by the logged in user.",
+        "templateParameters": [
+          {
+            "name": "username",
+            "description": "The name that needs to be deleted",
+            "type": "string",
+            "required": true,
+            "values": []
+          }
+        ],
+        "responses": [
+          {
+            "description": "Invalid username supplied",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json"
+              },
+              {
+                "contentType": "application/xml"
+              }
+            ],
+            "statusCode": 400
+          },
+          {
+            "description": "User not found",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json"
+              },
+              {
+                "contentType": "application/xml"
+              }
+            ],
+            "statusCode": 404
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/deletePet')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730')]"
+      ],
+      "properties": {
+        "displayName": "Deletes a pet",
+        "method": "DELETE",
+        "urlTemplate": "/pet/{petId}",
+        "description": "",
+        "templateParameters": [
+          {
+            "name": "petId",
+            "description": "Format - int64. Pet id to delete",
+            "type": "integer",
+            "required": true,
+            "values": []
+          }
+        ],
+        "request": {
+          "headers": [
+            {
+              "name": "api_key"
+            }
+          ],
+          "queryParameters": [],
+          "representations": []
+        },
+        "responses": [
+          {
+            "description": "Invalid ID supplied",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json"
+              },
+              {
+                "contentType": "application/xml"
+              }
+            ],
+            "statusCode": 400
+          },
+          {
+            "description": "Pet not found",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json"
+              },
+              {
+                "contentType": "application/xml"
+              }
+            ],
+            "statusCode": 404
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/getPetById')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', '626677474634610edcbff8bc')]"
+      ],
+      "properties": {
+        "displayName": "Find pet by ID",
+        "method": "GET",
+        "urlTemplate": "/pet/{petId}",
+        "description": "Returns a single pet",
+        "templateParameters": [
+          {
+            "name": "petId",
+            "description": "Format - int64. ID of pet to return",
+            "type": "integer",
+            "required": true,
+            "values": []
+          }
+        ],
+        "responses": [
+          {
+            "description": "successful operation",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "626677474634610edcbff8bc",
+                "typeName": "Pet",
+                "sample": "{\r\n  \"id\": 0,\r\n  \"category\": {\r\n    \"id\": 0,\r\n    \"name\": \"string\"\r\n  },\r\n  \"name\": \"doggie\",\r\n  \"photoUrls\": [\r\n    \"string\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"string\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}"
+              },
+              {
+                "contentType": "application/xml",
+                "schemaId": "626677474634610edcbff8bc",
+                "typeName": "Pet",
+                "sample": "<Pet>\r\n  <id>0</id>\r\n  <Category>\r\n    <id>0</id>\r\n    <name>string</name>\r\n  </Category>\r\n  <name>doggie</name>\r\n  <photoUrls>\r\n    <photoUrl>string</photoUrl>\r\n  </photoUrls>\r\n  <tags>\r\n    <Tag>\r\n      <id>0</id>\r\n      <name>string</name>\r\n    </Tag>\r\n  </tags>\r\n  <status>available</status>\r\n</Pet>"
+              }
+            ],
+            "statusCode": 200
+          },
+          {
+            "description": "Invalid ID supplied",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json"
+              },
+              {
+                "contentType": "application/xml"
+              }
+            ],
+            "statusCode": 400
+          },
+          {
+            "description": "Pet not found",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json"
+              },
+              {
+                "contentType": "application/xml"
+              }
+            ],
+            "statusCode": 404
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/getOrderById')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', '626677474634610edcbff8bc')]"
+      ],
+      "properties": {
+        "displayName": "Find purchase order by ID",
+        "method": "GET",
+        "urlTemplate": "/store/order/{orderId}",
+        "description": "For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions",
+        "templateParameters": [
+          {
+            "name": "orderId",
+            "description": "Format - int64. ID of pet that needs to be fetched",
+            "type": "integer",
+            "required": true,
+            "values": []
+          }
+        ],
+        "responses": [
+          {
+            "description": "successful operation",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "626677474634610edcbff8bc",
+                "typeName": "Order",
+                "sample": "{\r\n  \"id\": 0,\r\n  \"petId\": 0,\r\n  \"quantity\": 0,\r\n  \"shipDate\": \"string\",\r\n  \"status\": \"placed\",\r\n  \"complete\": true\r\n}"
+              },
+              {
+                "contentType": "application/xml",
+                "schemaId": "626677474634610edcbff8bc",
+                "typeName": "Order",
+                "sample": "<Order>\r\n  <id>0</id>\r\n  <petId>0</petId>\r\n  <quantity>0</quantity>\r\n  <shipDate>string</shipDate>\r\n  <status>placed</status>\r\n  <complete>true</complete>\r\n</Order>"
+              }
+            ],
+            "statusCode": 200
+          },
+          {
+            "description": "Invalid ID supplied",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json"
+              },
+              {
+                "contentType": "application/xml"
+              }
+            ],
+            "statusCode": 400
+          },
+          {
+            "description": "Order not found",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json"
+              },
+              {
+                "contentType": "application/xml"
+              }
+            ],
+            "statusCode": 404
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/findPetsByStatus')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', '626677474634610edcbff8bc')]"
+      ],
+      "properties": {
+        "displayName": "Finds Pets by status",
+        "method": "GET",
+        "urlTemplate": "/pet/findByStatus?status={status}",
+        "description": "Multiple status values can be provided with comma separated strings",
+        "templateParameters": [
+          {
+            "name": "status",
+            "description": "Status values that need to be considered for filter",
+            "type": "array",
+            "required": true,
+            "values": []
+          }
+        ],
+        "responses": [
+          {
+            "description": "successful operation",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "626677474634610edcbff8bc",
+                "typeName": "PetArray",
+                "sample": "[\r\n  {\r\n    \"id\": 0,\r\n    \"category\": {\r\n      \"id\": 0,\r\n      \"name\": \"string\"\r\n    },\r\n    \"name\": \"doggie\",\r\n    \"photoUrls\": [\r\n      \"string\"\r\n    ],\r\n    \"tags\": [\r\n      {\r\n        \"id\": 0,\r\n        \"name\": \"string\"\r\n      }\r\n    ],\r\n    \"status\": \"available\"\r\n  }\r\n]"
+              },
+              {
+                "contentType": "application/xml",
+                "schemaId": "626677474634610edcbff8bc",
+                "typeName": "PetArray",
+                "sample": "<Pet>\r\n  <id>0</id>\r\n  <Category>\r\n    <id>0</id>\r\n    <name>string</name>\r\n  </Category>\r\n  <name>doggie</name>\r\n  <photoUrls>\r\n    <photoUrl>string</photoUrl>\r\n  </photoUrls>\r\n  <tags>\r\n    <Tag>\r\n      <id>0</id>\r\n      <name>string</name>\r\n    </Tag>\r\n  </tags>\r\n  <status>available</status>\r\n</Pet>"
+              }
+            ],
+            "statusCode": 200
+          },
+          {
+            "description": "Invalid status value",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json"
+              },
+              {
+                "contentType": "application/xml"
+              }
+            ],
+            "statusCode": 400
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/findPetsByTags')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', '626677474634610edcbff8bc')]"
+      ],
+      "properties": {
+        "displayName": "Finds Pets by tags",
+        "method": "GET",
+        "urlTemplate": "/pet/findByTags?tags={tags}",
+        "description": "Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.",
+        "templateParameters": [
+          {
+            "name": "tags",
+            "description": "Tags to filter by",
+            "type": "array",
+            "required": true,
+            "values": []
+          }
+        ],
+        "responses": [
+          {
+            "description": "successful operation",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "626677474634610edcbff8bc",
+                "typeName": "PetArray",
+                "sample": "[\r\n  {\r\n    \"id\": 0,\r\n    \"category\": {\r\n      \"id\": 0,\r\n      \"name\": \"string\"\r\n    },\r\n    \"name\": \"doggie\",\r\n    \"photoUrls\": [\r\n      \"string\"\r\n    ],\r\n    \"tags\": [\r\n      {\r\n        \"id\": 0,\r\n        \"name\": \"string\"\r\n      }\r\n    ],\r\n    \"status\": \"available\"\r\n  }\r\n]"
+              },
+              {
+                "contentType": "application/xml",
+                "schemaId": "626677474634610edcbff8bc",
+                "typeName": "PetArray",
+                "sample": "<Pet>\r\n  <id>0</id>\r\n  <Category>\r\n    <id>0</id>\r\n    <name>string</name>\r\n  </Category>\r\n  <name>doggie</name>\r\n  <photoUrls>\r\n    <photoUrl>string</photoUrl>\r\n  </photoUrls>\r\n  <tags>\r\n    <Tag>\r\n      <id>0</id>\r\n      <name>string</name>\r\n    </Tag>\r\n  </tags>\r\n  <status>available</status>\r\n</Pet>"
+              }
+            ],
+            "statusCode": 200
+          },
+          {
+            "description": "Invalid tag value",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json"
+              },
+              {
+                "contentType": "application/xml"
+              }
+            ],
+            "statusCode": 400
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/getUserByName')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', '626677474634610edcbff8bc')]"
+      ],
+      "properties": {
+        "displayName": "Get user by user name",
+        "method": "GET",
+        "urlTemplate": "/user/{username}",
+        "description": "",
+        "templateParameters": [
+          {
+            "name": "username",
+            "description": "The name that needs to be fetched. Use user1 for testing. ",
+            "type": "string",
+            "required": true,
+            "values": []
+          }
+        ],
+        "responses": [
+          {
+            "description": "successful operation",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "626677474634610edcbff8bc",
+                "typeName": "User",
+                "sample": "{\r\n  \"id\": 0,\r\n  \"username\": \"string\",\r\n  \"firstName\": \"string\",\r\n  \"lastName\": \"string\",\r\n  \"email\": \"string\",\r\n  \"password\": \"string\",\r\n  \"phone\": \"string\",\r\n  \"userStatus\": 0\r\n}"
+              },
+              {
+                "contentType": "application/xml",
+                "schemaId": "626677474634610edcbff8bc",
+                "typeName": "User",
+                "sample": "<User>\r\n  <id>0</id>\r\n  <username>string</username>\r\n  <firstName>string</firstName>\r\n  <lastName>string</lastName>\r\n  <email>string</email>\r\n  <password>string</password>\r\n  <phone>string</phone>\r\n  <userStatus>0</userStatus>\r\n</User>"
+              }
+            ],
+            "statusCode": 200
+          },
+          {
+            "description": "Invalid username supplied",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json"
+              },
+              {
+                "contentType": "application/xml"
+              }
+            ],
+            "statusCode": 400
+          },
+          {
+            "description": "User not found",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json"
+              },
+              {
+                "contentType": "application/xml"
+              }
+            ],
+            "statusCode": 404
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/logoutUser')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730')]"
+      ],
+      "properties": {
+        "displayName": "Logs out current logged in user session",
+        "method": "GET",
+        "urlTemplate": "/user/logout",
+        "description": "",
+        "templateParameters": [],
+        "responses": [
+          {
+            "description": "successful operation",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json"
+              },
+              {
+                "contentType": "application/xml"
+              }
+            ],
+            "statusCode": 200
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/loginUser')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', '626677474634610edcbff8bc')]"
+      ],
+      "properties": {
+        "displayName": "Logs user into the system",
+        "method": "GET",
+        "urlTemplate": "/user/login?username={username}&password={password}",
+        "description": "",
+        "templateParameters": [
+          {
+            "name": "username",
+            "description": "The user name for login",
+            "type": "string",
+            "required": true,
+            "values": []
+          },
+          {
+            "name": "password",
+            "description": "The password for login in clear text",
+            "type": "string",
+            "required": true,
+            "values": []
+          }
+        ],
+        "responses": [
+          {
+            "description": "successful operation",
+            "headers": [
+              {
+                "description": "date in UTC when token expires",
+                "name": "X-Expires-After"
+              },
+              {
+                "description": "calls per hour allowed by the user",
+                "name": "X-Rate-Limit"
+              }
+            ],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "626677474634610edcbff8bc",
+                "typeName": "UserLoginGet200ApplicationJsonResponse",
+                "sample": "string"
+              },
+              {
+                "contentType": "application/xml",
+                "schemaId": "626677474634610edcbff8bc",
+                "typeName": "UserLoginGet200ApplicationXmlResponse",
+                "sample": "<UserLoginGet200ApplicationXmlResponse>string</UserLoginGet200ApplicationXmlResponse>"
+              }
+            ],
+            "statusCode": 200
+          },
+          {
+            "description": "Invalid username/password supplied",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json"
+              },
+              {
+                "contentType": "application/xml"
+              }
+            ],
+            "statusCode": 400
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/placeOrder')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', '626677474634610edcbff8bc')]"
+      ],
+      "properties": {
+        "displayName": "Place an order for a pet",
+        "method": "POST",
+        "urlTemplate": "/store/order",
+        "description": "",
+        "templateParameters": [],
+        "request": {
+          "description": "order placed for purchasing the pet",
+          "headers": [],
+          "queryParameters": [],
+          "representations": [
+            {
+              "contentType": "application/json",
+              "schemaId": "626677474634610edcbff8bc",
+              "typeName": "Order",
+              "sample": "{\r\n  \"id\": 0,\r\n  \"petId\": 0,\r\n  \"quantity\": 0,\r\n  \"shipDate\": \"string\",\r\n  \"status\": \"placed\",\r\n  \"complete\": true\r\n}"
+            }
+          ]
+        },
+        "responses": [
+          {
+            "description": "successful operation",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "626677474634610edcbff8bc",
+                "typeName": "Order",
+                "sample": "{\r\n  \"id\": 0,\r\n  \"petId\": 0,\r\n  \"quantity\": 0,\r\n  \"shipDate\": \"string\",\r\n  \"status\": \"placed\",\r\n  \"complete\": true\r\n}"
+              },
+              {
+                "contentType": "application/xml",
+                "schemaId": "626677474634610edcbff8bc",
+                "typeName": "Order",
+                "sample": "<Order>\r\n  <id>0</id>\r\n  <petId>0</petId>\r\n  <quantity>0</quantity>\r\n  <shipDate>string</shipDate>\r\n  <status>placed</status>\r\n  <complete>true</complete>\r\n</Order>"
+              }
+            ],
+            "statusCode": 200
+          },
+          {
+            "description": "Invalid Order",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json"
+              },
+              {
+                "contentType": "application/xml"
+              }
+            ],
+            "statusCode": 400
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/getInventory')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', '626677474634610edcbff8bc')]"
+      ],
+      "properties": {
+        "displayName": "Returns pet inventories by status",
+        "method": "GET",
+        "urlTemplate": "/store/inventory",
+        "description": "Returns a map of status codes to quantities",
+        "templateParameters": [],
+        "responses": [
+          {
+            "description": "successful operation",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "626677474634610edcbff8bc",
+                "typeName": "StoreInventoryGet200ApplicationJsonResponse",
+                "sample": "{}"
+              }
+            ],
+            "statusCode": 200
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/updatePet')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', '626677474634610edcbff8bc')]"
+      ],
+      "properties": {
+        "displayName": "Update an existing pet",
+        "method": "PUT",
+        "urlTemplate": "/pet",
+        "description": "",
+        "templateParameters": [],
+        "request": {
+          "description": "Pet object that needs to be added to the store",
+          "headers": [],
+          "queryParameters": [],
+          "representations": [
+            {
+              "contentType": "application/json",
+              "schemaId": "626677474634610edcbff8bc",
+              "typeName": "Pet",
+              "sample": "{\r\n  \"id\": 0,\r\n  \"category\": {\r\n    \"id\": 0,\r\n    \"name\": \"string\"\r\n  },\r\n  \"name\": \"doggie\",\r\n  \"photoUrls\": [\r\n    \"string\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"string\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}"
+            },
+            {
+              "contentType": "application/xml",
+              "schemaId": "626677474634610edcbff8bc",
+              "typeName": "Pet",
+              "sample": "<Pet>\r\n  <id>0</id>\r\n  <Category>\r\n    <id>0</id>\r\n    <name>string</name>\r\n  </Category>\r\n  <name>doggie</name>\r\n  <photoUrls>\r\n    <photoUrl>string</photoUrl>\r\n  </photoUrls>\r\n  <tags>\r\n    <Tag>\r\n      <id>0</id>\r\n      <name>string</name>\r\n    </Tag>\r\n  </tags>\r\n  <status>available</status>\r\n</Pet>"
+            }
+          ]
+        },
+        "responses": [
+          {
+            "description": "Invalid ID supplied",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json"
+              },
+              {
+                "contentType": "application/xml"
+              }
+            ],
+            "statusCode": 400
+          },
+          {
+            "description": "Pet not found",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json"
+              },
+              {
+                "contentType": "application/xml"
+              }
+            ],
+            "statusCode": 404
+          },
+          {
+            "description": "Validation exception",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json"
+              },
+              {
+                "contentType": "application/xml"
+              }
+            ],
+            "statusCode": 405
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/updateUser')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', '626677474634610edcbff8bc')]"
+      ],
+      "properties": {
+        "displayName": "Updated user",
+        "method": "PUT",
+        "urlTemplate": "/user/{username}",
+        "description": "This can only be done by the logged in user.",
+        "templateParameters": [
+          {
+            "name": "username",
+            "description": "name that need to be updated",
+            "type": "string",
+            "required": true,
+            "values": []
+          }
+        ],
+        "request": {
+          "description": "Updated user object",
+          "headers": [],
+          "queryParameters": [],
+          "representations": [
+            {
+              "contentType": "application/json",
+              "schemaId": "626677474634610edcbff8bc",
+              "typeName": "User",
+              "sample": "{\r\n  \"id\": 0,\r\n  \"username\": \"string\",\r\n  \"firstName\": \"string\",\r\n  \"lastName\": \"string\",\r\n  \"email\": \"string\",\r\n  \"password\": \"string\",\r\n  \"phone\": \"string\",\r\n  \"userStatus\": 0\r\n}"
+            }
+          ]
+        },
+        "responses": [
+          {
+            "description": "Invalid user supplied",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json"
+              },
+              {
+                "contentType": "application/xml"
+              }
+            ],
+            "statusCode": 400
+          },
+          {
+            "description": "User not found",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json"
+              },
+              {
+                "contentType": "application/xml"
+              }
+            ],
+            "statusCode": 404
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/updatePetWithForm')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730')]"
+      ],
+      "properties": {
+        "displayName": "Updates a pet in the store with form data",
+        "method": "POST",
+        "urlTemplate": "/pet/{petId}",
+        "description": "",
+        "templateParameters": [
+          {
+            "name": "petId",
+            "description": "Format - int64. ID of pet that needs to be updated",
+            "type": "integer",
+            "required": true,
+            "values": []
+          }
+        ],
+        "request": {
+          "headers": [],
+          "queryParameters": [],
+          "representations": [
+            {
+              "contentType": "application/x-www-form-urlencoded"
+            }
+          ]
+        },
+        "responses": [
+          {
+            "description": "Invalid input",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json"
+              },
+              {
+                "contentType": "application/xml"
+              }
+            ],
+            "statusCode": 405
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/uploadFile')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', '626677474634610edcbff8bc')]"
+      ],
+      "properties": {
+        "displayName": "uploads an image",
+        "method": "POST",
+        "urlTemplate": "/pet/{petId}/uploadImage",
+        "description": "",
+        "templateParameters": [
+          {
+            "name": "petId",
+            "description": "Format - int64. ID of pet to update",
+            "type": "integer",
+            "required": true,
+            "values": []
+          }
+        ],
+        "request": {
+          "headers": [],
+          "queryParameters": [],
+          "representations": [
+            {
+              "contentType": "multipart/form-data"
+            }
+          ]
+        },
+        "responses": [
+          {
+            "description": "successful operation",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "626677474634610edcbff8bc",
+                "typeName": "ApiResponse",
+                "sample": "{\r\n  \"code\": 0,\r\n  \"type\": \"string\",\r\n  \"message\": \"string\"\r\n}"
+              }
+            ],
+            "statusCode": 200
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/policies",
+      "name": "[concat(parameters('apimServiceName'), '/echo-api/create-resource/policy')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), 'echo-api', 'create-resource')]"
+      ],
+      "properties": {
+        "value": "<policies>\r\n  <inbound>\r\n    <base />\r\n    <json-to-xml apply=\"always\" consider-accept-header=\"false\" />\r\n  </inbound>\r\n  <backend>\r\n    <base />\r\n  </backend>\r\n  <outbound>\r\n    <base />\r\n  </outbound>\r\n</policies>",
+        "format": "xml"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/policies",
+      "name": "[concat(parameters('apimServiceName'), '/echo-api/retrieve-header-only/policy')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), 'echo-api', 'retrieve-header-only')]"
+      ],
+      "properties": {
+        "value": "<policies>\r\n  <inbound>\r\n    <base />\r\n  </inbound>\r\n  <backend>\r\n    <base />\r\n  </backend>\r\n  <outbound>\r\n    <base />\r\n    <set-header name=\"X-My-Sample\" exists-action=\"override\">\r\n      <value>This is a sample</value>\r\n      <!-- for multiple headers with the same name add additional value elements -->\r\n    </set-header>\r\n    <jsonp callback-parameter-name=\"ProcessResponse\" />\r\n  </outbound>\r\n</policies>",
+        "format": "xml"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/policies",
+      "name": "[concat(parameters('apimServiceName'), '/echo-api/retrieve-resource-cached/policy')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), 'echo-api', 'retrieve-resource-cached')]"
+      ],
+      "properties": {
+        "value": "<policies>\r\n  <inbound>\r\n    <base />\r\n    <cache-lookup vary-by-developer=\"false\" vary-by-developer-groups=\"false\">\r\n      <vary-by-header>Accept</vary-by-header>\r\n      <vary-by-header>Accept-Charset</vary-by-header>\r\n    </cache-lookup>\r\n    <rewrite-uri template=\"/resource\" />\r\n  </inbound>\r\n  <backend>\r\n    <base />\r\n  </backend>\r\n  <outbound>\r\n    <base />\r\n    <cache-store duration=\"3600\" />\r\n  </outbound>\r\n</policies>",
+        "format": "xml"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/addPet/pet')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', 'addPet')]"
+      ],
+      "properties": {
+        "displayName": "pet"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/createUser/user')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', 'createUser')]"
+      ],
+      "properties": {
+        "displayName": "user"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/createUsersWithListInput/user')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', 'createUsersWithListInput')]"
+      ],
+      "properties": {
+        "displayName": "user"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/createUsersWithArrayInput/user')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', 'createUsersWithArrayInput')]"
+      ],
+      "properties": {
+        "displayName": "user"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/deleteOrder/store')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', 'deleteOrder')]"
+      ],
+      "properties": {
+        "displayName": "store"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/deleteUser/user')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', 'deleteUser')]"
+      ],
+      "properties": {
+        "displayName": "user"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/deletePet/pet')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', 'deletePet')]"
+      ],
+      "properties": {
+        "displayName": "pet"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/getPetById/pet')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', 'getPetById')]"
+      ],
+      "properties": {
+        "displayName": "pet"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/getOrderById/store')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', 'getOrderById')]"
+      ],
+      "properties": {
+        "displayName": "store"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/findPetsByStatus/pet')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', 'findPetsByStatus')]"
+      ],
+      "properties": {
+        "displayName": "pet"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/findPetsByTags/pet')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', 'findPetsByTags')]"
+      ],
+      "properties": {
+        "displayName": "pet"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/getUserByName/user')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', 'getUserByName')]"
+      ],
+      "properties": {
+        "displayName": "user"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/logoutUser/user')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', 'logoutUser')]"
+      ],
+      "properties": {
+        "displayName": "user"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/loginUser/user')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', 'loginUser')]"
+      ],
+      "properties": {
+        "displayName": "user"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/placeOrder/store')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', 'placeOrder')]"
+      ],
+      "properties": {
+        "displayName": "store"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/getInventory/store')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', 'getInventory')]"
+      ],
+      "properties": {
+        "displayName": "store"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/updatePet/pet')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', 'updatePet')]"
+      ],
+      "properties": {
+        "displayName": "pet"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/updateUser/user')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', 'updateUser')]"
+      ],
+      "properties": {
+        "displayName": "user"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/updatePetWithForm/pet')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', 'updatePetWithForm')]"
+      ],
+      "properties": {
+        "displayName": "pet"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/uploadFile/pet')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730', 'uploadFile')]"
+      ],
+      "properties": {
+        "displayName": "pet"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/policies",
+      "name": "[concat(parameters('apimServiceName'), '/6b60079d96b446329099b0c406643730/policy')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '6b60079d96b446329099b0c406643730')]"
+      ],
+      "properties": {
+        "value": "<!--\r\n    IMPORTANT:\r\n    - Policy elements can appear only within the <inbound>, <outbound>, <backend> section elements.\r\n    - To apply a policy to the incoming request (before it is forwarded to the backend service), place a corresponding policy element within the <inbound> section element.\r\n    - To apply a policy to the outgoing response (before it is sent back to the caller), place a corresponding policy element within the <outbound> section element.\r\n    - To add a policy, place the cursor at the desired insertion point and select a policy from the sidebar.\r\n    - To remove a policy, delete the corresponding policy statement from the policy document.\r\n    - Position the <base> element within a section element to inherit all policies from the corresponding section element in the enclosing scope.\r\n    - Remove the <base> element to prevent inheriting policies from the corresponding section element in the enclosing scope.\r\n    - Policies are applied in the order of their appearance, from the top down.\r\n    - Comments within policy elements are not supported and may disappear. Place your comments between policy elements or at a higher level scope.\r\n-->\r\n<policies>\r\n  <inbound>\r\n    <rate-limit-by-key calls=\"3\" renewal-period=\"15\" counter-key=\"@(context.Subscription.Id)\" />\r\n    <base />\r\n  </inbound>\r\n  <backend>\r\n    <base />\r\n  </backend>\r\n  <outbound>\r\n    <redirect-content-urls />\r\n    <base />\r\n  </outbound>\r\n  <on-error>\r\n    <base />\r\n  </on-error>\r\n</policies>",
+        "format": "xml"
+      }
+    }
+  ]
+}
