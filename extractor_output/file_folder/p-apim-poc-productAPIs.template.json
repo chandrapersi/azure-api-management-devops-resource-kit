@@ -1,0 +1,579 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "apimServiceName": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/1955058afc6f45f3ababf18bccf6b384')]",
+      "dependsOn": [],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/21c26bcc03194a80aa874f7c18f9ce15')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ce3d629faef1434cad709b2dd1616b27', '1955058afc6f45f3ababf18bccf6b384')]"
+      ],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/faf3958bc9334947ba8d98ce3f1221b1')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ce3d629faef1434cad709b2dd1616b27', '21c26bcc03194a80aa874f7c18f9ce15')]"
+      ],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/b6ee07ae7c1645648783cd0c1104d0db')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ce3d629faef1434cad709b2dd1616b27', 'faf3958bc9334947ba8d98ce3f1221b1')]"
+      ],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/80ba9d0a04394964bdf5b6c3511d1f23')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ce3d629faef1434cad709b2dd1616b27', 'b6ee07ae7c1645648783cd0c1104d0db')]"
+      ],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/ba0228cd31ec42af8695e98a9d9ddea5')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ce3d629faef1434cad709b2dd1616b27', '80ba9d0a04394964bdf5b6c3511d1f23')]"
+      ],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/2250ac3eac114b3ebcd421fc9342f5ac')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ce3d629faef1434cad709b2dd1616b27', 'ba0228cd31ec42af8695e98a9d9ddea5')]"
+      ],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/d50278d4c57348009a956f327c8dcbe8')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ce3d629faef1434cad709b2dd1616b27', '2250ac3eac114b3ebcd421fc9342f5ac')]"
+      ],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/starter/echo-api')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ce3d629faef1434cad709b2dd1616b27', 'd50278d4c57348009a956f327c8dcbe8')]"
+      ],
+      "properties": {
+        "displayName": "Starter",
+        "description": "Subscribers will be able to run 5 calls/minute up to a maximum of 100 calls/week.",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/unlimited/echo-api')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'starter', 'echo-api')]"
+      ],
+      "properties": {
+        "displayName": "Unlimited",
+        "description": "Subscribers have completely unlimited access to the API. Administrator approval is required.",
+        "subscriptionRequired": true,
+        "approvalRequired": true,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/19509fbf85d24ac48819ab41b78fdf8d')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'unlimited', 'echo-api')]"
+      ],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/6b5ff6bfadbb4fbea56b372e48bd5d27')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ce3d629faef1434cad709b2dd1616b27', '19509fbf85d24ac48819ab41b78fdf8d')]"
+      ],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/c035a2f112984171aa4746039f7de69a')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ce3d629faef1434cad709b2dd1616b27', '6b5ff6bfadbb4fbea56b372e48bd5d27')]"
+      ],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/e5c07152bf6b4de999d5c1af86b9d984')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ce3d629faef1434cad709b2dd1616b27', 'c035a2f112984171aa4746039f7de69a')]"
+      ],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/81ae205158c04e629c406e10d2309d87')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ce3d629faef1434cad709b2dd1616b27', 'e5c07152bf6b4de999d5c1af86b9d984')]"
+      ],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/fe43339aa7934732bef1bb8510b6ad9e')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ce3d629faef1434cad709b2dd1616b27', '81ae205158c04e629c406e10d2309d87')]"
+      ],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/6fc2bddcdf93402b93b576fa1b8bb84c')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ce3d629faef1434cad709b2dd1616b27', 'fe43339aa7934732bef1bb8510b6ad9e')]"
+      ],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/4f56d9e580ef486f88491ed38c6991a8')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ce3d629faef1434cad709b2dd1616b27', '6fc2bddcdf93402b93b576fa1b8bb84c')]"
+      ],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/876bf032623540d59969b68890c4321b')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ce3d629faef1434cad709b2dd1616b27', '4f56d9e580ef486f88491ed38c6991a8')]"
+      ],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/60e8a6f4ee2e4b5d9d5a9c7630defeee')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ce3d629faef1434cad709b2dd1616b27', '876bf032623540d59969b68890c4321b')]"
+      ],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/e164eeb3b04441ca9e28ed1a0895d9c8')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ce3d629faef1434cad709b2dd1616b27', '60e8a6f4ee2e4b5d9d5a9c7630defeee')]"
+      ],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/0488c481bb46440f9ffa3a79780a67ff')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ce3d629faef1434cad709b2dd1616b27', 'e164eeb3b04441ca9e28ed1a0895d9c8')]"
+      ],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/477f89284c8e4bb0a8bdb40d65b73b4f')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ce3d629faef1434cad709b2dd1616b27', '0488c481bb46440f9ffa3a79780a67ff')]"
+      ],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/9bff38690679488fb28379ac2a0bae6e')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ce3d629faef1434cad709b2dd1616b27', '477f89284c8e4bb0a8bdb40d65b73b4f')]"
+      ],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/3bc4a4deb21d4b34bd97d746d9b638cf')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ce3d629faef1434cad709b2dd1616b27', '9bff38690679488fb28379ac2a0bae6e')]"
+      ],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/1c0ddc1bca4841299b7b75cd40116622')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ce3d629faef1434cad709b2dd1616b27', '3bc4a4deb21d4b34bd97d746d9b638cf')]"
+      ],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/d0790f889e7d43e280725da0caae6f2f')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ce3d629faef1434cad709b2dd1616b27', '1c0ddc1bca4841299b7b75cd40116622')]"
+      ],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/d42d899e4bed4664b3f48265bae91121')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ce3d629faef1434cad709b2dd1616b27', 'd0790f889e7d43e280725da0caae6f2f')]"
+      ],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/1c5f97a691dd4fd2ba6889e2dab1b9e3')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ce3d629faef1434cad709b2dd1616b27', 'd42d899e4bed4664b3f48265bae91121')]"
+      ],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/7e6bafecc8b54c0aa905e3922d12e3ef')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ce3d629faef1434cad709b2dd1616b27', '1c5f97a691dd4fd2ba6889e2dab1b9e3')]"
+      ],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/1d8c8fe156954680bb9eb013dca4d12e')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ce3d629faef1434cad709b2dd1616b27', '7e6bafecc8b54c0aa905e3922d12e3ef')]"
+      ],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/adc3103ea0bc49e08c811c34c27fa052')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ce3d629faef1434cad709b2dd1616b27', '1d8c8fe156954680bb9eb013dca4d12e')]"
+      ],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/0f351b8b558d4a59a8fd37f59d8f8a0b')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ce3d629faef1434cad709b2dd1616b27', 'adc3103ea0bc49e08c811c34c27fa052')]"
+      ],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/c608e39358634e2baea48a853a580633')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ce3d629faef1434cad709b2dd1616b27', '0f351b8b558d4a59a8fd37f59d8f8a0b')]"
+      ],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/164d336382c7411ebedb16da5509b805')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ce3d629faef1434cad709b2dd1616b27', 'c608e39358634e2baea48a853a580633')]"
+      ],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/76abe014ff7545e69194f945da6a58ec')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ce3d629faef1434cad709b2dd1616b27', '164d336382c7411ebedb16da5509b805')]"
+      ],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/cfd6560de1594b03bab78e1073aa1724/6b60079d96b446329099b0c406643730')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ce3d629faef1434cad709b2dd1616b27', '76abe014ff7545e69194f945da6a58ec')]"
+      ],
+      "properties": {
+        "displayName": "Pet Store Product",
+        "description": "Product giving access to Petstore api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ce3d629faef1434cad709b2dd1616b27/ae748efa2f5744318625c46e1a0e1922')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'cfd6560de1594b03bab78e1073aa1724', '6b60079d96b446329099b0c406643730')]"
+      ],
+      "properties": {
+        "displayName": "PnC_OAS",
+        "description": "Product giving access to PnC OAS api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    }
+  ]
+}
