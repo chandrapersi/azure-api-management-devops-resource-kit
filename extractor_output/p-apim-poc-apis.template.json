@@ -635,7 +635,7 @@
               "contentType": "application/json",
               "schemaId": "626677474634610edcbff8bc",
               "typeName": "UserArray",
-              "sample": "[\r\n  {\r\n    \"id\": 0,\r\n    \"username\": \"string\",\r\n    \"firstName\": \"string\",\r\n    \"lastName\": \"string\",\r\n    \"email\": \"string\",\r\n    \"password\": \"string\",\r\n    \"phone\": \"string\",\r\n    \"userStatus\": 0\r\n  }\r\n]"
+              "sample": "{'id': 0,  'username': 'string',  'firstName': 'string',  'lastName': 'string',  'email': 'string',  'password': 'string',  'phone': 'string',  'userStatus': 0}"
             }
           ]
         },
@@ -679,7 +679,7 @@
               "contentType": "application/json",
               "schemaId": "626677474634610edcbff8bc",
               "typeName": "UserArray",
-              "sample": "[\r\n  {\r\n    \"id\": 0,\r\n    \"username\": \"string\",\r\n    \"firstName\": \"string\",\r\n    \"lastName\": \"string\",\r\n    \"email\": \"string\",\r\n    \"password\": \"string\",\r\n    \"phone\": \"string\",\r\n    \"userStatus\": 0\r\n  }\r\n]"
+              "sample": "{'id': 0,  'username': 'string',  'firstName': 'string',  'lastName': 'string',  'email': 'string',  'password': 'string',  'phone': 'string',  'userStatus': 0}"
             }
           ]
         },
@@ -1035,7 +1035,7 @@
                 "contentType": "application/json",
                 "schemaId": "626677474634610edcbff8bc",
                 "typeName": "PetArray",
-                "sample": "[\r\n  {\r\n    \"id\": 0,\r\n    \"category\": {\r\n      \"id\": 0,\r\n      \"name\": \"string\"\r\n    },\r\n    \"name\": \"doggie\",\r\n    \"photoUrls\": [\r\n      \"string\"\r\n    ],\r\n    \"tags\": [\r\n      {\r\n        \"id\": 0,\r\n        \"name\": \"string\"\r\n      }\r\n    ],\r\n    \"status\": \"available\"\r\n  }\r\n]"
+                "sample": "{'id': 0,  'username': 'string',  'firstName': 'string',  'lastName': 'string',  'email': 'string',  'password': 'string',  'phone': 'string',  'userStatus': 0}"
               },
               {
                 "contentType": "application/xml",
@@ -1093,7 +1093,7 @@
                 "contentType": "application/json",
                 "schemaId": "626677474634610edcbff8bc",
                 "typeName": "PetArray",
-                "sample": "[\r\n  {\r\n    \"id\": 0,\r\n    \"category\": {\r\n      \"id\": 0,\r\n      \"name\": \"string\"\r\n    },\r\n    \"name\": \"doggie\",\r\n    \"photoUrls\": [\r\n      \"string\"\r\n    ],\r\n    \"tags\": [\r\n      {\r\n        \"id\": 0,\r\n        \"name\": \"string\"\r\n      }\r\n    ],\r\n    \"status\": \"available\"\r\n  }\r\n]"
+                "sample": "{'id': 0,  'username': 'string',  'firstName': 'string',  'lastName': 'string',  'email': 'string',  'password': 'string',  'phone': 'string',  'userStatus': 0}"
               },
               {
                 "contentType": "application/xml",
