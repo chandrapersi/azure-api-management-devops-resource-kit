@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "apimServiceName": {
-      "value": "p-apim-poc-prod"
+      "value": "api-m-poc-prod"
     }
   },
   "resources": []
