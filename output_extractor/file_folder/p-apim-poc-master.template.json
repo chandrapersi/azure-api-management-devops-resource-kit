@@ -1,0 +1,199 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "apimServiceName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the API Management"
+      }
+    },
+    "linkedTemplatesBaseUrl": {
+      "type": "string",
+      "metadata": {
+        "description": "Base URL of the repository that contains the generated templates"
+      }
+    },
+    "policyXMLBaseUrl": {
+      "type": "string",
+      "metadata": {
+        "description": "Base URL of the repository that contains the generated policy files"
+      }
+    }
+  },
+  "resources": [
+    {
+      "apiVersion": "2022-01-01",
+      "type": "Microsoft.Resources/deployments",
+      "name": "namedValuesTemplate",
+      "dependsOn": [],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(parameters('linkedTemplatesBaseUrl'), 'p-apim-poc-namedValues.template.json')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "apimServiceName": {
+            "value": "[parameters('apimServiceName')]"
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "2022-01-01",
+      "type": "Microsoft.Resources/deployments",
+      "name": "globalServicePolicyTemplate",
+      "dependsOn": [
+        "[resourceId('Microsoft.Resources/deployments', 'namedValuesTemplate')]"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(parameters('linkedTemplatesBaseUrl'), 'p-apim-poc-globalServicePolicy.template.json')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "apimServiceName": {
+            "value": "[parameters('apimServiceName')]"
+          },
+          "policyXMLBaseUrl": {
+            "value": "[parameters('policyXMLBaseUrl')]"
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "2022-01-01",
+      "type": "Microsoft.Resources/deployments",
+      "name": "productsTemplate",
+      "dependsOn": [
+        "[resourceId('Microsoft.Resources/deployments', 'namedValuesTemplate')]"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(parameters('linkedTemplatesBaseUrl'), 'p-apim-poc-products.template.json')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "apimServiceName": {
+            "value": "[parameters('apimServiceName')]"
+          },
+          "policyXMLBaseUrl": {
+            "value": "[parameters('policyXMLBaseUrl')]"
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "2022-01-01",
+      "type": "Microsoft.Resources/deployments",
+      "name": "tagTemplate",
+      "dependsOn": [
+        "[resourceId('Microsoft.Resources/deployments', 'namedValuesTemplate')]"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(parameters('linkedTemplatesBaseUrl'), 'p-apim-poc-tags.template.json')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "apimServiceName": {
+            "value": "[parameters('apimServiceName')]"
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "2022-01-01",
+      "type": "Microsoft.Resources/deployments",
+      "name": "loggersTemplate",
+      "dependsOn": [
+        "[resourceId('Microsoft.Resources/deployments', 'namedValuesTemplate')]"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(parameters('linkedTemplatesBaseUrl'), 'p-apim-poc-loggers.template.json')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "apimServiceName": {
+            "value": "[parameters('apimServiceName')]"
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "2022-01-01",
+      "type": "Microsoft.Resources/deployments",
+      "name": "apisTemplate",
+      "dependsOn": [
+        "[resourceId('Microsoft.Resources/deployments', 'namedValuesTemplate')]",
+        "[resourceId('Microsoft.Resources/deployments', 'globalServicePolicyTemplate')]",
+        "[resourceId('Microsoft.Resources/deployments', 'productsTemplate')]",
+        "[resourceId('Microsoft.Resources/deployments', 'tagTemplate')]",
+        "[resourceId('Microsoft.Resources/deployments', 'loggersTemplate')]"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(parameters('linkedTemplatesBaseUrl'), 'p-apim-poc-apis.template.json')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "apimServiceName": {
+            "value": "[parameters('apimServiceName')]"
+          },
+          "policyXMLBaseUrl": {
+            "value": "[parameters('policyXMLBaseUrl')]"
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "2022-01-01",
+      "type": "Microsoft.Resources/deployments",
+      "name": "productAPIsTemplate",
+      "dependsOn": [
+        "[resourceId('Microsoft.Resources/deployments', 'productsTemplate')]",
+        "[resourceId('Microsoft.Resources/deployments', 'apisTemplate')]"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(parameters('linkedTemplatesBaseUrl'), 'p-apim-poc-productAPIs.template.json')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "apimServiceName": {
+            "value": "[parameters('apimServiceName')]"
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "2022-01-01",
+      "type": "Microsoft.Resources/deployments",
+      "name": "apiTagsTemplate",
+      "dependsOn": [
+        "[resourceId('Microsoft.Resources/deployments', 'tagTemplate')]",
+        "[resourceId('Microsoft.Resources/deployments', 'apisTemplate')]"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(parameters('linkedTemplatesBaseUrl'), 'p-apim-poc-apiTags.template.json')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "apimServiceName": {
+            "value": "[parameters('apimServiceName')]"
+          }
+        }
+      }
+    }
+  ]
+}

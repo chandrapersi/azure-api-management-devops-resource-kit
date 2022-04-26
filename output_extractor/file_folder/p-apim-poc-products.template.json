@@ -1,0 +1,41 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "apimServiceName": {
+      "type": "string"
+    },
+    "policyXMLBaseUrl": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products",
+      "name": "[concat(parameters('apimServiceName'), '/cfd6560de1594b03bab78e1073aa1724')]",
+      "properties": {
+        "description": "Product giving access to Petstore api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "subscriptionsLimit": 10,
+        "state": "published",
+        "displayName": "Pet Store Product"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/groups",
+      "name": "[concat(parameters('apimServiceName'), '/cfd6560de1594b03bab78e1073aa1724/administrators')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products', parameters('apimServiceName'), 'cfd6560de1594b03bab78e1073aa1724')]"
+      ],
+      "properties": {
+        "description": "Administrators is a built-in group. Its membership is managed by the system. Microsoft Azure subscription administrators fall into this group.",
+        "displayName": "Administrators",
+        "type": "system",
+        "builtIn": true
+      }
+    }
+  ]
+}
