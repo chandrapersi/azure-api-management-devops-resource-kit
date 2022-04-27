@@ -605,27 +605,6 @@
     },
     {
       "apiVersion": "2021-08-01",
-      "type": "Microsoft.ApiManagement/service/diagnostics",
-      "name": "[concat(parameters('apimServiceName'), '/applicationinsights')]",
-      "dependsOn": [],
-      "properties": {
-        "alwaysLog": "allErrors",
-        "httpCorrelationProtocol": "Legacy",
-        "logClientIp": true,
-        "sampling": {
-          "samplingType": "fixed",
-          "percentage": 100.0
-        },
-        "frontend": {
-          "request": {}
-        },
-        "backend": {
-          "request": {}
-        }
-      }
-    },
-    {
-      "apiVersion": "2021-08-01",
       "type": "Microsoft.ApiManagement/service/products/apis",
       "name": "[concat(parameters('apimServiceName'), '/cfd6560de1594b03bab78e1073aa1724/swagger-petstore-openapi-3-0')]",
       "dependsOn": [
