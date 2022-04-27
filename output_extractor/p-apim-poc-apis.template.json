@@ -302,6 +302,7 @@
         "alwaysLog": "allErrors",
         "httpCorrelationProtocol": "Legacy",
         "logClientIp": true,
+        "loggerId": "/subscriptions/510e61ea-804b-489a-b0d1-775d711fe7c0/resourceGroups/APIM-POC/providers/Microsoft.ApiManagement/service/p-apim-poc/loggers/appi-psl-dev-g7iea-logs",
         "sampling": {
           "samplingType": "fixed",
           "percentage": 100.0
