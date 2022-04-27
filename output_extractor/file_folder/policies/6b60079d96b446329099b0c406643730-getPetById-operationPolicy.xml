@@ -19,8 +19,8 @@
     <base />
   </backend>
   <outbound>
-    <base />
     <redirect-content-urls />
+    <base />
   </outbound>
   <on-error>
     <base />

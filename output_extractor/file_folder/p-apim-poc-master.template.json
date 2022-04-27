@@ -109,33 +109,12 @@
     {
       "apiVersion": "2022-01-01",
       "type": "Microsoft.Resources/deployments",
-      "name": "loggersTemplate",
-      "dependsOn": [
-        "[resourceId('Microsoft.Resources/deployments', 'namedValuesTemplate')]"
-      ],
-      "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "[concat(parameters('linkedTemplatesBaseUrl'), 'p-apim-poc-loggers.template.json')]",
-          "contentVersion": "1.0.0.0"
-        },
-        "parameters": {
-          "apimServiceName": {
-            "value": "[parameters('apimServiceName')]"
-          }
-        }
-      }
-    },
-    {
-      "apiVersion": "2022-01-01",
-      "type": "Microsoft.Resources/deployments",
       "name": "apisTemplate",
       "dependsOn": [
         "[resourceId('Microsoft.Resources/deployments', 'namedValuesTemplate')]",
         "[resourceId('Microsoft.Resources/deployments', 'globalServicePolicyTemplate')]",
         "[resourceId('Microsoft.Resources/deployments', 'productsTemplate')]",
-        "[resourceId('Microsoft.Resources/deployments', 'tagTemplate')]",
-        "[resourceId('Microsoft.Resources/deployments', 'loggersTemplate')]"
+        "[resourceId('Microsoft.Resources/deployments', 'tagTemplate')]"
       ],
       "properties": {
         "mode": "Incremental",
@@ -165,27 +144,6 @@
         "mode": "Incremental",
         "templateLink": {
           "uri": "[concat(parameters('linkedTemplatesBaseUrl'), 'p-apim-poc-productAPIs.template.json')]",
-          "contentVersion": "1.0.0.0"
-        },
-        "parameters": {
-          "apimServiceName": {
-            "value": "[parameters('apimServiceName')]"
-          }
-        }
-      }
-    },
-    {
-      "apiVersion": "2022-01-01",
-      "type": "Microsoft.Resources/deployments",
-      "name": "apiTagsTemplate",
-      "dependsOn": [
-        "[resourceId('Microsoft.Resources/deployments', 'tagTemplate')]",
-        "[resourceId('Microsoft.Resources/deployments', 'apisTemplate')]"
-      ],
-      "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "[concat(parameters('linkedTemplatesBaseUrl'), 'p-apim-poc-apiTags.template.json')]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {

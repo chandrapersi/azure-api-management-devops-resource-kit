@@ -6,7 +6,7 @@
             "value": "apim-inst-poc-prd"
         },
         "policyXMLBaseUrl": {
-            "value": "output_extractor\\policies"
+            "value": "D:\\a\\r1\\a\\_API-M-CI\\extractor\\file_folder\\policies"
         }
     }
 }
