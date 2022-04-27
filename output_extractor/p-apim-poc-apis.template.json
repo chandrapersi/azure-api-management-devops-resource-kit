@@ -498,6 +498,7 @@
       "dependsOn": [],
       "properties": {
         "alwaysLog": "allErrors",
+        "loggerId": "/subscriptions/510e61ea-804b-489a-b0d1-775d711fe7c0/resourceGroups/APIM-POC/providers/Microsoft.ApiManagement/service/apim-poc-prd/loggers/appi-psl-dev-g7iea-logs",
         "httpCorrelationProtocol": "Legacy",
         "logClientIp": true,
         "sampling": {
