@@ -248,28 +248,6 @@
     },
     {
       "apiVersion": "2021-08-01",
-      "type": "Microsoft.ApiManagement/service/diagnostics",
-      "name": "[concat(parameters('apimServiceName'), '/applicationinsights')]",
-      "dependsOn": [],
-      "properties": {
-        "alwaysLog": "allErrors",
-        "loggerId": "/subscriptions/510e61ea-804b-489a-b0d1-775d711fe7c0/resourceGroups/APIM-POC/providers/Microsoft.ApiManagement/service/p-apim-poc/loggers/appi-psl-dev-g7iea-logs",
-        "httpCorrelationProtocol": "Legacy",
-        "logClientIp": true,
-        "sampling": {
-          "samplingType": "fixed",
-          "percentage": 100.0
-        },
-        "frontend": {
-          "request": {}
-        },
-        "backend": {
-          "request": {}
-        }
-      }
-    },
-    {
-      "apiVersion": "2021-08-01",
       "type": "Microsoft.ApiManagement/service/products/apis",
       "name": "[concat(parameters('apimServiceName'), '/cfd6560de1594b03bab78e1073aa1724/6b60079d96b446329099b0c406643730')]",
       "dependsOn": [
