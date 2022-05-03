@@ -6,7 +6,7 @@
             "value": "api-m-prd"
         },
         "policyXMLBaseUrl": {
-            "value": "https://apimsto.blob.core.windows.net/policies"
+            "value": "https://apimsto.blob.core.windows.net/policies/"
         }
     }
 }
