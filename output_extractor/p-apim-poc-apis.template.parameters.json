@@ -10,7 +10,7 @@
         },
         "apiLoggerId": {
             "value": {
-                "applicationinsights": null,
+                "applicationinsights": "/subscriptions/510e61ea-804b-489a-b0d1-775d711fe7c0/resourceGroups/APIM-POC/providers/Microsoft.ApiManagement/service/p-apim-poc/loggers/appi-psl-dev-g7iea-logs",
                 "azuremonitor": "/subscriptions/510e61ea-804b-489a-b0d1-775d711fe7c0/resourceGroups/APIM-POC/providers/Microsoft.ApiManagement/service/p-apim-poc/loggers/azuremonitor",
                 "api9e326065a78b450a8ffb47e489494295": {
                     "applicationinsights": "/subscriptions/510e61ea-804b-489a-b0d1-775d711fe7c0/resourceGroups/APIM-POC/providers/Microsoft.ApiManagement/service/p-apim-poc/loggers/appi-psl-dev-g7iea-logs"
