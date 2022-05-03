@@ -31881,7 +31881,7 @@
       ],
       "properties": {
         "alwaysLog": "allErrors",
-        "loggerId": "[parameters('apiLoggerId').Api9e326065a78b450a8ffb47e489494295.applicationinsights]",
+        "loggerId": "[parameters('apiLoggerId').api9e326065a78b450a8ffb47e489494295.applicationinsights]",
         "httpCorrelationProtocol": "Legacy",
         "verbosity": "information",
         "logClientIp": true,
