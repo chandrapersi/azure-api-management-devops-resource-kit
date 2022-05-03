@@ -1,0 +1,37 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "apimServiceName": {
+      "type": "string"
+    },
+    "loggerResourceId": {
+      "type": "object"
+    }
+  },
+  "resources": [
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/loggers",
+      "name": "[concat(parameters('apimServiceName'), '/appi-psl-dev-g7iea-logs')]",
+      "properties": {
+        "loggerType": "applicationInsights",
+        "credentials": {
+          "instrumentationKey": "e534385e-8e4e-4c49-89a6-7d388e52a007"
+        },
+        "isBuffered": true,
+        "resourceId": "[parameters('loggerResourceId').appipsldevg7iealogs]"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/loggers",
+      "name": "[concat(parameters('apimServiceName'), '/azuremonitor')]",
+      "properties": {
+        "loggerType": "azureMonitor",
+        "isBuffered": true,
+        "resourceId": "[parameters('loggerResourceId').azuremonitor]"
+      }
+    }
+  ]
+}
