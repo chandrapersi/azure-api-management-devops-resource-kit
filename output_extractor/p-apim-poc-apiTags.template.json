@@ -1,0 +1,42 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "apimServiceName": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/tags",
+      "name": "[concat(parameters('apimServiceName'), '/9e326065a78b450a8ffb47e489494295/enrollment')]",
+      "dependsOn": [],
+      "properties": {
+        "displayName": "Enrollment"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/tags",
+      "name": "[concat(parameters('apimServiceName'), '/ee2b1d3fa55f41099c61e25d898e048e/rfp')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/tags', parameters('apimServiceName'), '9e326065a78b450a8ffb47e489494295', 'enrollment')]"
+      ],
+      "properties": {
+        "displayName": "RFP"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/tags",
+      "name": "[concat(parameters('apimServiceName'), '/swagger-petstore-openapi-3-0/pet')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/tags', parameters('apimServiceName'), 'ee2b1d3fa55f41099c61e25d898e048e', 'rfp')]"
+      ],
+      "properties": {
+        "displayName": "pet"
+      }
+    }
+  ]
+}

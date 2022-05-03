@@ -1,0 +1,15 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "apimServiceName": {
+            "value": "api-m-prd"
+        },
+        "loggerResourceId": {
+            "value": {
+                "appipsldevg7iealogs": "/subscriptions/510e61ea-804b-489a-b0d1-775d711fe7c0/resourceGroups/rg-psl-dev-g7iea-logs/providers/microsoft.insights/components/appi-psl-dev-g7iea-logs",
+                "azuremonitor": null
+            }
+        }
+    }
+}
