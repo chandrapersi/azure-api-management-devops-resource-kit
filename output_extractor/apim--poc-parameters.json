@@ -1,0 +1,37 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "apimServiceName": {
+      "value": "p-apim-prd"
+    },
+    "policyXMLBaseUrl": {
+      "value": "C:\\Proposals\\chandra-repo\\azure-api-management-devops-resource-kit\\output_extractor"
+    },
+    "namedValues": {
+      "value": {
+        "property627dcfe04634611330f0d513": "[parameters('namedValues').Property627dcfe04634611330f0d513]",
+        "testname": "[parameters('namedValues').testname]"
+      }
+    },
+    "namedValueKeyVaultSecrets": {
+      "value": {}
+    },
+    "apiLoggerId": {
+      "value": {
+        "applicationinsights": "/subscriptions/b83436d5-5064-478b-9535-b4785ccb70d1/resourceGroups/APIM/providers/Microsoft.ApiManagement/service/apim--poc/loggers/app-instight-apim",
+        "azuremonitor": "/subscriptions/b83436d5-5064-478b-9535-b4785ccb70d1/resourceGroups/APIM/providers/Microsoft.ApiManagement/service/apim--poc/loggers/azuremonitor"
+      }
+    },
+    "loggerResourceId": {
+      "value": {
+        "appinstightapim": "/subscriptions/b83436d5-5064-478b-9535-b4785ccb70d1/resourceGroups/APIM/providers/microsoft.insights/components/app-instight-apim",
+        "azuremonitor": null
+      }
+    },
+    "backendSettings": {
+      "value": {}
+    }
+  },
+  "resources": []
+}

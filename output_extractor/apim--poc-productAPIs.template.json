@@ -1,0 +1,294 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "apimServiceName": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/4de49919fb51437b9760ecceae88b1f8/dd2d9026210049d78b1842fe37022acb')]",
+      "dependsOn": [],
+      "properties": {
+        "displayName": "P&C Billing",
+        "description": "product giving access to P&C Billing api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/3c591c7492d04316a401fc1d3a44e154/2b53a447a91f4e2598fbeb75a12d50fa')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), '4de49919fb51437b9760ecceae88b1f8', 'dd2d9026210049d78b1842fe37022acb')]"
+      ],
+      "properties": {
+        "displayName": "Policy Transactions",
+        "description": "product giving access to Policy Transactions api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ebc85f59525346658fc94c164afcd86b/17aa653519204c628b3e1d9bce2717b1')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), '3c591c7492d04316a401fc1d3a44e154', '2b53a447a91f4e2598fbeb75a12d50fa')]"
+      ],
+      "properties": {
+        "displayName": "P&C Claims",
+        "description": "product giving access to P&C Claims api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/a67eb9c0d93d40f3891847ed4dcfda69/e8050aa0132c4a7f99904efa88993666')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'ebc85f59525346658fc94c164afcd86b', '17aa653519204c628b3e1d9bce2717b1')]"
+      ],
+      "properties": {
+        "displayName": "L&A Common APIs",
+        "description": "product giving access to L&A Common APIs api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/3c591c7492d04316a401fc1d3a44e154/fe3323ee02eb4d9faf107ab394d8e865')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'a67eb9c0d93d40f3891847ed4dcfda69', 'e8050aa0132c4a7f99904efa88993666')]"
+      ],
+      "properties": {
+        "displayName": "Policy Transactions",
+        "description": "product giving access to Policy Transactions api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/starter/echo-api')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), '3c591c7492d04316a401fc1d3a44e154', 'fe3323ee02eb4d9faf107ab394d8e865')]"
+      ],
+      "properties": {
+        "displayName": "Starter",
+        "description": "Subscribers will be able to run 5 calls/minute up to a maximum of 100 calls/week.",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/unlimited/echo-api')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'starter', 'echo-api')]"
+      ],
+      "properties": {
+        "displayName": "Unlimited",
+        "description": "Subscribers have completely unlimited access to the API. Administrator approval is required.",
+        "subscriptionRequired": true,
+        "approvalRequired": true,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/fd107d6dd36344dd88a6f8adbf170919/06c1f942c975490ea821e56f5ead6a03')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'unlimited', 'echo-api')]"
+      ],
+      "properties": {
+        "displayName": "P&C Policy",
+        "description": "product giving access to P&C Policy api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/6d515498aab041e4aa558cbf4bcfe95f/0e396f8e8dd4497c90f808ae8103a19d')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'fd107d6dd36344dd88a6f8adbf170919', '06c1f942c975490ea821e56f5ead6a03')]"
+      ],
+      "properties": {
+        "displayName": "L&A Claims",
+        "description": "product giving access to L&A Claims api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/b005c097f75b4033ae9db0b8524bea0a/121489dd2bda42ec8f994005bc4a822a')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), '6d515498aab041e4aa558cbf4bcfe95f', '0e396f8e8dd4497c90f808ae8103a19d')]"
+      ],
+      "properties": {
+        "displayName": "L&A Billing",
+        "description": "product giving access to L&A Billing api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/b005c097f75b4033ae9db0b8524bea0a/10cbd667918a492ca1f855692ad1b75e')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'b005c097f75b4033ae9db0b8524bea0a', '121489dd2bda42ec8f994005bc4a822a')]"
+      ],
+      "properties": {
+        "displayName": "L&A Billing",
+        "description": "product giving access to L&A Billing api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/31a8092bd7024c24b5603c96f2124b1d/3b98f0faf2684a6c825761c53bfa5668')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'b005c097f75b4033ae9db0b8524bea0a', '10cbd667918a492ca1f855692ad1b75e')]"
+      ],
+      "properties": {
+        "displayName": "Distribution Management",
+        "description": "product giving access to Distribution Management api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/fd107d6dd36344dd88a6f8adbf170919/546c26b186f845d89b1929c9a4c44a05')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), '31a8092bd7024c24b5603c96f2124b1d', '3b98f0faf2684a6c825761c53bfa5668')]"
+      ],
+      "properties": {
+        "displayName": "P&C Policy",
+        "description": "product giving access to P&C Policy api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/b6fe748ccac64a22841df03cc28b3d26/2e6c853c29c34231b86d49dc8c1c8b7a')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'fd107d6dd36344dd88a6f8adbf170919', '546c26b186f845d89b1929c9a4c44a05')]"
+      ],
+      "properties": {
+        "displayName": "Quote Transaction",
+        "description": "product giving access to Quote Transaction api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/d9379faa7db14c20906614f51b1bd938/6825c0ad07c543c28dbb5fd4e7526611')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'b6fe748ccac64a22841df03cc28b3d26', '2e6c853c29c34231b86d49dc8c1c8b7a')]"
+      ],
+      "properties": {
+        "displayName": "L&A Policy",
+        "description": "product giving access to L&A Policy api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/d9379faa7db14c20906614f51b1bd938/d668d2e17c79404cb1c14b3e85428aab')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'd9379faa7db14c20906614f51b1bd938', '6825c0ad07c543c28dbb5fd4e7526611')]"
+      ],
+      "properties": {
+        "displayName": "L&A Policy",
+        "description": "product giving access to L&A Policy api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/d5778bc268cb4363a36f7722b8aed733/fa50a1a2128b42f7ba803fe1763e8cae')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'd9379faa7db14c20906614f51b1bd938', 'd668d2e17c79404cb1c14b3e85428aab')]"
+      ],
+      "properties": {
+        "displayName": "P&C Core Services APIs",
+        "description": "product giving access to P&C Core Services APIs api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/b6fe748ccac64a22841df03cc28b3d26/cf0871e6ebbd4b218f992d974a1c51c1')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'd5778bc268cb4363a36f7722b8aed733', 'fa50a1a2128b42f7ba803fe1763e8cae')]"
+      ],
+      "properties": {
+        "displayName": "Quote Transaction",
+        "description": "product giving access to Quote Transaction api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ebc85f59525346658fc94c164afcd86b/3a4ca50087a244faaa7d0c7c86e3bfbc')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products/apis', parameters('apimServiceName'), 'b6fe748ccac64a22841df03cc28b3d26', 'cf0871e6ebbd4b218f992d974a1c51c1')]"
+      ],
+      "properties": {
+        "displayName": "P&C Claims",
+        "description": "product giving access to P&C Claims api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    }
+  ]
+}
