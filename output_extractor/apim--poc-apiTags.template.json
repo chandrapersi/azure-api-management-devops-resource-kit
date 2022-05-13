@@ -1,0 +1,31 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "apimServiceName": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/tags",
+      "name": "[concat(parameters('apimServiceName'), '/dd2d9026210049d78b1842fe37022acb/billingtag')]",
+      "dependsOn": [],
+      "properties": {
+        "displayName": "billingtag"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/tags",
+      "name": "[concat(parameters('apimServiceName'), '/2b53a447a91f4e2598fbeb75a12d50fa/busowner')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/tags', parameters('apimServiceName'), 'dd2d9026210049d78b1842fe37022acb', 'billingtag')]"
+      ],
+      "properties": {
+        "displayName": "busowner"
+      }
+    }
+  ]
+}
