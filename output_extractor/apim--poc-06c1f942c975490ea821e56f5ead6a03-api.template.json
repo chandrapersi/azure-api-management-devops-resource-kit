@@ -409,7 +409,7 @@
                 "contentType": "application/json",
                 "schemaId": "627dfdec4634611330f0d8ba",
                 "typeName": "customerEvents",
-                "sample": "[\r\n  {\r\n    \"amount\": \"string\",\r\n    \"eventDate\": \"string\",\r\n    \"policyNo\": \"string\",\r\n    \"eventDescription\": \"string\",\r\n    \"policyEffectiveDate\": \"string\"\r\n  }\r\n]"
+                "sample": "\"[\r\n  {\r\n    \"amount\": \"string\",\r\n    \"eventDate\": \"string\",\r\n    \"policyNo\": \"string\",\r\n    \"eventDescription\": \"string\",\r\n    \"policyEffectiveDate\": \"string\"\r\n  }\r\n]\""
               }
             ],
             "statusCode": 200
@@ -479,7 +479,7 @@
                 "contentType": "application/json",
                 "schemaId": "627dfdec4634611330f0d8ba",
                 "typeName": "configuredEvents",
-                "sample": "[\r\n  {\r\n    \"eventName\": \"string\",\r\n    \"isDefaultEvent\": \"string\"\r\n  }\r\n]"
+                "sample": "\"[\r\n  {\r\n    \"eventName\": \"string\",\r\n    \"isDefaultEvent\": \"string\"\r\n  }\r\n]\""
               }
             ],
             "statusCode": 200

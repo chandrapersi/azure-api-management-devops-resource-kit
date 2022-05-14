@@ -1491,7 +1491,7 @@
                 "contentType": "application/json",
                 "schemaId": "627dfdca4634611330f0d8b3",
                 "typeName": "UwAssignments",
-                "sample": "[\r\n  {\r\n    \"sourceSystemUserId\": \"string\",\r\n    \"sourceSystemCode\": \"string\",\r\n    \"sourceSystemRequestNo\": 0,\r\n    \"uwAssignmentId\": 0,\r\n    \"underWriterCode\": \"string\",\r\n    \"ruleweight\": 0,\r\n    \"premiumLowRange\": \"string\",\r\n    \"premiumHighRange\": \"string\",\r\n    \"policyEffectiveDate\": \"string\",\r\n    \"programCode\": \"string\",\r\n    \"policySymbol\": \"string\",\r\n    \"serviceCenter\": \"string\",\r\n    \"district\": \"string\",\r\n    \"businessType\": \"string\",\r\n    \"producerCode\": \"string\",\r\n    \"producerStateProvince\": \"string\"\r\n  }\r\n]"
+                "sample": "\"[\r\n  {\r\n    \"sourceSystemUserId\": \"string\",\r\n    \"sourceSystemCode\": \"string\",\r\n    \"sourceSystemRequestNo\": 0,\r\n    \"uwAssignmentId\": 0,\r\n    \"underWriterCode\": \"string\",\r\n    \"ruleweight\": 0,\r\n    \"premiumLowRange\": \"string\",\r\n    \"premiumHighRange\": \"string\",\r\n    \"policyEffectiveDate\": \"string\",\r\n    \"programCode\": \"string\",\r\n    \"policySymbol\": \"string\",\r\n    \"serviceCenter\": \"string\",\r\n    \"district\": \"string\",\r\n    \"businessType\": \"string\",\r\n    \"producerCode\": \"string\",\r\n    \"producerStateProvince\": \"string\"\r\n  }\r\n]\""
               }
             ],
             "statusCode": 200

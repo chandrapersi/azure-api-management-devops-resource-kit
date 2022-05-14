@@ -4,6 +4,9 @@
   "parameters": {
     "apimServiceName": {
       "type": "string"
+    },
+    "loggerResourceId": {
+      "type": "object"
     }
   },
   "resources": [
@@ -14,7 +17,7 @@
       "properties": {
         "loggerType": "applicationInsights",
         "credentials": {
-          "instrumentationKey": "{{Logger-Credentials--627dcfe04634611330f0d514}}"
+          "instrumentationKey": "735b24b2-f13d-4a71-8726-6aa5e993c2b9"
         },
         "isBuffered": true,
         "resourceId": "[parameters('loggerResourceId').appinstightapim]"

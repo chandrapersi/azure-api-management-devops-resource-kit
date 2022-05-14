@@ -4078,7 +4078,7 @@
                 "contentType": "application/json",
                 "schemaId": "627dfeb64634611330f0d8df",
                 "typeName": "AccountBalances",
-                "sample": "[\r\n  {\r\n    \"accountNo\": \"ACC123\",\r\n    \"sourceSystemRequestNo\": \"1820107\",\r\n    \"balanceSummary\": {\r\n      \"receivableCategoryCode\": \"PREMIUM\",\r\n      \"receivableAmount\": 100.0,\r\n      \"paymentAmount\": 100.0,\r\n      \"balanceAmount\": 100.0,\r\n      \"grossAmount\": 100.0,\r\n      \"netAmount\": 100.0,\r\n      \"adjustmentAmount\": 100.0,\r\n      \"currentDueAmount\": 100.0,\r\n      \"pastDueAmount\": 100.0,\r\n      \"billBalanceAmount\": 100.0,\r\n      \"deferredAmount\": 100.0\r\n    }\r\n  }\r\n]"
+                "sample": "\"[\r\n  {\r\n    \"accountNo\": \"ACC123\",\r\n    \"sourceSystemRequestNo\": \"1820107\",\r\n    \"balanceSummary\": {\r\n      \"receivableCategoryCode\": \"PREMIUM\",\r\n      \"receivableAmount\": 100.0,\r\n      \"paymentAmount\": 100.0,\r\n      \"balanceAmount\": 100.0,\r\n      \"grossAmount\": 100.0,\r\n      \"netAmount\": 100.0,\r\n      \"adjustmentAmount\": 100.0,\r\n      \"currentDueAmount\": 100.0,\r\n      \"pastDueAmount\": 100.0,\r\n      \"billBalanceAmount\": 100.0,\r\n      \"deferredAmount\": 100.0\r\n    }\r\n  }\r\n]\""
               }
             ],
             "statusCode": 200

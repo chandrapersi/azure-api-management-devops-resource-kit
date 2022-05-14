@@ -5943,7 +5943,7 @@
               "contentType": "application/json",
               "schemaId": "627dffa94634611330f0d910",
               "typeName": "Compensation-policy-policyNo-PremiumPostRequest",
-              "sample": "[\r\n  {\r\n    \"policyno\": \"POLNM4344\",\r\n    \"dueTypeCode\": \"PREMIUM\",\r\n    \"sourceSystemCode\": \"POL2015\",\r\n    \"sourceSystemReferenceId\": \"12312\",\r\n    \"sourceSystemCoverageId\": 45689.0,\r\n    \"coverageSequence\": 545465.0,\r\n    \"paymentCode\": \"CHQ\",\r\n    \"dueDate\": \"2018-01-25\",\r\n    \"dueAmount\": 1000.0,\r\n    \"appropriationAmount\": 1000.0,\r\n    \"appropriationDate\": \"2018-01-25\",\r\n    \"appropriationTypeCode\": \"PREMIUM\",\r\n    \"extraPremiumAmount\": 10.0,\r\n    \"billTypeCode\": \"AGYBILL\",\r\n    \"commissionRetainedAmount\": 100.0,\r\n    \"installmentNumber\": 1.0,\r\n    \"remarks\": \"Sample Text.\",\r\n    \"paymentFrequencyCode\": \"WEEK\"\r\n  }\r\n]"
+              "sample": "\"[\r\n  {\r\n    \"policyno\": \"POLNM4344\",\r\n    \"dueTypeCode\": \"PREMIUM\",\r\n    \"sourceSystemCode\": \"POL2015\",\r\n    \"sourceSystemReferenceId\": \"12312\",\r\n    \"sourceSystemCoverageId\": 45689.0,\r\n    \"coverageSequence\": 545465.0,\r\n    \"paymentCode\": \"CHQ\",\r\n    \"dueDate\": \"2018-01-25\",\r\n    \"dueAmount\": 1000.0,\r\n    \"appropriationAmount\": 1000.0,\r\n    \"appropriationDate\": \"2018-01-25\",\r\n    \"appropriationTypeCode\": \"PREMIUM\",\r\n    \"extraPremiumAmount\": 10.0,\r\n    \"billTypeCode\": \"AGYBILL\",\r\n    \"commissionRetainedAmount\": 100.0,\r\n    \"installmentNumber\": 1.0,\r\n    \"remarks\": \"Sample Text.\",\r\n    \"paymentFrequencyCode\": \"WEEK\"\r\n  }\r\n]\""
             }
           ]
         },
