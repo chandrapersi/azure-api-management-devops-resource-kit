@@ -287,6 +287,14 @@
         "displayName": "ClaimService"
       }
     },
+	{
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Policy')]",
+      "properties": {
+        "displayName": "Policy"
+      }
+    },
     {
       "apiVersion": "2021-08-01",
       "type": "Microsoft.ApiManagement/service/tags",
@@ -813,6 +821,70 @@
       "name": "[concat(parameters('apimServiceName'), '/myPerformanceListConf')]",
       "properties": {
         "displayName": "myPerformanceListConf"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/pendingCancellations')]",
+      "properties": {
+        "displayName": "pendingCancellations"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/pendingIssuances')]",
+      "properties": {
+        "displayName": "pendingIssuances"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/pendingQuotes')]",
+      "properties": {
+        "displayName": "pendingQuotes"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/pendingReferals')]",
+      "properties": {
+        "displayName": "pendingReferals"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/policyClaimsView')]",
+      "properties": {
+        "displayName": "policyClaimsView"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/policyDashboard')]",
+      "properties": {
+        "displayName": "policyDashboard"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/rejectedReferrals')]",
+      "properties": {
+        "displayName": "rejectedReferrals"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/upcomingRenewals')]",
+      "properties": {
+        "displayName": "upcomingRenewals"
       }
     }
   ]
