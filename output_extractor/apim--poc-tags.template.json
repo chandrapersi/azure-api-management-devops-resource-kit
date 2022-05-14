@@ -639,6 +639,14 @@
         "displayName": "Failed Transactions"
       }
     },
+	{
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Transactions')]",
+      "properties": {
+        "displayName": "Transactions"
+      }
+    },
     {
       "apiVersion": "2021-08-01",
       "type": "Microsoft.ApiManagement/service/tags",
@@ -733,6 +741,14 @@
       "name": "[concat(parameters('apimServiceName'), '/Insured')]",
       "properties": {
         "displayName": "Insured"
+      }
+    },
+	{
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Underwriter')]",
+      "properties": {
+        "displayName": "Underwriter"
       }
     },
     {
@@ -885,6 +901,62 @@
       "name": "[concat(parameters('apimServiceName'), '/upcomingRenewals')]",
       "properties": {
         "displayName": "upcomingRenewals"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Workers-Comp-FROI')]",
+      "properties": {
+        "displayName": "Workers Comp FROI"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/QPRService')]",
+      "properties": {
+        "displayName": "QPRService"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/search-count')]",
+      "properties": {
+        "displayName": "search count"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/search')]",
+      "properties": {
+        "displayName": "search"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Roles')]",
+      "properties": {
+        "displayName": "Roles"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/User-Directories')]",
+      "properties": {
+        "displayName": "User Directories"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Users')]",
+      "properties": {
+        "displayName": "Users"
       }
     }
   ]
