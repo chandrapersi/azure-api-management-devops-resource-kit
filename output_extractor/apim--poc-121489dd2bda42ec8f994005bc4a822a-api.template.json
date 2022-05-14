@@ -1,0 +1,1306 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "apimServiceName": {
+      "type": "string"
+    },
+    "policyXMLBaseUrl": {
+      "type": "string"
+    },
+    "apiLoggerId": {
+      "type": "object"
+    }
+  },
+  "resources": [
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis",
+      "name": "[concat(parameters('apimServiceName'), '/121489dd2bda42ec8f994005bc4a822a')]",
+      "dependsOn": [],
+      "properties": {
+        "description": " API has operations to setup, update and retrieve various global entities like Group, Account, Broker, Member, Insured, Additional Insured etc.",
+        "authenticationSettings": {
+          "subscriptionKeyRequired": false
+        },
+        "subscriptionKeyParameterNames": {
+          "header": "Ocp-Apim-Subscription-Key",
+          "query": "subscription-key"
+        },
+        "apiRevision": "1",
+        "isCurrent": true,
+        "subscriptionRequired": true,
+        "displayName": "L&A Billing API",
+        "serviceUrl": "https://confluenceapidocs.blob.core.windows.net/lna/L&Abilling/v1",
+        "path": "GroupSetupProcessInterface",
+        "protocols": [
+          "https"
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/schemas",
+      "name": "[concat(parameters('apimServiceName'), '/121489dd2bda42ec8f994005bc4a822a/627dfcd94634611330f0d855')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '121489dd2bda42ec8f994005bc4a822a')]"
+      ],
+      "properties": {
+        "contentType": "application/vnd.oai.openapi.components+json",
+        "document": {
+          "components": {
+            "schemas": {
+              "Group": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Entity"
+                },
+                "description": "This will contain multiple instances of Group object. Group object contains details such as group number, group name, output delivery method etc of a group in billing system."
+              },
+              "Entity": {
+                "type": "object",
+                "properties": {
+                  "groupName": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "Indicates name of the group.",
+                    "example": "AS_R50_SC41_G0_name"
+                  },
+                  "entityType": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "Entity type associated with Entity.",
+                    "example": "EMPLOYER"
+                  },
+                  "sourceSystemEntityCode": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "Code assigned to the entity in the source system.",
+                    "example": "AS_R50_SC41"
+                  },
+                  "effectiveDate": {
+                    "type": "string",
+                    "description": "Effective date of entity with timestamp.",
+                    "format": "date",
+                    "example": "2019-01-01"
+                  },
+                  "groupSetupYn": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Flag to indicate if the group setup is required with flag Y or the group already exists in system and can be set to N.",
+                    "example": "N"
+                  },
+                  "billingEntityYn": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Flag to indicate if the group is a billing entity or not.",
+                    "example": "N"
+                  },
+                  "calendarHolidaySetupYn": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Flag to indicate if the group is a billing entity or not.",
+                    "example": "N"
+                  },
+                  "deductionYN": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Flag to indicate if the group a deduction entity.",
+                    "example": "N"
+                  },
+                  "billDefinitionCompleteYn": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Flag to indicate if the group status should be taken up to bill definition complete.",
+                    "example": "N"
+                  },
+                  "anniversaryDate": {
+                    "type": "string",
+                    "description": "Anniversary date of entity with timestamp.",
+                    "format": "date",
+                    "example": "2020-01-01"
+                  },
+                  "sourceSystemPrimaryKey": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "Code assigned to the entity in the source system.",
+                    "example": "AS_R50_SC41_SPK"
+                  },
+                  "groupSize": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "Indicates size of the group.",
+                    "example": "4"
+                  },
+                  "sourceSystemUserId": {
+                    "maxLength": 30,
+                    "type": "string",
+                    "description": "User id sent by source system.",
+                    "example": "SYSADMIN"
+                  },
+                  "doingBusinessAsName": {
+                    "maxLength": 90,
+                    "type": "string",
+                    "description": "DBA name.",
+                    "example": "AS_R50_SC41_DBA"
+                  },
+                  "sourceSystem": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "Originating system from where entity is interfaced to the billing system.",
+                    "example": "BILLING"
+                  },
+                  "parentEntityType": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "Parent entity type, if applicable on the entity.",
+                    "example": "EMPLOYER"
+                  },
+                  "parentEntityCode": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "Parent entity code, if applicable on the entity.",
+                    "example": "AS_R50_SC41"
+                  },
+                  "apexEntityNo": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "Represents the group no of apex group that is Top level group of the hierarchy.",
+                    "example": "AS_R50_SC41"
+                  },
+                  "apexEntityType": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "Represents the group type of apex group that is Top level group of the hierarchy.",
+                    "example": "EMPLOYER"
+                  },
+                  "state": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "State to which entity belongs.",
+                    "example": "CA"
+                  },
+                  "country": {
+                    "maxLength": 60,
+                    "type": "string",
+                    "description": "Country to which entity belongs.",
+                    "example": "USA"
+                  },
+                  "ssn": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "Social Security number SSN of the entity.This is only for reference.",
+                    "example": "001-003 NH"
+                  },
+                  "transactionReason": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "TransactionReason.",
+                    "example": "GROUP_SETUP"
+                  },
+                  "STPFlagYN": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Flag to indicate Straight Through Process.",
+                    "example": "N"
+                  },
+                  "billingFrequency": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Frequency to which entity belongs.",
+                    "example": "QUARTERLY"
+                  },
+                  "temporaryStaffingLocationYN": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Flag indicates if Location Serves Temporary Staffing Yes or No.",
+                    "example": "N"
+                  },
+                  "specialHandlingIndicator": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Flag to indicate whether auto lapse is applicable for an entity or not.",
+                    "example": "N"
+                  },
+                  "userRemarks": {
+                    "maxLength": 1000,
+                    "type": "string",
+                    "description": "Remarks sent from the source system.",
+                    "example": "Group Created"
+                  },
+                  "tpaNo": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "TPA entity code, would be applicable if current group is TPA billing group.",
+                    "example": "TPA_100"
+                  },
+                  "tpaType": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "TPA entity type, would be applicable if current group is TPA billing group.",
+                    "example": "G_CORPORATION"
+                  },
+                  "migratedYN": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Applicable for Migrated Data.",
+                    "example": "N"
+                  },
+                  "allianceCode": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "Parent entity code, if applicable on the entity.",
+                    "example": "AS_R50_SC41"
+                  },
+                  "recurringEftTokenId": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "Parent entity code, if applicable on the entity.",
+                    "example": "123456"
+                  },
+                  "cobraIndicator": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Flag to indicate whether entity is on cobra.",
+                    "example": "N"
+                  },
+                  "billMethod": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "Bill Method details of entity.",
+                    "example": "LISTBILL"
+                  },
+                  "billDeliveryMethod": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "Bill Delivery Method of entity.",
+                    "example": "EMAIL"
+                  },
+                  "billSendOption": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "Bill Send Option of entity.",
+                    "example": "SEND"
+                  },
+                  "billingFormat": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "Statement Format details of entity.",
+                    "example": "PDF"
+                  },
+                  "billDueDay": {
+                    "maxLength": 2,
+                    "type": "number",
+                    "description": "Statement Due Day.",
+                    "example": "1"
+                  },
+                  "billingCycleDay": {
+                    "maxLength": 2,
+                    "type": "number",
+                    "description": "Billing Cycle Day.",
+                    "example": "1"
+                  },
+                  "billLeadDays": {
+                    "maxLength": 3,
+                    "type": "number",
+                    "description": "Credit Term Days.",
+                    "example": "10"
+                  },
+                  "billDueDay1": {
+                    "maxLength": 2,
+                    "type": "number",
+                    "description": "Bill Due  Day1.",
+                    "example": ""
+                  },
+                  "billDueDay2": {
+                    "maxLength": 2,
+                    "type": "number",
+                    "description": "Bill Due Day2.",
+                    "example": ""
+                  },
+                  "paymentMethod": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "Payment Method details of entity.",
+                    "example": "CHECK"
+                  },
+                  "autoLapseYN": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Flag to indicate if the group would get auto lapsed or not.",
+                    "example": "Y"
+                  },
+                  "billReviewRequired": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Flag to indicate whether bill review required or not.",
+                    "example": "N"
+                  },
+                  "billToTPA": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Indicates if the TPA is a billing entity or not.",
+                    "example": "N"
+                  },
+                  "billingBasis": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "Indicates if the statement should  bill in advance or arrears.",
+                    "example": "ADVANCE"
+                  },
+                  "billingCycleDayOfWeek": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "Billing Cycle Day of Week.",
+                    "example": ""
+                  },
+                  "billingDueDayOfWeek": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "Billing Due day of week.",
+                    "example": ""
+                  },
+                  "partialPremiumChargingOption": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "Indicates premium charging option selected.",
+                    "example": ""
+                  },
+                  "partialDeductionChargingOption": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "Indicates deduction charging option selected.",
+                    "example": ""
+                  },
+                  "stopBillFeesFlag": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Indicates whether billing for that group is stopped or not.",
+                    "example": "N"
+                  },
+                  "addressDetails": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Address"
+                    },
+                    "description": "This contains multiple instances of Address object. This is an address object which will capture address details of an entity."
+                  },
+                  "productClass": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ProductClass"
+                    },
+                    "description": "This contains product class details for Group entity."
+                  },
+                  "groupingCategory": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/GroupingCategory"
+                    },
+                    "description": "Grouping category details of an entity and applicable only for Group."
+                  },
+                  "entityRelation": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/EntityRelation"
+                    },
+                    "description": "Entity Relation details defined for the Group entity."
+                  },
+                  "lapseParameters": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LapseParameters"
+                    },
+                    "description": "Lapse Parameters details defined for the Group entity."
+                  },
+                  "SICCodeDetails": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/SICCodeDetails"
+                    },
+                    "description": "SIC Code Details of group and It will be accepted only at Apex Level."
+                  },
+                  "groupHolidayMapping": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/GroupHolidayMapping"
+                    },
+                    "description": "This section contains holiday details for Group entity."
+                  },
+                  "inboundDeductionFrequency": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/InboundDeductionFrequency"
+                    },
+                    "description": "This section contains deduction frequency details for Group entity."
+                  }
+                }
+              },
+              "Address": {
+                "type": "object",
+                "properties": {
+                  "addressType": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "Type of address like MAILING, BILLING, BUSINESS etc.",
+                    "example": "MAILING"
+                  },
+                  "namePrefix": {
+                    "maxLength": 5,
+                    "type": "string",
+                    "description": "Prefix.",
+                    "example": "MR"
+                  },
+                  "nameSuffix": {
+                    "maxLength": 5,
+                    "type": "string",
+                    "description": "Prefix.",
+                    "example": "AD"
+                  },
+                  "firstName": {
+                    "maxLength": 60,
+                    "type": "string",
+                    "description": "First name of the entity.  In case of groups, the contact person first name to be sent in this field.",
+                    "example": "Pank"
+                  },
+                  "middleName": {
+                    "maxLength": 60,
+                    "type": "string",
+                    "description": "Middle name of the entity.  In case of groups, the contact person middle name to be sent in this field.",
+                    "example": "A"
+                  },
+                  "lastName": {
+                    "maxLength": 60,
+                    "type": "string",
+                    "description": "Last name of the entity.  In case of groups, the contact person last name to be sent in this field.",
+                    "example": "Gole"
+                  },
+                  "fullName": {
+                    "maxLength": 180,
+                    "type": "string",
+                    "description": "Full name of the entity.  In case of groups, the contact person full name to be sent in this field.",
+                    "example": "PANK A GOLE"
+                  },
+                  "address1": {
+                    "maxLength": 40,
+                    "type": "string",
+                    "description": "First line of address for the address type.",
+                    "example": "109 Rail road Street"
+                  },
+                  "address2": {
+                    "maxLength": 40,
+                    "type": "string",
+                    "description": "Second line of address for the address type.",
+                    "example": "phi phi land"
+                  },
+                  "state": {
+                    "maxLength": 5,
+                    "type": "string",
+                    "description": "State to which entity belongs.",
+                    "example": "CA"
+                  },
+                  "country": {
+                    "maxLength": 60,
+                    "type": "string",
+                    "description": "Country to which entity belongs.",
+                    "example": "USA"
+                  },
+                  "city": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "City to which entity belongs.",
+                    "example": "Iron River"
+                  },
+                  "zipCode": {
+                    "maxLength": 15,
+                    "type": "string",
+                    "description": "Zip Code to which entity belongs.",
+                    "example": "USA"
+                  },
+                  "county": {
+                    "maxLength": 15,
+                    "type": "string",
+                    "description": "County to which entity belongs.",
+                    "example": "166"
+                  },
+                  "primaryPhoneNo": {
+                    "maxLength": 16,
+                    "type": "string",
+                    "description": "Primary phone no on the address type.",
+                    "example": "8458877445"
+                  },
+                  "primaryEmailId": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "Primary email id on the address type.",
+                    "example": "pank.g@gmail.com"
+                  },
+                  "primaryFaxNo": {
+                    "maxLength": 16,
+                    "type": "string",
+                    "description": "Primary fax no on the address type.",
+                    "example": "456788"
+                  },
+                  "alternatePhoneNo": {
+                    "maxLength": 16,
+                    "type": "string",
+                    "description": "Alternate phone no on the address type.",
+                    "example": "8458877446"
+                  },
+                  "alternateEmailId": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "Alternate email id on the address type.",
+                    "example": "pank1.g@gmail.com"
+                  },
+                  "alternateFaxNo": {
+                    "maxLength": 16,
+                    "type": "string",
+                    "description": "Alternate fax no on the address type.",
+                    "example": "456789"
+                  },
+                  "primaryAddressYN": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Flag to indicate if the address is to be considered as Primary address.",
+                    "example": "Y"
+                  }
+                }
+              },
+              "ProductClass": {
+                "type": "object",
+                "properties": {
+                  "classCode": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "Eligibility classes within a group entity e.g. executives, permanent employees, temporary contractors.",
+                    "example": "WORKER"
+                  },
+                  "classDescription": {
+                    "maxLength": 1000,
+                    "type": "string",
+                    "description": "Description for the class code.",
+                    "example": "worker"
+                  },
+                  "productCode": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "Product codes available in the group e.g. Term_Life",
+                    "example": "TERM_LIFE"
+                  },
+                  "originalProductCode": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "To Capture Original Product Code for DC migration data.",
+                    "example": "TERM_LIFE"
+                  },
+                  "underwritingCompany": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "To Capture underwritingCompany Code for DC migration data.",
+                    "example": "ALL"
+                  },
+                  "renewalDate": {
+                    "type": "string",
+                    "description": "Renewal date of the product with time stamp.",
+                    "format": "date",
+                    "example": "2019-01-01"
+                  },
+                  "fundingMethod": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "Indicates who is doing the receivable payment.",
+                    "example": "EMPLOYER"
+                  },
+                  "productType": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "Indicates what type of product is being added.",
+                    "example": "WORKSITE"
+                  },
+                  "groupLapseForEE": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Flag to indicate whether getting lapse based on PTD or not.",
+                    "example": "Y"
+                  },
+                  "payrollDeductionYN": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Flag to indicate if this receivable will be collected through payroll deduction by the employer.",
+                    "example": "N"
+                  },
+                  "directedMemberAllocationYN": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Flag to indicate if the product receivable is setup for directed payment allocation.",
+                    "example": "N"
+                  }
+                }
+              },
+              "GroupingCategory": {
+                "type": "object",
+                "properties": {
+                  "categoryCode": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "Grouping category code associated with the Group.",
+                    "example": "cc"
+                  },
+                  "categoryDescription": {
+                    "maxLength": 150,
+                    "type": "string",
+                    "description": "Description for the category code.",
+                    "example": "Cost Center"
+                  },
+                  "groupingCategoryOrder": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Order of the GroupingCategory.",
+                    "example": "2"
+                  },
+                  "groupingCode": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "Code of grouping category value.This code is has to be passed at policy level.",
+                    "example": "CC001"
+                  },
+                  "groupingDescription": {
+                    "maxLength": 150,
+                    "type": "string",
+                    "description": "Description for the grouping code.",
+                    "example": "CC for USA"
+                  },
+                  "groupingSortingIndicator": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Possible values are either G or S to notify Grouping or Sorting.",
+                    "example": "S"
+                  }
+                }
+              },
+              "EntityRelation": {
+                "type": "object",
+                "properties": {
+                  "agentType": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "Agent Type associated with entity.",
+                    "example": "Broker"
+                  },
+                  "agentSubType": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "Agent Sub Type associated with entity.",
+                    "example": "Broker"
+                  },
+                  "allianceCode": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "Alliance Code associated with entity.",
+                    "example": "12345"
+                  },
+                  "externalEntityYN": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "The Entity is external entity.",
+                    "example": "N"
+                  },
+                  "deleteYN": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "If the association of the entity is to be removed.",
+                    "example": "N"
+                  },
+                  "entityCode": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "source system entity code of an entity associated with a group or account.",
+                    "example": "AS_R50_SC41"
+                  },
+                  "entityName": {
+                    "maxLength": 180,
+                    "type": "string",
+                    "description": "Entity Name",
+                    "example": "AS_R50_SC41_name"
+                  },
+                  "entityType": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "Type of the entity Associated with a Group or Account Example Broker",
+                    "example": "BROKER"
+                  },
+                  "percRateValue": {
+                    "maxLength": 3,
+                    "type": "string",
+                    "description": "Value for SharePercRate.",
+                    "example": "50"
+                  },
+                  "sharePercRate": {
+                    "maxLength": 22,
+                    "type": "string",
+                    "description": "Commission sharing type - PERCENTAGE or RATE.",
+                    "example": "PERCENTAGE"
+                  }
+                }
+              },
+              "LapseParameters": {
+                "type": "object",
+                "properties": {
+                  "lapseParameter": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "Various lapse parameters like past due grace days, reminder notice days, lapse notice days etc..",
+                    "example": "PAST_DUE_GRACE_DAYS"
+                  },
+                  "memberNoOfDays": {
+                    "maxLength": 3,
+                    "type": "number",
+                    "description": "Number of days from the bill due date for member.",
+                    "example": "5"
+                  },
+                  "numberOfDays": {
+                    "maxLength": 3,
+                    "type": "number",
+                    "description": "Number of days from the bill due date.",
+                    "example": "5"
+                  }
+                }
+              },
+              "SICCodeDetails": {
+                "type": "object",
+                "properties": {
+                  "SICCode": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "SICCode of the Group.",
+                    "example": "0723"
+                  },
+                  "primaryYN": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Flag to know if it is primary.",
+                    "example": "Y"
+                  },
+                  "deleteYN": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "If SIC code is to be removed.",
+                    "example": "N"
+                  }
+                }
+              },
+              "InboundDeductionFrequency": {
+                "type": "object",
+                "properties": {
+                  "considerLocationHolidays": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Mandatory flag to indicate if the holidays are applicable for a deduction entity. Applicable values are Y and N.",
+                    "example": "Y"
+                  },
+                  "considerExclusionPeriod": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Mandatory flag to indicate if the exclusions are applicable for a deduction entity. Applicable values are Y and N.",
+                    "example": "Y"
+                  },
+                  "deductionHolidayRule": {
+                    "maxLength": 15,
+                    "type": "string",
+                    "description": "Indicates deduction Holiday Rule like Previous Working,Next Working Day,Not Applicable.Applicable values are PREVIOUS,NEXT,NA.",
+                    "example": "PREVIOUS"
+                  },
+                  "frequencyMode": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "FrequencyMode of Deduction.Applicable values are MONTHLY,SEMI_MONTHLY,QUARTERLY,WEEKLY,BI_WEEKLY,ANNUAL",
+                    "example": "MONTHLY"
+                  },
+                  "day1OfTheMonth": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "Day1OfTheMonth.",
+                    "example": "30"
+                  },
+                  "day2OfTheMonth": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "Day2OfTheMonth.",
+                    "example": "20"
+                  },
+                  "dayOfTheWeek": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "DayOfTheWeek.",
+                    "example": "MON"
+                  },
+                  "weekNo": {
+                    "maxLength": 6,
+                    "type": "number",
+                    "description": "Indicates occurance Count.Applicable values are 1 is Odd and 2 is Even.",
+                    "example": "2"
+                  },
+                  "monthOfTheYear": {
+                    "maxLength": 3,
+                    "type": "string",
+                    "description": "MonthOfTheYear. Refer ICM DRM for Possible Values.JAN indicates 1,Feb Indicates 2.",
+                    "example": "3"
+                  },
+                  "deductionNotificationOption": {
+                    "maxLength": 15,
+                    "type": "string",
+                    "description": "Flag to indicate to send Notification or Not.Applicable values are NEVER,ALWAYS",
+                    "example": "NEVER"
+                  },
+                  "notificationSendBeforeDays": {
+                    "maxLength": 3,
+                    "type": "number",
+                    "description": "No of Days required to send Notification.Applicable only if Deduction Notification Option is ALWAYS.",
+                    "example": "3"
+                  },
+                  "catchUpOption": {
+                    "maxLength": 30,
+                    "type": "string",
+                    "description": "CatchUpOption.Applicable values are LAST_ACTIVE_DEDUCTION,SPREAD_EQUAL.",
+                    "example": "SPREAD_EQUAL"
+                  },
+                  "inboundDeductionYear": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/InboundDeductionYear"
+                    },
+                    "description": "This section contains Deduction Year of the location."
+                  },
+                  "excludeMonths": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ExcludeMonths"
+                    },
+                    "description": "This section contains Exclusion Details of the location."
+                  },
+                  "deductionProductClass": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/DeductionProductClass"
+                    },
+                    "description": "This section contains product class details for Group entity."
+                  }
+                }
+              },
+              "InboundDeductionYear": {
+                "type": "object",
+                "properties": {
+                  "year": {
+                    "maxLength": 4,
+                    "type": "number",
+                    "description": "Input year required for deduction Setup.Year of Deduction.",
+                    "example": "2016"
+                  }
+                }
+              },
+              "DeductionProductClass": {
+                "type": "object",
+                "properties": {
+                  "classCode": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "Eligibility classes within a group entity e.g. executives, permanent employees, temporary contractors.",
+                    "example": "WORKER"
+                  },
+                  "productCode": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "Product codes available in the group e.g. Term_Life",
+                    "example": "TERM_LIFE"
+                  }
+                }
+              },
+              "ExcludeMonths": {
+                "type": "object",
+                "properties": {
+                  "excludeFromDate": {
+                    "type": "string",
+                    "description": "ExcludeFromDate required in case of Exclusion.",
+                    "format": "date",
+                    "example": "2016-03-01"
+                  },
+                  "excludeToDate": {
+                    "type": "string",
+                    "description": "ExcludeToDate required in case of Exclusion.",
+                    "format": "date",
+                    "example": "2016-05-01"
+                  }
+                }
+              },
+              "GroupHolidayMapping": {
+                "type": "object",
+                "properties": {
+                  "calendarHoliday": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/CalendarHoliday"
+                    },
+                    "description": "This section contains CalendarHoliday Details."
+                  },
+                  "calendarHolidayYears": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/CalendarHolidayYears"
+                    },
+                    "description": "This section contains CalendarHolidayYears Details."
+                  },
+                  "nonWorkingDay": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/NonWorkingDay"
+                    },
+                    "description": "This section contains NonWorkingDay details for Group entity."
+                  },
+                  "nonWorkingDayException": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/NonWorkingDayException"
+                    },
+                    "description": "This section contains NonWorkingDayException details for Group entity."
+                  }
+                }
+              },
+              "NonWorkingDay": {
+                "type": "object",
+                "properties": {
+                  "saturdayWorkingYN": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "NonWorkingDay details,It is an applicability flag Yes or No.",
+                    "example": "N"
+                  },
+                  "sundayWorkingYN": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "NonWorkingDay details,It is an applicability flag Yes or No.",
+                    "example": "N"
+                  },
+                  "mondayWorkingYN": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "NonWorkingDay details,It is an applicability flag Yes or No.",
+                    "example": "Y"
+                  },
+                  "tuesdayWorkingYN": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "NonWorkingDay details,It is an applicability flag Yes or No.",
+                    "example": "Y"
+                  },
+                  "wednesdayWorkingYN": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "NonWorkingDay details,It is an applicability flag Yes or No.",
+                    "example": "Y"
+                  },
+                  "thursdayWorkingYN": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "NonWorkingDay details,It is an applicability flag Yes or No.",
+                    "example": "Y"
+                  },
+                  "fridayWorkingYN": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "NonWorkingDay details,It is an applicability flag Yes or No.",
+                    "example": "Y"
+                  }
+                }
+              },
+              "NonWorkingDayException": {
+                "type": "object",
+                "properties": {
+                  "exceptionWorkingDate": {
+                    "type": "string",
+                    "description": "ExceptionWorkingDate for corresponding NonWorkingDay.",
+                    "format": "date",
+                    "example": "2016-12-22"
+                  },
+                  "remark": {
+                    "maxLength": 1000,
+                    "type": "string",
+                    "description": "Remarks for each NonWorkingDay Exception.",
+                    "example": "ManoharBirthday"
+                  }
+                }
+              },
+              "CalendarHoliday": {
+                "type": "object",
+                "properties": {
+                  "holidayName": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "Holiday Details.",
+                    "example": "Christmas Day"
+                  },
+                  "nonWorkingDate": {
+                    "type": "string",
+                    "description": "Nonworkingdate of corresponding Holiday.",
+                    "format": "date",
+                    "example": "2016-12-25"
+                  }
+                }
+              },
+              "CalendarHolidayYears": {
+                "type": "object",
+                "properties": {
+                  "year": {
+                    "maxLength": 4,
+                    "type": "number",
+                    "description": "Input year required mandatory for deduction holidaySetup.",
+                    "example": "2016"
+                  }
+                }
+              },
+              "DeductionYear": {
+                "type": "object",
+                "properties": {
+                  "year": {
+                    "maxLength": 4,
+                    "type": "number",
+                    "description": "Input year required mandatory for deduction holidaySetup.",
+                    "example": "2016"
+                  }
+                }
+              },
+              "Message": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "Custom message code in case of success."
+                  },
+                  "description": {
+                    "maxLength": 1000,
+                    "type": "string",
+                    "description": "Custom message details in case of success."
+                  },
+                  "type": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "Type of Message example ERROR, WARNING etc."
+                  },
+                  "groupNo": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "Type of Message example ERROR, WARNING etc."
+                  }
+                }
+              },
+              "Error": {
+                "required": [
+                  "statuscode",
+                  "status",
+                  "message"
+                ],
+                "type": "object",
+                "properties": {
+                  "statuscode": {
+                    "type": "string",
+                    "description": "HTTP Status code for example 200/400/500",
+                    "example": "http-status-code"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "Short status description",
+                    "example": "Example status message"
+                  },
+                  "message": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Error_message"
+                    },
+                    "description": "Detailed error messages"
+                  }
+                }
+              },
+              "Error_message": {
+                "type": "object",
+                "properties": {
+                  "systemerrcode": {
+                    "type": "string",
+                    "description": "System/Application error code",
+                    "example": "ERR-001"
+                  },
+                  "developer": {
+                    "type": "string",
+                    "description": "Verbose, plain language description of the problem for the app developer with hints about how to fix it.",
+                    "example": "Message for app developer"
+                  },
+                  "user": {
+                    "type": "string",
+                    "description": "Pass this message on to the app user if needed.",
+                    "example": "Message for end user"
+                  },
+                  "groupNo": {
+                    "type": "string",
+                    "description": "Group No for which the error / message is applicable.",
+                    "example": "DS_R40_SC01"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/diagnostics",
+      "name": "[concat(parameters('apimServiceName'), '/applicationinsights')]",
+      "dependsOn": [],
+      "properties": {
+        "alwaysLog": "allErrors",
+        "loggerId": "[parameters('apiLoggerId').applicationinsights]",
+        "httpCorrelationProtocol": "Legacy",
+        "logClientIp": true,
+        "sampling": {
+          "samplingType": "fixed",
+          "percentage": 100.0
+        },
+        "frontend": {
+          "request": {}
+        },
+        "backend": {
+          "request": {}
+        }
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/diagnostics",
+      "name": "[concat(parameters('apimServiceName'), '/azuremonitor')]",
+      "dependsOn": [],
+      "properties": {
+        "loggerId": "[parameters('apiLoggerId').azuremonitor]",
+        "logClientIp": true,
+        "sampling": {
+          "samplingType": "fixed",
+          "percentage": 100.0
+        },
+        "frontend": {
+          "request": {}
+        },
+        "backend": {
+          "request": {}
+        }
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/b005c097f75b4033ae9db0b8524bea0a/121489dd2bda42ec8f994005bc4a822a')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '121489dd2bda42ec8f994005bc4a822a')]"
+      ],
+      "properties": {
+        "displayName": "L&A Billing",
+        "description": "product giving access to L&A Billing api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/121489dd2bda42ec8f994005bc4a822a/groupcreationcomplete')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '121489dd2bda42ec8f994005bc4a822a')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), '121489dd2bda42ec8f994005bc4a822a', '627dfcd94634611330f0d855')]"
+      ],
+      "properties": {
+        "displayName": "Group Creation Complete Process",
+        "method": "POST",
+        "urlTemplate": "/parties-group/groupsetupprocess",
+        "description": "This operation will complete group setup process upto bill definition complete status.",
+        "templateParameters": [],
+        "request": {
+          "description": "Request to create group.",
+          "headers": [],
+          "queryParameters": [],
+          "representations": [
+            {
+              "contentType": "application/json",
+              "schemaId": "627dfcd94634611330f0d855",
+              "typeName": "Group",
+              "sample": "[\r\n  {\r\n    \"groupName\": \"AS_R50_SC41_G0_name\",\r\n    \"entityType\": \"EMPLOYER\",\r\n    \"sourceSystemEntityCode\": \"AS_R50_SC41\",\r\n    \"effectiveDate\": \"2019-01-01\",\r\n    \"groupSetupYn\": \"N\",\r\n    \"billingEntityYn\": \"N\",\r\n    \"calendarHolidaySetupYn\": \"N\",\r\n    \"deductionYN\": \"N\",\r\n    \"billDefinitionCompleteYn\": \"N\",\r\n    \"anniversaryDate\": \"2020-01-01\",\r\n    \"sourceSystemPrimaryKey\": \"AS_R50_SC41_SPK\",\r\n    \"groupSize\": \"4\",\r\n    \"sourceSystemUserId\": \"SYSADMIN\",\r\n    \"doingBusinessAsName\": \"AS_R50_SC41_DBA\",\r\n    \"sourceSystem\": \"BILLING\",\r\n    \"parentEntityType\": \"EMPLOYER\",\r\n    \"parentEntityCode\": \"AS_R50_SC41\",\r\n    \"apexEntityNo\": \"AS_R50_SC41\",\r\n    \"apexEntityType\": \"EMPLOYER\",\r\n    \"state\": \"CA\",\r\n    \"country\": \"USA\",\r\n    \"ssn\": \"001-003 NH\",\r\n    \"transactionReason\": \"GROUP_SETUP\",\r\n    \"STPFlagYN\": \"N\",\r\n    \"billingFrequency\": \"QUARTERLY\",\r\n    \"temporaryStaffingLocationYN\": \"N\",\r\n    \"specialHandlingIndicator\": \"N\",\r\n    \"userRemarks\": \"Group Created\",\r\n    \"tpaNo\": \"TPA_100\",\r\n    \"tpaType\": \"G_CORPORATION\",\r\n    \"migratedYN\": \"N\",\r\n    \"allianceCode\": \"AS_R50_SC41\",\r\n    \"recurringEftTokenId\": \"123456\",\r\n    \"cobraIndicator\": \"N\",\r\n    \"billMethod\": \"LISTBILL\",\r\n    \"billDeliveryMethod\": \"EMAIL\",\r\n    \"billSendOption\": \"SEND\",\r\n    \"billingFormat\": \"PDF\",\r\n    \"billDueDay\": \"1\",\r\n    \"billingCycleDay\": \"1\",\r\n    \"billLeadDays\": \"10\",\r\n    \"billDueDay1\": \"\",\r\n    \"billDueDay2\": \"\",\r\n    \"paymentMethod\": \"CHECK\",\r\n    \"autoLapseYN\": \"Y\",\r\n    \"billReviewRequired\": \"N\",\r\n    \"billToTPA\": \"N\",\r\n    \"billingBasis\": \"ADVANCE\",\r\n    \"billingCycleDayOfWeek\": \"\",\r\n    \"billingDueDayOfWeek\": \"\",\r\n    \"partialPremiumChargingOption\": \"\",\r\n    \"partialDeductionChargingOption\": \"\",\r\n    \"stopBillFeesFlag\": \"N\",\r\n    \"addressDetails\": [\r\n      {\r\n        \"addressType\": \"MAILING\",\r\n        \"namePrefix\": \"MR\",\r\n        \"nameSuffix\": \"AD\",\r\n        \"firstName\": \"Pank\",\r\n        \"middleName\": \"A\",\r\n        \"lastName\": \"Gole\",\r\n        \"fullName\": \"PANK A GOLE\",\r\n        \"address1\": \"109 Rail road Street\",\r\n        \"address2\": \"phi phi land\",\r\n        \"state\": \"CA\",\r\n        \"country\": \"USA\",\r\n        \"city\": \"Iron River\",\r\n        \"zipCode\": \"USA\",\r\n        \"county\": \"166\",\r\n        \"primaryPhoneNo\": \"8458877445\",\r\n        \"primaryEmailId\": \"pank.g@gmail.com\",\r\n        \"primaryFaxNo\": \"456788\",\r\n        \"alternatePhoneNo\": \"8458877446\",\r\n        \"alternateEmailId\": \"pank1.g@gmail.com\",\r\n        \"alternateFaxNo\": \"456789\",\r\n        \"primaryAddressYN\": \"Y\"\r\n      }\r\n    ],\r\n    \"productClass\": [\r\n      {\r\n        \"classCode\": \"WORKER\",\r\n        \"classDescription\": \"worker\",\r\n        \"productCode\": \"TERM_LIFE\",\r\n        \"originalProductCode\": \"TERM_LIFE\",\r\n        \"underwritingCompany\": \"ALL\",\r\n        \"renewalDate\": \"2019-01-01\",\r\n        \"fundingMethod\": \"EMPLOYER\",\r\n        \"productType\": \"WORKSITE\",\r\n        \"groupLapseForEE\": \"Y\",\r\n        \"payrollDeductionYN\": \"N\",\r\n        \"directedMemberAllocationYN\": \"N\"\r\n      }\r\n    ],\r\n    \"groupingCategory\": [\r\n      {\r\n        \"categoryCode\": \"cc\",\r\n        \"categoryDescription\": \"Cost Center\",\r\n        \"groupingCategoryOrder\": \"2\",\r\n        \"groupingCode\": \"CC001\",\r\n        \"groupingDescription\": \"CC for USA\",\r\n        \"groupingSortingIndicator\": \"S\"\r\n      }\r\n    ],\r\n    \"entityRelation\": [\r\n      {\r\n        \"agentType\": \"Broker\",\r\n        \"agentSubType\": \"Broker\",\r\n        \"allianceCode\": \"12345\",\r\n        \"externalEntityYN\": \"N\",\r\n        \"deleteYN\": \"N\",\r\n        \"entityCode\": \"AS_R50_SC41\",\r\n        \"entityName\": \"AS_R50_SC41_name\",\r\n        \"entityType\": \"BROKER\",\r\n        \"percRateValue\": \"50\",\r\n        \"sharePercRate\": \"PERCENTAGE\"\r\n      }\r\n    ],\r\n    \"lapseParameters\": [\r\n      {\r\n        \"lapseParameter\": \"PAST_DUE_GRACE_DAYS\",\r\n        \"memberNoOfDays\": \"5\",\r\n        \"numberOfDays\": \"5\"\r\n      }\r\n    ],\r\n    \"SICCodeDetails\": [\r\n      {\r\n        \"SICCode\": \"0723\",\r\n        \"primaryYN\": \"Y\",\r\n        \"deleteYN\": \"N\"\r\n      }\r\n    ],\r\n    \"groupHolidayMapping\": [\r\n      {\r\n        \"calendarHoliday\": [\r\n          {\r\n            \"holidayName\": \"Christmas Day\",\r\n            \"nonWorkingDate\": \"2016-12-25\"\r\n          }\r\n        ],\r\n        \"calendarHolidayYears\": [\r\n          {\r\n            \"year\": \"2016\"\r\n          }\r\n        ],\r\n        \"nonWorkingDay\": [\r\n          {\r\n            \"saturdayWorkingYN\": \"N\",\r\n            \"sundayWorkingYN\": \"N\",\r\n            \"mondayWorkingYN\": \"Y\",\r\n            \"tuesdayWorkingYN\": \"Y\",\r\n            \"wednesdayWorkingYN\": \"Y\",\r\n            \"thursdayWorkingYN\": \"Y\",\r\n            \"fridayWorkingYN\": \"Y\"\r\n          }\r\n        ],\r\n        \"nonWorkingDayException\": [\r\n          {\r\n            \"exceptionWorkingDate\": \"2016-12-22\",\r\n            \"remark\": \"ManoharBirthday\"\r\n          }\r\n        ]\r\n      }\r\n    ],\r\n    \"inboundDeductionFrequency\": [\r\n      {\r\n        \"considerLocationHolidays\": \"Y\",\r\n        \"considerExclusionPeriod\": \"Y\",\r\n        \"deductionHolidayRule\": \"PREVIOUS\",\r\n        \"frequencyMode\": \"MONTHLY\",\r\n        \"day1OfTheMonth\": \"30\",\r\n        \"day2OfTheMonth\": \"20\",\r\n        \"dayOfTheWeek\": \"MON\",\r\n        \"weekNo\": \"2\",\r\n        \"monthOfTheYear\": \"3\",\r\n        \"deductionNotificationOption\": \"NEVER\",\r\n        \"notificationSendBeforeDays\": \"3\",\r\n        \"catchUpOption\": \"SPREAD_EQUAL\",\r\n        \"inboundDeductionYear\": [\r\n          {\r\n            \"year\": \"2016\"\r\n          }\r\n        ],\r\n        \"excludeMonths\": [\r\n          {\r\n            \"excludeFromDate\": \"2016-03-01\",\r\n            \"excludeToDate\": \"2016-05-01\"\r\n          }\r\n        ],\r\n        \"deductionProductClass\": [\r\n          {\r\n            \"classCode\": \"WORKER\",\r\n            \"productCode\": \"TERM_LIFE\"\r\n          }\r\n        ]\r\n      }\r\n    ]\r\n  }\r\n]"
+            }
+          ]
+        },
+        "responses": [
+          {
+            "description": "Successful operation",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfcd94634611330f0d855",
+                "typeName": "Message",
+                "sample": "{\r\n  \"code\": \"string\",\r\n  \"description\": \"string\",\r\n  \"type\": \"string\",\r\n  \"groupNo\": \"string\"\r\n}"
+              }
+            ],
+            "statusCode": 200
+          },
+          {
+            "description": "Bad Request",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfcd94634611330f0d855",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\",\r\n      \"groupNo\": \"DS_R40_SC01\"\r\n    }\r\n  ]\r\n}"
+              }
+            ],
+            "statusCode": 400
+          },
+          {
+            "description": "Resource not found",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfcd94634611330f0d855",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\",\r\n      \"groupNo\": \"DS_R40_SC01\"\r\n    }\r\n  ]\r\n}"
+              }
+            ],
+            "statusCode": 404
+          },
+          {
+            "description": "Server not available.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfcd94634611330f0d855",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\",\r\n      \"groupNo\": \"DS_R40_SC01\"\r\n    }\r\n  ]\r\n}"
+              }
+            ],
+            "statusCode": 500
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/121489dd2bda42ec8f994005bc4a822a/groupcreationcomplete/Group')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '121489dd2bda42ec8f994005bc4a822a', 'groupcreationcomplete')]"
+      ],
+      "properties": {
+        "displayName": "Group"
+      }
+    }
+  ]
+}

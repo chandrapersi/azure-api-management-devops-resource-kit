@@ -1,0 +1,563 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "apimServiceName": {
+      "type": "string"
+    },
+    "policyXMLBaseUrl": {
+      "type": "string"
+    },
+    "apiLoggerId": {
+      "type": "object"
+    }
+  },
+  "resources": [
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis",
+      "name": "[concat(parameters('apimServiceName'), '/06c1f942c975490ea821e56f5ead6a03')]",
+      "dependsOn": [],
+      "properties": {
+        "description": "Customer API's for getting the customer related information",
+        "authenticationSettings": {
+          "subscriptionKeyRequired": false
+        },
+        "subscriptionKeyParameterNames": {
+          "header": "Ocp-Apim-Subscription-Key",
+          "query": "subscription-key"
+        },
+        "apiRevision": "1",
+        "isCurrent": true,
+        "subscriptionRequired": true,
+        "displayName": "Events base for Customer entity",
+        "serviceUrl": "https://suite-test1.cloudinsurer.com/mic/api/oas/parties-customer/v1/customer",
+        "path": "PartiesCustomer",
+        "protocols": [
+          "https"
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/schemas",
+      "name": "[concat(parameters('apimServiceName'), '/06c1f942c975490ea821e56f5ead6a03/627dfdec4634611330f0d8ba')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '06c1f942c975490ea821e56f5ead6a03')]"
+      ],
+      "properties": {
+        "contentType": "application/vnd.oai.openapi.components+json",
+        "document": {
+          "components": {
+            "schemas": {
+              "Error": {
+                "required": [
+                  "message",
+                  "status",
+                  "statuscode"
+                ],
+                "type": "object",
+                "properties": {
+                  "statuscode": {
+                    "type": "string",
+                    "description": "HTTP Status code for example 200/400/500",
+                    "example": "http-status-code"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "Short status description",
+                    "example": "Example status message"
+                  },
+                  "message": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Error_message"
+                    },
+                    "description": "Detailed error messages"
+                  },
+                  "moreinfo": {
+                    "type": "string",
+                    "description": "HTTP Link to more information page.",
+                    "example": "http://sampledomain/errors/ERR-001"
+                  }
+                }
+              },
+              "Message": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "Custom message code in case of success."
+                  },
+                  "description": {
+                    "maxLength": 1000,
+                    "type": "string",
+                    "description": "Custom message details in case of success."
+                  }
+                }
+              },
+              "Error_message": {
+                "type": "object",
+                "properties": {
+                  "systemerrcode": {
+                    "type": "string",
+                    "description": "System/Application error code",
+                    "example": "ERR-001"
+                  },
+                  "developer": {
+                    "type": "string",
+                    "description": "Verbose, plain language description of the problem for the app developer with hints about how to fix it.",
+                    "example": "Message for app developer"
+                  },
+                  "user": {
+                    "type": "string",
+                    "description": "Pass this message on to the app user if needed.",
+                    "example": "Message for end user"
+                  }
+                }
+              },
+              "configuredEvents": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/configuredEvent"
+                }
+              },
+              "configuredEvent": {
+                "type": "object",
+                "properties": {
+                  "eventName": {
+                    "type": "string",
+                    "description": "Event Name"
+                  },
+                  "isDefaultEvent": {
+                    "type": "string",
+                    "description": "Is Default Event"
+                  }
+                }
+              },
+              "customerEvents": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/customerEvent"
+                }
+              },
+              "customerEvent": {
+                "type": "object",
+                "properties": {
+                  "amount": {
+                    "type": "string"
+                  },
+                  "eventDate": {
+                    "type": "string"
+                  },
+                  "policyNo": {
+                    "type": "string"
+                  },
+                  "eventDescription": {
+                    "type": "string"
+                  },
+                  "policyEffectiveDate": {
+                    "type": "string"
+                  }
+                }
+              },
+              "ServiceResponseData": {
+                "required": [
+                  "statusCode",
+                  "responseMessage"
+                ],
+                "type": "object",
+                "properties": {
+                  "statuscode": {
+                    "type": "string",
+                    "description": "HTTP Status code for example 200/400/500",
+                    "example": "http-status-code"
+                  },
+                  "responseMessage": {
+                    "type": "string",
+                    "description": "status description",
+                    "example": "Example status message"
+                  },
+                  "Errors": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Error_message"
+                    },
+                    "description": "Detailed error messages"
+                  },
+                  "gid": {
+                    "type": "string",
+                    "description": "Customer gid value.",
+                    "example": "Example 100,200"
+                  },
+                  "sourceSystemID": {
+                    "type": "string",
+                    "description": "sourceSystemID value.",
+                    "example": "Example 100,200"
+                  },
+                  "customerId": {
+                    "type": "string",
+                    "description": "Customer id value.",
+                    "example": "Example 100,200"
+                  },
+                  "transactionId": {
+                    "type": "string",
+                    "description": "TransactionId value.",
+                    "example": "Example 100,200"
+                  },
+                  "clientId": {
+                    "type": "string",
+                    "description": "clientId value.",
+                    "example": "Example 100,200"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/diagnostics",
+      "name": "[concat(parameters('apimServiceName'), '/applicationinsights')]",
+      "dependsOn": [],
+      "properties": {
+        "alwaysLog": "allErrors",
+        "loggerId": "[parameters('apiLoggerId').applicationinsights]",
+        "httpCorrelationProtocol": "Legacy",
+        "logClientIp": true,
+        "sampling": {
+          "samplingType": "fixed",
+          "percentage": 100.0
+        },
+        "frontend": {
+          "request": {}
+        },
+        "backend": {
+          "request": {}
+        }
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/diagnostics",
+      "name": "[concat(parameters('apimServiceName'), '/azuremonitor')]",
+      "dependsOn": [],
+      "properties": {
+        "loggerId": "[parameters('apiLoggerId').azuremonitor]",
+        "logClientIp": true,
+        "sampling": {
+          "samplingType": "fixed",
+          "percentage": 100.0
+        },
+        "frontend": {
+          "request": {}
+        },
+        "backend": {
+          "request": {}
+        }
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/fd107d6dd36344dd88a6f8adbf170919/06c1f942c975490ea821e56f5ead6a03')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '06c1f942c975490ea821e56f5ead6a03')]"
+      ],
+      "properties": {
+        "displayName": "P&C Policy",
+        "description": "product giving access to P&C Policy api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/06c1f942c975490ea821e56f5ead6a03/delete')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '06c1f942c975490ea821e56f5ead6a03')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), '06c1f942c975490ea821e56f5ead6a03', '627dfdec4634611330f0d8ba')]"
+      ],
+      "properties": {
+        "displayName": "delete customer",
+        "method": "DELETE",
+        "urlTemplate": "/{customerId}",
+        "description": "delete customer",
+        "templateParameters": [
+          {
+            "name": "customerId",
+            "description": "Customer ID",
+            "type": "string",
+            "required": true,
+            "values": []
+          }
+        ],
+        "responses": [
+          {
+            "description": "successful operation",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfdec4634611330f0d8ba",
+                "typeName": "ServiceResponseData",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"responseMessage\": \"Example status message\",\r\n  \"Errors\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"gid\": \"Example 100,200\",\r\n  \"sourceSystemID\": \"Example 100,200\",\r\n  \"customerId\": \"Example 100,200\",\r\n  \"transactionId\": \"Example 100,200\",\r\n  \"clientId\": \"Example 100,200\"\r\n}"
+              }
+            ],
+            "statusCode": 200
+          },
+          {
+            "description": "Bad Request",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfdec4634611330f0d8ba",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreinfo\": \"http://sampledomain/errors/ERR-001\"\r\n}"
+              }
+            ],
+            "statusCode": 400
+          },
+          {
+            "description": "Resource not found",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfdec4634611330f0d8ba",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreinfo\": \"http://sampledomain/errors/ERR-001\"\r\n}"
+              }
+            ],
+            "statusCode": 404
+          },
+          {
+            "description": "Server not available.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfdec4634611330f0d8ba",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreinfo\": \"http://sampledomain/errors/ERR-001\"\r\n}"
+              }
+            ],
+            "statusCode": 500
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/06c1f942c975490ea821e56f5ead6a03/events')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '06c1f942c975490ea821e56f5ead6a03')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), '06c1f942c975490ea821e56f5ead6a03', '627dfdec4634611330f0d8ba')]"
+      ],
+      "properties": {
+        "displayName": "retrieve events for customer",
+        "method": "GET",
+        "urlTemplate": "/{customerId}/events?eventToDate={eventToDate}",
+        "description": "retrieve events for customer",
+        "templateParameters": [
+          {
+            "name": "customerId",
+            "description": "Customer ID",
+            "type": "string",
+            "required": true,
+            "values": []
+          },
+          {
+            "name": "eventToDate",
+            "description": "To date for the events",
+            "type": "string",
+            "required": true,
+            "values": []
+          }
+        ],
+        "request": {
+          "headers": [],
+          "queryParameters": [
+            {
+              "description": "From date for the events",
+              "name": "eventFromDate",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "description": "send pipe separated event name",
+              "name": "eventName",
+              "required": false,
+              "type": "string"
+            }
+          ],
+          "representations": []
+        },
+        "responses": [
+          {
+            "description": "successful operation",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfdec4634611330f0d8ba",
+                "typeName": "customerEvents",
+                "sample": "[\r\n  {\r\n    \"amount\": \"string\",\r\n    \"eventDate\": \"string\",\r\n    \"policyNo\": \"string\",\r\n    \"eventDescription\": \"string\",\r\n    \"policyEffectiveDate\": \"string\"\r\n  }\r\n]"
+              }
+            ],
+            "statusCode": 200
+          },
+          {
+            "description": "Bad Request",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfdec4634611330f0d8ba",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreinfo\": \"http://sampledomain/errors/ERR-001\"\r\n}"
+              }
+            ],
+            "statusCode": 400
+          },
+          {
+            "description": "Resource not found",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfdec4634611330f0d8ba",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreinfo\": \"http://sampledomain/errors/ERR-001\"\r\n}"
+              }
+            ],
+            "statusCode": 404
+          },
+          {
+            "description": "Server not available.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfdec4634611330f0d8ba",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreinfo\": \"http://sampledomain/errors/ERR-001\"\r\n}"
+              }
+            ],
+            "statusCode": 500
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/06c1f942c975490ea821e56f5ead6a03/configuredEvents')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '06c1f942c975490ea821e56f5ead6a03')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), '06c1f942c975490ea821e56f5ead6a03', '627dfdec4634611330f0d8ba')]"
+      ],
+      "properties": {
+        "displayName": "retrieve list configured events",
+        "method": "GET",
+        "urlTemplate": "/configuredEvents",
+        "description": "retrieve list configured events",
+        "templateParameters": [],
+        "responses": [
+          {
+            "description": "successful operation",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfdec4634611330f0d8ba",
+                "typeName": "configuredEvents",
+                "sample": "[\r\n  {\r\n    \"eventName\": \"string\",\r\n    \"isDefaultEvent\": \"string\"\r\n  }\r\n]"
+              }
+            ],
+            "statusCode": 200
+          },
+          {
+            "description": "Bad Request",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfdec4634611330f0d8ba",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreinfo\": \"http://sampledomain/errors/ERR-001\"\r\n}"
+              }
+            ],
+            "statusCode": 400
+          },
+          {
+            "description": "Resource not found",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfdec4634611330f0d8ba",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreinfo\": \"http://sampledomain/errors/ERR-001\"\r\n}"
+              }
+            ],
+            "statusCode": 404
+          },
+          {
+            "description": "Server not available.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfdec4634611330f0d8ba",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreinfo\": \"http://sampledomain/errors/ERR-001\"\r\n}"
+              }
+            ],
+            "statusCode": 500
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/06c1f942c975490ea821e56f5ead6a03/delete/customer')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '06c1f942c975490ea821e56f5ead6a03', 'delete')]"
+      ],
+      "properties": {
+        "displayName": "customer"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/06c1f942c975490ea821e56f5ead6a03/events/customer')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '06c1f942c975490ea821e56f5ead6a03', 'events')]"
+      ],
+      "properties": {
+        "displayName": "customer"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/06c1f942c975490ea821e56f5ead6a03/configuredEvents/customer')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '06c1f942c975490ea821e56f5ead6a03', 'configuredEvents')]"
+      ],
+      "properties": {
+        "displayName": "customer"
+      }
+    }
+  ]
+}

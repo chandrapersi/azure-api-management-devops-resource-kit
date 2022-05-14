@@ -1,0 +1,1754 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "apimServiceName": {
+      "type": "string"
+    },
+    "policyXMLBaseUrl": {
+      "type": "string"
+    },
+    "apiLoggerId": {
+      "type": "object"
+    }
+  },
+  "resources": [
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis",
+      "name": "[concat(parameters('apimServiceName'), '/546c26b186f845d89b1929c9a4c44a05')]",
+      "dependsOn": [],
+      "properties": {
+        "description": "Policy parties API has the operations for managing the Underwriters and Reinsurers. The API has operations like create an Underwriter, update an Underwriter, delete an Underwriter, create a Reinsurer, update a Reinsurer, delete a Reinsurer along with operations to list and retrive the Underwriters and Reinsurers. There is also a provision for operations like Export and Import for the UnderWriters and Reinsurers.",
+        "authenticationSettings": {
+          "subscriptionKeyRequired": false
+        },
+        "subscriptionKeyParameterNames": {
+          "header": "Ocp-Apim-Subscription-Key",
+          "query": "subscription-key"
+        },
+        "apiRevision": "1",
+        "isCurrent": true,
+        "subscriptionRequired": true,
+        "displayName": "Policy Parties API",
+        "serviceUrl": "https://developer.cloudinsurer.com/mic/api/oas/policy-parties/v1",
+        "path": "Parties",
+        "protocols": [
+          "https"
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/schemas",
+      "name": "[concat(parameters('apimServiceName'), '/546c26b186f845d89b1929c9a4c44a05/627dfdca4634611330f0d8b3')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '546c26b186f845d89b1929c9a4c44a05')]"
+      ],
+      "properties": {
+        "contentType": "application/vnd.oai.openapi.components+json",
+        "document": {
+          "components": {
+            "schemas": {
+              "UnderWriterList": {
+                "type": "object",
+                "properties": {
+                  "pagination": {
+                    "$ref": "#/components/schemas/Pagination"
+                  },
+                  "underwriters": {
+                    "$ref": "#/components/schemas/UnderWriters"
+                  }
+                }
+              },
+              "UnderWriters": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UnderWriter"
+                }
+              },
+              "UnderWriter": {
+                "required": [
+                  "underWriterCode"
+                ],
+                "type": "object",
+                "properties": {
+                  "sourceSystemUserId": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "User Id sent by source system"
+                  },
+                  "sourceSystemCode": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "Originating system from where the account is interfaced to the Policy system"
+                  },
+                  "sourceSystemRequestNo": {
+                    "maxLength": 30,
+                    "type": "integer",
+                    "description": "Request sequence generated in the source system to uniquely identify a request",
+                    "format": "int32"
+                  },
+                  "underwriterId": {
+                    "type": "integer",
+                    "description": "This is system generated unique identifier for an Underwriter",
+                    "format": "int32",
+                    "readOnly": true
+                  },
+                  "underwriterCode": {
+                    "type": "string",
+                    "description": "This field defines the Underwriter Code"
+                  },
+                  "underwriterName": {
+                    "type": "string",
+                    "description": "This field defines the  Underwriter name"
+                  },
+                  "userId": {
+                    "type": "string",
+                    "description": "This field defines the user ID of an Underwriter"
+                  },
+                  "expirationDate": {
+                    "type": "string",
+                    "description": "This field defines the expiration date for this Underwriter",
+                    "format": "date"
+                  },
+                  "isExpired": {
+                    "enum": [
+                      "Y",
+                      "N"
+                    ],
+                    "type": "string",
+                    "description": "This field defines the status if the underwriter is expired.",
+                    "readOnly": true
+                  },
+                  "addressLine": {
+                    "type": "string",
+                    "description": "This field defines the street address for an underwriter"
+                  },
+                  "city": {
+                    "type": "string",
+                    "description": "This field defines the city of an underwriter"
+                  },
+                  "state": {
+                    "type": "string",
+                    "description": "This field defines state of an underwriter"
+                  },
+                  "zipCode": {
+                    "type": "string",
+                    "description": "This field defines the zip code of  an underwriter."
+                  },
+                  "country": {
+                    "type": "string",
+                    "description": "This field defines the country of an underwriter"
+                  },
+                  "telephone": {
+                    "type": "string",
+                    "description": "This field defines the telephone number of an underwriter"
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "This field defines the email address of an underwriter"
+                  },
+                  "licenseId": {
+                    "type": "string",
+                    "description": "This field defines the License ID of an underwriter"
+                  }
+                },
+                "description": "These are all the underwriters and their information configured in the system"
+              },
+              "UnderWriterExport": {
+                "type": "object",
+                "properties": {
+                  "sourceSystemUserId": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "User Id sent by source system"
+                  },
+                  "sourceSystemCode": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "Originating system from where the account is interfaced to the Policy system"
+                  },
+                  "sourceSystemRequestNo": {
+                    "maxLength": 30,
+                    "type": "integer",
+                    "description": "Request sequence generated in the source system to uniquely identify a request",
+                    "format": "int32"
+                  },
+                  "exportCsv": {
+                    "type": "string",
+                    "description": "This will be the export of all the Underwriters in a CSV file as a Base64 Encoded String",
+                    "format": "byte"
+                  }
+                },
+                "description": "These are all the Underwriters configured in the system extracted as a CSV file"
+              },
+              "UwAssignments": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UwAssignment"
+                }
+              },
+              "UwAssignment": {
+                "type": "object",
+                "properties": {
+                  "sourceSystemUserId": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "User Id sent by source system"
+                  },
+                  "sourceSystemCode": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "Originating system from where the account is interfaced to the Policy system"
+                  },
+                  "sourceSystemRequestNo": {
+                    "maxLength": 30,
+                    "type": "integer",
+                    "description": "Request sequence generated in the source system to uniquely identify a request",
+                    "format": "int32"
+                  },
+                  "uwAssignmentId": {
+                    "type": "integer",
+                    "description": "This is system generated unique identifier for an Underwriter",
+                    "format": "int32",
+                    "readOnly": true
+                  },
+                  "underWriterCode": {
+                    "type": "string",
+                    "description": "This field defines the Underwriter Code"
+                  },
+                  "ruleweight": {
+                    "type": "integer",
+                    "description": "This field defines weightage of this assignment",
+                    "format": "int32",
+                    "readOnly": true
+                  },
+                  "premiumLowRange": {
+                    "type": "string",
+                    "description": "This field defines the Low range of the premium configured for this assignment"
+                  },
+                  "premiumHighRange": {
+                    "type": "string",
+                    "description": "This field defines the high range of the premium configured for this assignment",
+                    "readOnly": true
+                  },
+                  "policyEffectiveDate": {
+                    "type": "string",
+                    "description": "This field defines the policy effective date configured for this assignment",
+                    "format": "date",
+                    "readOnly": true
+                  },
+                  "programCode": {
+                    "type": "string",
+                    "description": "This field defines the program code configured for this assignment",
+                    "readOnly": true
+                  },
+                  "policySymbol": {
+                    "type": "string",
+                    "description": "This field defines the policy symbol/Product code configured for this assignment",
+                    "readOnly": true
+                  },
+                  "serviceCenter": {
+                    "type": "string",
+                    "description": "This field defines the service center configured for this assignment",
+                    "readOnly": true
+                  },
+                  "district": {
+                    "type": "string",
+                    "description": "This field defines the District configured for this assignment",
+                    "readOnly": true
+                  },
+                  "businessType": {
+                    "type": "string",
+                    "description": "This field defines the Business Type configured for this assignment"
+                  },
+                  "producerCode": {
+                    "type": "string",
+                    "description": "This field defines the producer code configured for this assignment",
+                    "readOnly": true
+                  },
+                  "producerStateProvince": {
+                    "type": "string",
+                    "description": "This field defines the state province for the producer configured for this assignment.",
+                    "readOnly": true
+                  }
+                },
+                "description": "These are the assigments configured for an Underwriter"
+              },
+              "Reinsurers": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Reinsurer"
+                }
+              },
+              "Reinsurer": {
+                "required": [
+                  "ReinsurerId",
+                  "companyCode",
+                  "federalID",
+                  "jurisdictionState",
+                  "name"
+                ],
+                "type": "object",
+                "properties": {
+                  "sourceSystemUserId": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "User Id sent by source system"
+                  },
+                  "sourceSystemCode": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "Originating system from where the account is interfaced to the Policy system"
+                  },
+                  "sourceSystemRequestNo": {
+                    "maxLength": 30,
+                    "type": "integer",
+                    "description": "Request sequence generated in the source system to uniquely identify a request",
+                    "format": "int32"
+                  },
+                  "ReinsurerId": {
+                    "type": "integer",
+                    "description": "This is system generated unique identifier for a Reinsurer",
+                    "format": "int32",
+                    "readOnly": true
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "This field defines the name of a Reinsurer"
+                  },
+                  "companyCode": {
+                    "type": "string",
+                    "description": "This field defines the company code for a Reinsurer"
+                  },
+                  "federalID": {
+                    "type": "string",
+                    "description": "This field defines the Federal ID of a Reinsurer"
+                  },
+                  "jurisdictionState": {
+                    "type": "string",
+                    "description": "This field defines the jurisdiction state of a Reinsurer"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "This field defines the status of a Reinsurer, which will specify if the Reinsurer is active or not",
+                    "readOnly": true
+                  },
+                  "userModified": {
+                    "type": "string",
+                    "description": "This field defines the username of the user who updated the Reinsurer",
+                    "readOnly": true
+                  },
+                  "dateModified": {
+                    "type": "string",
+                    "description": "This field defines the date on which the Reinsurer was updated.",
+                    "format": "date",
+                    "readOnly": true
+                  }
+                },
+                "description": "These are the Reinsurer details configured in the policy system"
+              },
+              "ReinsurerExport": {
+                "type": "object",
+                "properties": {
+                  "sourceSystemUserId": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "User Id sent by source system"
+                  },
+                  "sourceSystemCode": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "Originating system from where the account is interfaced to the Policy system"
+                  },
+                  "sourceSystemRequestNo": {
+                    "maxLength": 30,
+                    "type": "integer",
+                    "description": "Request sequence generated in the source system to uniquely identify a request",
+                    "format": "int32"
+                  },
+                  "exportCsv": {
+                    "type": "string",
+                    "description": "This will be the export of all the reinsurer in a CSV file as a Base64 Encoded String",
+                    "format": "byte"
+                  }
+                },
+                "description": "These are all the resinsurers in the system extracted as a CSV file"
+              },
+              "InsuredSearchResults": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/InsuredSearchResult"
+                }
+              },
+              "InsuredSearchResult": {
+                "type": "object",
+                "properties": {
+                  "entityType": {
+                    "type": "string",
+                    "description": "Entity Type"
+                  },
+                  "insuredName": {
+                    "type": "string",
+                    "description": "Name of the Insured"
+                  },
+                  "insuredType": {
+                    "type": "string",
+                    "description": "Type of the Insured"
+                  },
+                  "agencyName": {
+                    "type": "string",
+                    "description": "Name of the agency"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "Status of the Insured"
+                  }
+                },
+                "description": "Search Result object"
+              },
+              "Error": {
+                "required": [
+                  "message",
+                  "status",
+                  "statuscode"
+                ],
+                "type": "object",
+                "properties": {
+                  "statuscode": {
+                    "type": "string",
+                    "description": "HTTP Status code for example 200/400/500",
+                    "example": "http-status-code"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "Short status description",
+                    "example": "Example status message"
+                  },
+                  "message": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Error_message"
+                    },
+                    "description": "Detailed error messages"
+                  },
+                  "moreinfo": {
+                    "type": "string",
+                    "description": "HTTP Link to more information page.",
+                    "example": "http://sampledomain/errors/ERR-001"
+                  }
+                }
+              },
+              "Message": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "Custom message code in case of success."
+                  },
+                  "description": {
+                    "maxLength": 1000,
+                    "type": "string",
+                    "description": "Custom message details in case of success."
+                  }
+                }
+              },
+              "Pagination": {
+                "type": "object",
+                "properties": {
+                  "pageSize": {
+                    "type": "integer",
+                    "description": "Number of records to be returned in a single page. API will use default value if this is not supplied",
+                    "format": "int32",
+                    "default": 10,
+                    "example": 10
+                  },
+                  "totalRecords": {
+                    "type": "integer",
+                    "description": "Total number of records. This can be used by the consumer to decide the page size.",
+                    "format": "int32",
+                    "readOnly": true,
+                    "example": 100
+                  },
+                  "pageNumber": {
+                    "type": "integer",
+                    "description": "Page number of the current records.",
+                    "format": "int32",
+                    "readOnly": true,
+                    "example": 1
+                  },
+                  "lastPageNumber": {
+                    "type": "integer",
+                    "description": "Page number of the last page based on total records.",
+                    "format": "int32",
+                    "readOnly": true,
+                    "example": 10
+                  },
+                  "startIndex": {
+                    "type": "string",
+                    "description": "Start index/ID of records in the current page. This is the start cursor of the record set representing a page.This can be continutation token to fetch the previous page.",
+                    "readOnly": true,
+                    "example": "u1001"
+                  },
+                  "endIndex": {
+                    "type": "string",
+                    "description": "End index/ID of records in the current page.This is the end cursor of the record set representing a page. This can be continutation token to fetch the next page.",
+                    "readOnly": true,
+                    "example": "u1010"
+                  },
+                  "links": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/PageLink"
+                    },
+                    "description": "Page links for previous, next, first and last pages"
+                  }
+                },
+                "description": "Pagination Metada which is used to communicate pagination related fields between consumer and API implementation"
+              },
+              "PageLink": {
+                "type": "object",
+                "properties": {
+                  "next": {
+                    "maxLength": 150,
+                    "type": "string",
+                    "description": "Represents http link to access the next page",
+                    "example": "http://sampledomain/version/resourcename?pageSize=10&pageNumber=2&correlationid=GUID000111"
+                  },
+                  "prev": {
+                    "maxLength": 150,
+                    "type": "string",
+                    "description": "Represents http link to access the previous page",
+                    "example": "http://sampledomain/version/resourcename?pageSize=10&pageNumber=1&correlationid=GUID000111"
+                  },
+                  "first": {
+                    "maxLength": 150,
+                    "type": "string",
+                    "description": "Represents http link to access the first page",
+                    "example": "http://sampledomain/version/resourcename?pageSize=10&pageNumber=1&correlationid=GUID000111"
+                  },
+                  "last": {
+                    "maxLength": 150,
+                    "type": "string",
+                    "description": "Represents http link to access the last page",
+                    "example": "http://sampledomain/version/resourcename?pageSize=10&pageNumber=10&correlationid=GUID000111"
+                  }
+                },
+                "description": "Represents first, last, previous and next page , http links in a pagination context."
+              },
+              "businessName": {
+                "maxLength": 250,
+                "type": "string",
+                "description": "Business Name of the Insured - For the Insured Type other than 'Individual'"
+              },
+              "Insured": {
+                "required": [
+                  "InsuredAddress",
+                  "address",
+                  "businessName",
+                  "insuredType"
+                ],
+                "type": "object",
+                "properties": {
+                  "sourceSystemUserId": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "User Id sent by source system"
+                  },
+                  "sourceSystemCode": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "Originating system from where the account is interfaced to the Policy system"
+                  },
+                  "sourceSystemRequestNo": {
+                    "maxLength": 30,
+                    "type": "integer",
+                    "description": "Request sequence generated in the source system to uniquely identify a request",
+                    "format": "int32"
+                  },
+                  "id": {
+                    "type": "integer",
+                    "description": "ID",
+                    "format": "int32",
+                    "readOnly": true
+                  },
+                  "isDelete": {
+                    "maxLength": 1,
+                    "enum": [
+                      "N",
+                      "Y"
+                    ],
+                    "type": "string",
+                    "description": "Is Delete ?",
+                    "readOnly": true
+                  },
+                  "businessName": {
+                    "maxLength": 250,
+                    "type": "string",
+                    "description": "Business Name of the Insured - For the Insured Type other than 'Individual'"
+                  },
+                  "insuredType": {
+                    "maxLength": 256,
+                    "type": "string",
+                    "description": "Type of the Insured.",
+                    "example": "Association, Common Ownership, Corporation, Executor or Trustee, Govermental Entity, Individual, Joint Employers, Joint Venture, Labor Union, Limited Liability, Company (LLC), Limited Liability Partnership, Limited Partnership, Multiple Status, Organization, including a Corporation (but not including a Partnership, Joint Venture or Limited Liability Company) , Other"
+                  },
+                  "insuredTypeDescription": {
+                    "maxLength": 4000,
+                    "type": "string",
+                    "description": "Insured description of the Insured - For the Insured Type other than 'Individual'"
+                  },
+                  "businessDescription": {
+                    "maxLength": 4000,
+                    "type": "string",
+                    "description": "Business description of the Insured - For the Insured Type other than 'Individual'"
+                  },
+                  "descriptionOfOperations": {
+                    "maxLength": 4000,
+                    "type": "string",
+                    "description": "Description of  operations of the Insured -For the Insured Type other than 'Individual'"
+                  },
+                  "SICCode": {
+                    "maxLength": 6,
+                    "type": "string",
+                    "description": "SIC (Standard Industrial Classification) code of the Insured - For the Insured Type other than 'Individual'"
+                  },
+                  "NAICSCode": {
+                    "maxLength": 6,
+                    "type": "string",
+                    "description": "NAICS (The North American Industry Classification System ) code of the Insured - For the Insured Type other than 'Individual'"
+                  },
+                  "doingBusinessAs": {
+                    "maxLength": 250,
+                    "type": "string",
+                    "description": "Doing business  as business the Insured - For the Insured Type other than 'Individual'"
+                  },
+                  "stateOfIncorporation": {
+                    "maxLength": 2,
+                    "type": "string",
+                    "description": "State of  incorporation of the Insured - For the Insured Type other than 'Individual'"
+                  },
+                  "yearsOfOperation": {
+                    "type": "integer",
+                    "description": "Years of  operation of the Insured - For the Insured Type other than 'Individual'",
+                    "format": "int32"
+                  },
+                  "searchKeywords": {
+                    "maxLength": 128,
+                    "type": "string",
+                    "description": "Any search tags that need to be added to this Insured- For the Insured Type other than 'Individual'"
+                  },
+                  "accountNumber": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "Account number of the Insured - For the Insured Type other than 'Individual'"
+                  },
+                  "D&BNumber": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "D&B (Dun & Bradstreet) number of  the Insured - For the Insured Type other than 'Individual'"
+                  },
+                  "InsuredAddress": {
+                    "$ref": "#/components/schemas/Address"
+                  },
+                  "FIEN": {
+                    "type": "string",
+                    "description": "FIEN (FEDERAL EMPLOYER ID NUMBER) of the Insured -  For the Insured Type other than 'Individual'"
+                  },
+                  "insuredProgramName": {
+                    "maxLength": 128,
+                    "type": "string",
+                    "description": "Insured Program Name"
+                  },
+                  "InsuredContact": {
+                    "$ref": "#/components/schemas/Contact"
+                  },
+                  "feinPhoneRequired": {
+                    "maxLength": 128,
+                    "type": "string",
+                    "description": "FEIN Phone number"
+                  },
+                  "insMarketGroupDesc": {
+                    "maxLength": 128,
+                    "type": "string",
+                    "description": "Market Segment description"
+                  },
+                  "InUnderwritingDetails": {
+                    "$ref": "#/components/schemas/InUnderwritingDetails"
+                  },
+                  "InsuredRiskClearance": {
+                    "$ref": "#/components/schemas/InsuredRiskClearance"
+                  },
+                  "address": {
+                    "$ref": "#/components/schemas/Address"
+                  },
+                  "locations": {
+                    "$ref": "#/components/schemas/Locations"
+                  }
+                },
+                "description": "Object details for Insured.This model can be sent for create/update/delete independently. However wrapper model QuoteDetails/PolicyDetails should be sent"
+              },
+              "Address": {
+                "required": [
+                  "city",
+                  "line1",
+                  "stateCode",
+                  "zipCode"
+                ],
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "ID",
+                    "format": "int32",
+                    "readOnly": true
+                  },
+                  "isDelete": {
+                    "maxLength": 1,
+                    "enum": [
+                      "N",
+                      "Y"
+                    ],
+                    "type": "string",
+                    "description": "Is Delete ?",
+                    "readOnly": true
+                  },
+                  "line1": {
+                    "maxLength": 64,
+                    "type": "string",
+                    "description": "Address line 1"
+                  },
+                  "line2": {
+                    "maxLength": 64,
+                    "type": "string",
+                    "description": "Address line 2"
+                  },
+                  "city": {
+                    "maxLength": 128,
+                    "type": "string",
+                    "description": "City"
+                  },
+                  "stateCode": {
+                    "maxLength": 2,
+                    "type": "string",
+                    "description": "State code"
+                  },
+                  "stateDesc": {
+                    "maxLength": 30,
+                    "type": "string",
+                    "description": "State description"
+                  },
+                  "zipCode": {
+                    "maxLength": 15,
+                    "type": "string",
+                    "description": "Zip / Postal code"
+                  },
+                  "zipExt": {
+                    "maxLength": 4,
+                    "type": "string",
+                    "description": "Zip extension"
+                  },
+                  "county": {
+                    "maxLength": 40,
+                    "type": "string",
+                    "description": "County"
+                  },
+                  "country": {
+                    "maxLength": 30,
+                    "type": "string",
+                    "description": "Country"
+                  },
+                  "geoRangeIndicator": {
+                    "maxLength": 80,
+                    "type": "string",
+                    "description": "Location Verification",
+                    "readOnly": true
+                  },
+                  "dGeoRangeInd": {
+                    "maxLength": 80,
+                    "type": "string",
+                    "description": "Location Verification",
+                    "readOnly": true
+                  },
+                  "suggAdd": {
+                    "maxLength": 32,
+                    "type": "string",
+                    "description": "Suggested Address"
+                  },
+                  "acptNewadd": {
+                    "enum": [
+                      "N",
+                      "Y"
+                    ],
+                    "type": "string",
+                    "description": "Keep Address as Entered"
+                  }
+                }
+              },
+              "Contact": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "ID",
+                    "format": "int32",
+                    "readOnly": true
+                  },
+                  "isDelete": {
+                    "maxLength": 1,
+                    "enum": [
+                      "N",
+                      "Y"
+                    ],
+                    "type": "string",
+                    "description": "Is Delete ?",
+                    "readOnly": true
+                  },
+                  "contactName": {
+                    "maxLength": 250,
+                    "type": "string",
+                    "description": "Contact Name"
+                  },
+                  "eMail": {
+                    "maxLength": 256,
+                    "type": "string",
+                    "description": "Email id of the Contact"
+                  },
+                  "title": {
+                    "maxLength": 128,
+                    "type": "string",
+                    "description": "Title of the contact"
+                  },
+                  "phone1": {
+                    "maxLength": 16,
+                    "type": "string",
+                    "description": "Phone number 1  of the contact"
+                  },
+                  "phone2": {
+                    "maxLength": 16,
+                    "type": "string",
+                    "description": "Phone number 2  of the contact"
+                  },
+                  "fax": {
+                    "maxLength": 16,
+                    "type": "string",
+                    "description": "Fax Number  of the contact"
+                  },
+                  "webSite": {
+                    "maxLength": 256,
+                    "type": "string",
+                    "description": "Website of the contact"
+                  },
+                  "PolicyMailAddrFk": {
+                    "$ref": "#/components/schemas/Address"
+                  }
+                }
+              },
+              "InUnderwritingDetails": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "ID",
+                    "format": "int32",
+                    "readOnly": true
+                  },
+                  "isDelete": {
+                    "maxLength": 1,
+                    "enum": [
+                      "N",
+                      "Y"
+                    ],
+                    "type": "string",
+                    "description": "Is Delete ?",
+                    "readOnly": true
+                  },
+                  "underwriterName": {
+                    "maxLength": 128,
+                    "type": "string",
+                    "description": "Underwriter Name"
+                  },
+                  "dateReceived": {
+                    "type": "string",
+                    "description": "Date on which underwriting details are received",
+                    "format": "date"
+                  },
+                  "timeReceived": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "Time  on which underwriting details are received (HH:MM)"
+                  }
+                }
+              },
+              "InsuredRiskClearance": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "ID",
+                    "format": "int32",
+                    "readOnly": true
+                  },
+                  "isDelete": {
+                    "maxLength": 1,
+                    "enum": [
+                      "N",
+                      "Y"
+                    ],
+                    "type": "string",
+                    "description": "Is Delete ?",
+                    "readOnly": true
+                  },
+                  "RiskClearanceRule": {
+                    "$ref": "#/components/schemas/RiskClearanceRule"
+                  },
+                  "displayRcStatus": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "All Rules Qualifed"
+                  },
+                  "riskClearanceMessage": {
+                    "maxLength": 4000,
+                    "type": "string",
+                    "description": "Rule Qualification Message"
+                  },
+                  "riskClearOverideStatus": {
+                    "maxLength": 32,
+                    "type": "string",
+                    "description": "Risk Clearance Qualification (Override)"
+                  },
+                  "riskClearOverideMessage": {
+                    "maxLength": 4000,
+                    "type": "string",
+                    "description": "Risk Clearance Message (Override)"
+                  },
+                  "overrideBy": {
+                    "maxLength": 128,
+                    "type": "string",
+                    "description": "Override By"
+                  }
+                }
+              },
+              "RiskClearanceRule": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "ID",
+                    "format": "int32",
+                    "readOnly": true
+                  },
+                  "isDelete": {
+                    "maxLength": 1,
+                    "enum": [
+                      "N",
+                      "Y"
+                    ],
+                    "type": "string",
+                    "description": "Is Delete ?",
+                    "readOnly": true
+                  },
+                  "riskRule": {
+                    "maxLength": 250,
+                    "type": "string",
+                    "description": "Risk Clearance Rule Name"
+                  },
+                  "riskClrnceRuleResult": {
+                    "maxLength": 32,
+                    "type": "string",
+                    "description": "Risk clearance result Passed?"
+                  },
+                  "displayRcResult": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "Display Result"
+                  },
+                  "riskClRuleFailMsg": {
+                    "maxLength": 350,
+                    "type": "string",
+                    "description": "Failure Message"
+                  }
+                }
+              },
+              "Locations": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Location"
+                }
+              },
+              "Location": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "ID",
+                    "format": "int32",
+                    "readOnly": true
+                  },
+                  "isDelete": {
+                    "maxLength": 1,
+                    "enum": [
+                      "N",
+                      "Y"
+                    ],
+                    "type": "string",
+                    "description": "Is Delete ?",
+                    "readOnly": true
+                  },
+                  "locationNo": {
+                    "type": "integer",
+                    "description": "Location Number",
+                    "format": "int32",
+                    "readOnly": true
+                  },
+                  "copyMailingAddress": {
+                    "maxLength": 32,
+                    "type": "string",
+                    "description": "Copy Mailing  Address"
+                  },
+                  "name": {
+                    "maxLength": 30,
+                    "type": "string",
+                    "description": "Name of the Location"
+                  },
+                  "mainLocation": {
+                    "enum": [
+                      "N",
+                      "Y"
+                    ],
+                    "type": "string",
+                    "description": "Main Location"
+                  },
+                  "desc": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "Description"
+                  },
+                  "earthquakeZone": {
+                    "maxLength": 30,
+                    "type": "string",
+                    "description": "Earthquake Zone details"
+                  },
+                  "fireDistrict": {
+                    "maxLength": 30,
+                    "type": "string",
+                    "description": "Fire District Name"
+                  },
+                  "firedistCode": {
+                    "maxLength": 30,
+                    "type": "string",
+                    "description": "Fire District Name"
+                  },
+                  "fireStation": {
+                    "maxLength": 30,
+                    "type": "string",
+                    "description": "Fire Station Name"
+                  },
+                  "phoneInfo": {
+                    "maxLength": 16,
+                    "type": "string",
+                    "description": "Phone Number"
+                  },
+                  "emailInfo": {
+                    "maxLength": 256,
+                    "type": "string",
+                    "description": "Email"
+                  },
+                  "websiteInfo": {
+                    "maxLength": 256,
+                    "type": "string",
+                    "description": "Website"
+                  },
+                  "locationAddress": {
+                    "$ref": "#/components/schemas/Address"
+                  },
+                  "sublimit": {
+                    "type": "integer",
+                    "description": "Location Sublimit",
+                    "format": "int32"
+                  },
+                  "indoorValues": {
+                    "type": "integer",
+                    "description": "Indoor Values",
+                    "format": "int32"
+                  },
+                  "floodHazard": {
+                    "enum": [
+                      "N",
+                      "Y"
+                    ],
+                    "type": "string",
+                    "description": "Flood Hazard Applicable?"
+                  },
+                  "windHazard": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Windstorm Hazard Applicable?"
+                  },
+                  "hailHazard": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Hail Hazard Applicable?"
+                  },
+                  "unsecuredLotExclusion": {
+                    "enum": [
+                      "N",
+                      "Y"
+                    ],
+                    "type": "string",
+                    "description": "Unsecured Lot Exclusion Applicable?"
+                  },
+                  "floodExclusion": {
+                    "enum": [
+                      "N",
+                      "Y"
+                    ],
+                    "type": "string",
+                    "description": "Flood Exclusion Applicable?"
+                  },
+                  "weatherExclusion": {
+                    "enum": [
+                      "N",
+                      "Y"
+                    ],
+                    "type": "string",
+                    "description": "Weather Exclusion Applicable?"
+                  },
+                  "territoryCode": {
+                    "maxLength": 16,
+                    "type": "string",
+                    "description": "Territory Code for the location"
+                  },
+                  "territoryDescription": {
+                    "maxLength": 512,
+                    "type": "string",
+                    "description": "Territory Description "
+                  },
+                  "statisticalCode": {
+                    "maxLength": 3,
+                    "type": "string",
+                    "description": "Town Code"
+                  },
+                  "interest": {
+                    "maxLength": 2,
+                    "enum": [
+                      "O~Owner",
+                      "T~Tenant"
+                    ],
+                    "type": "string",
+                    "description": "Interest area of the location"
+                  },
+                  "locKyLocalGovtTax": {
+                    "$ref": "#/components/schemas/LocKyLocalGovtTax"
+                  },
+                  "distFireDept": {
+                    "maxLength": 30,
+                    "type": "string",
+                    "description": "Distance to Fire Department"
+                  },
+                  "distFireHydrant": {
+                    "maxLength": 30,
+                    "type": "string",
+                    "description": "Distance to Fire Hydrant"
+                  },
+                  "compositeRatingGroupNo": {
+                    "type": "integer",
+                    "description": "Composite Group Number",
+                    "format": "int32"
+                  },
+                  "compRatingGroupName": {
+                    "maxLength": 128,
+                    "type": "string",
+                    "description": "Composite Group Name"
+                  },
+                  "overrideManualFtr": {
+                    "enum": [
+                      "N",
+                      "Y"
+                    ],
+                    "type": "string",
+                    "description": "Override Manual Factor"
+                  },
+                  "liabilityManualFtr": {
+                    "type": "integer",
+                    "description": "Liability Manual Factor",
+                    "format": "int32"
+                  },
+                  "physicalDmgeManualFtr": {
+                    "type": "integer",
+                    "description": "Physical Damage Manual Factor",
+                    "format": "int32"
+                  }
+                },
+                "description": "Details of one or more locations to be passed here. This is applicable for Insureds of commercial policies only."
+              },
+              "LocKyLocalGovtTax": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "ID",
+                    "format": "int32",
+                    "readOnly": true
+                  },
+                  "isDelete": {
+                    "maxLength": 1,
+                    "enum": [
+                      "N",
+                      "Y"
+                    ],
+                    "type": "string",
+                    "description": "Is Delete ?",
+                    "readOnly": true
+                  },
+                  "isNoTax": {
+                    "enum": [
+                      "N",
+                      "Y"
+                    ],
+                    "type": "string",
+                    "description": "Do not apply City or County Taxes?"
+                  },
+                  "riskMunicipalityName": {
+                    "maxLength": 40,
+                    "type": "string",
+                    "description": "Risk Municipality City Name"
+                  },
+                  "riskCityCode": {
+                    "maxLength": 5,
+                    "type": "string",
+                    "description": "Risk Municipality City Code"
+                  },
+                  "riskCounty": {
+                    "maxLength": 40,
+                    "type": "string",
+                    "description": "Risk County"
+                  },
+                  "riskCountyCode": {
+                    "maxLength": 5,
+                    "type": "string",
+                    "description": "Risk County Code"
+                  },
+                  "riskTaxCode": {
+                    "maxLength": 30,
+                    "type": "string",
+                    "description": "Risk Tax Code"
+                  }
+                }
+              },
+              "inline_response_200": {
+                "type": "object",
+                "properties": {
+                  "SearchResults": {
+                    "$ref": "#/components/schemas/InsuredSearchResults"
+                  },
+                  "pagination": {
+                    "$ref": "#/components/schemas/Pagination"
+                  }
+                }
+              },
+              "Error_message": {
+                "type": "object",
+                "properties": {
+                  "systemerrcode": {
+                    "type": "string",
+                    "description": "System/Application error code",
+                    "example": "ERR-001"
+                  },
+                  "developer": {
+                    "type": "string",
+                    "description": "Verbose, plain language description of the problem for the app developer with hints about how to fix it.",
+                    "example": "Message for app developer"
+                  },
+                  "user": {
+                    "type": "string",
+                    "description": "Pass this message on to the app user if needed.",
+                    "example": "Message for end user"
+                  }
+                }
+              },
+              "ServiceResponseData": {
+                "required": [
+                  "statusCode",
+                  "responseMessage"
+                ],
+                "type": "object",
+                "properties": {
+                  "statuscode": {
+                    "type": "string",
+                    "description": "HTTP Status code for example 200/400/500",
+                    "example": "http-status-code"
+                  },
+                  "responseMessage": {
+                    "type": "string",
+                    "description": "status description",
+                    "example": "Example status message"
+                  },
+                  "Errors": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Error_message"
+                    },
+                    "description": "Detailed error messages"
+                  },
+                  "gid": {
+                    "type": "string",
+                    "description": "Customer gid value.",
+                    "example": "Example 100,200"
+                  },
+                  "sourceSystemID": {
+                    "type": "string",
+                    "description": "sourceSystemID value.",
+                    "example": "Example 100,200"
+                  },
+                  "insuredId": {
+                    "type": "string",
+                    "description": "Customer id value.",
+                    "example": "Example 100,200"
+                  },
+                  "transactionId": {
+                    "type": "string",
+                    "description": "TransactionId value.",
+                    "example": "Example 100,200"
+                  },
+                  "clientId": {
+                    "type": "string",
+                    "description": "clientId value.",
+                    "example": "Example 100,200"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/diagnostics",
+      "name": "[concat(parameters('apimServiceName'), '/applicationinsights')]",
+      "dependsOn": [],
+      "properties": {
+        "alwaysLog": "allErrors",
+        "loggerId": "[parameters('apiLoggerId').applicationinsights]",
+        "httpCorrelationProtocol": "Legacy",
+        "logClientIp": true,
+        "sampling": {
+          "samplingType": "fixed",
+          "percentage": 100.0
+        },
+        "frontend": {
+          "request": {}
+        },
+        "backend": {
+          "request": {}
+        }
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/diagnostics",
+      "name": "[concat(parameters('apimServiceName'), '/azuremonitor')]",
+      "dependsOn": [],
+      "properties": {
+        "loggerId": "[parameters('apiLoggerId').azuremonitor]",
+        "logClientIp": true,
+        "sampling": {
+          "samplingType": "fixed",
+          "percentage": 100.0
+        },
+        "frontend": {
+          "request": {}
+        },
+        "backend": {
+          "request": {}
+        }
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/fd107d6dd36344dd88a6f8adbf170919/546c26b186f845d89b1929c9a4c44a05')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '546c26b186f845d89b1929c9a4c44a05')]"
+      ],
+      "properties": {
+        "displayName": "P&C Policy",
+        "description": "product giving access to P&C Policy api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/546c26b186f845d89b1929c9a4c44a05/delete')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '546c26b186f845d89b1929c9a4c44a05')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), '546c26b186f845d89b1929c9a4c44a05', '627dfdca4634611330f0d8b3')]"
+      ],
+      "properties": {
+        "displayName": "delete insured",
+        "method": "DELETE",
+        "urlTemplate": "/insured/{insuredId}",
+        "description": "delete insured",
+        "templateParameters": [
+          {
+            "name": "insuredId",
+            "description": "Insured ID",
+            "type": "string",
+            "required": true,
+            "values": []
+          }
+        ],
+        "responses": [
+          {
+            "description": "successful operation",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfdca4634611330f0d8b3",
+                "typeName": "ServiceResponseData",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"responseMessage\": \"Example status message\",\r\n  \"Errors\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"gid\": \"Example 100,200\",\r\n  \"sourceSystemID\": \"Example 100,200\",\r\n  \"insuredId\": \"Example 100,200\",\r\n  \"transactionId\": \"Example 100,200\",\r\n  \"clientId\": \"Example 100,200\"\r\n}"
+              }
+            ],
+            "statusCode": 200
+          },
+          {
+            "description": "Bad Request",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfdca4634611330f0d8b3",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreinfo\": \"http://sampledomain/errors/ERR-001\"\r\n}"
+              }
+            ],
+            "statusCode": 400
+          },
+          {
+            "description": "Resource not found",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfdca4634611330f0d8b3",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreinfo\": \"http://sampledomain/errors/ERR-001\"\r\n}"
+              }
+            ],
+            "statusCode": 404
+          },
+          {
+            "description": "Server not available.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfdca4634611330f0d8b3",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreinfo\": \"http://sampledomain/errors/ERR-001\"\r\n}"
+              }
+            ],
+            "statusCode": 500
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/546c26b186f845d89b1929c9a4c44a05/listUwAssignments')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '546c26b186f845d89b1929c9a4c44a05')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), '546c26b186f845d89b1929c9a4c44a05', '627dfdca4634611330f0d8b3')]"
+      ],
+      "properties": {
+        "displayName": "List all underwriter assignments for an underwriter",
+        "method": "GET",
+        "urlTemplate": "/underwriter/{underwriterId}/assignments",
+        "description": "This operation lists all the assignments for an underwriter",
+        "templateParameters": [
+          {
+            "name": "underwriterId",
+            "description": "Format - int32. This is system generated unique identifier for an Underwriter",
+            "type": "integer",
+            "required": true,
+            "values": []
+          }
+        ],
+        "responses": [
+          {
+            "description": "Successful operation",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfdca4634611330f0d8b3",
+                "typeName": "UwAssignments",
+                "sample": "[\r\n  {\r\n    \"sourceSystemUserId\": \"string\",\r\n    \"sourceSystemCode\": \"string\",\r\n    \"sourceSystemRequestNo\": 0,\r\n    \"uwAssignmentId\": 0,\r\n    \"underWriterCode\": \"string\",\r\n    \"ruleweight\": 0,\r\n    \"premiumLowRange\": \"string\",\r\n    \"premiumHighRange\": \"string\",\r\n    \"policyEffectiveDate\": \"string\",\r\n    \"programCode\": \"string\",\r\n    \"policySymbol\": \"string\",\r\n    \"serviceCenter\": \"string\",\r\n    \"district\": \"string\",\r\n    \"businessType\": \"string\",\r\n    \"producerCode\": \"string\",\r\n    \"producerStateProvince\": \"string\"\r\n  }\r\n]"
+              }
+            ],
+            "statusCode": 200
+          },
+          {
+            "description": "Bad Request",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfdca4634611330f0d8b3",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreinfo\": \"http://sampledomain/errors/ERR-001\"\r\n}"
+              }
+            ],
+            "statusCode": 400
+          },
+          {
+            "description": "Resource not found",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfdca4634611330f0d8b3",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreinfo\": \"http://sampledomain/errors/ERR-001\"\r\n}"
+              }
+            ],
+            "statusCode": 404
+          },
+          {
+            "description": "Server not available.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfdca4634611330f0d8b3",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreinfo\": \"http://sampledomain/errors/ERR-001\"\r\n}"
+              }
+            ],
+            "statusCode": 500
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/546c26b186f845d89b1929c9a4c44a05/listUnderWriters')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '546c26b186f845d89b1929c9a4c44a05')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), '546c26b186f845d89b1929c9a4c44a05', '627dfdca4634611330f0d8b3')]"
+      ],
+      "properties": {
+        "displayName": "List all underwriters",
+        "method": "GET",
+        "urlTemplate": "/underwriter",
+        "description": "This operation lists all the underwriters from the Policy system",
+        "templateParameters": [],
+        "request": {
+          "headers": [],
+          "queryParameters": [
+            {
+              "defaultValue": "10",
+              "description": "Format - int32.",
+              "name": "pageSize",
+              "required": false,
+              "type": "integer"
+            },
+            {
+              "defaultValue": "1",
+              "description": "Format - int32.",
+              "name": "pageNumber",
+              "required": false,
+              "type": "integer"
+            }
+          ],
+          "representations": []
+        },
+        "responses": [
+          {
+            "description": "Successful operation",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfdca4634611330f0d8b3",
+                "typeName": "UnderWriterList",
+                "sample": "{\r\n  \"pagination\": {\r\n    \"pageSize\": 10,\r\n    \"totalRecords\": 100,\r\n    \"pageNumber\": 1,\r\n    \"lastPageNumber\": 10,\r\n    \"startIndex\": \"u1001\",\r\n    \"endIndex\": \"u1010\",\r\n    \"links\": [\r\n      {\r\n        \"next\": \"http://sampledomain/version/resourcename?pageSize=10&pageNumber=2&correlationid=GUID000111\",\r\n        \"prev\": \"http://sampledomain/version/resourcename?pageSize=10&pageNumber=1&correlationid=GUID000111\",\r\n        \"first\": \"http://sampledomain/version/resourcename?pageSize=10&pageNumber=1&correlationid=GUID000111\",\r\n        \"last\": \"http://sampledomain/version/resourcename?pageSize=10&pageNumber=10&correlationid=GUID000111\"\r\n      }\r\n    ]\r\n  },\r\n  \"underwriters\": [\r\n    {\r\n      \"sourceSystemUserId\": \"string\",\r\n      \"sourceSystemCode\": \"string\",\r\n      \"sourceSystemRequestNo\": 0,\r\n      \"underwriterId\": 0,\r\n      \"underwriterCode\": \"string\",\r\n      \"underwriterName\": \"string\",\r\n      \"userId\": \"string\",\r\n      \"expirationDate\": \"string\",\r\n      \"isExpired\": \"Y\",\r\n      \"addressLine\": \"string\",\r\n      \"city\": \"string\",\r\n      \"state\": \"string\",\r\n      \"zipCode\": \"string\",\r\n      \"country\": \"string\",\r\n      \"telephone\": \"string\",\r\n      \"email\": \"string\",\r\n      \"licenseId\": \"string\"\r\n    }\r\n  ]\r\n}"
+              }
+            ],
+            "statusCode": 200
+          },
+          {
+            "description": "Bad Request",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfdca4634611330f0d8b3",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreinfo\": \"http://sampledomain/errors/ERR-001\"\r\n}"
+              }
+            ],
+            "statusCode": 400
+          },
+          {
+            "description": "Resource not found",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfdca4634611330f0d8b3",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreinfo\": \"http://sampledomain/errors/ERR-001\"\r\n}"
+              }
+            ],
+            "statusCode": 404
+          },
+          {
+            "description": "Server not available.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfdca4634611330f0d8b3",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreinfo\": \"http://sampledomain/errors/ERR-001\"\r\n}"
+              }
+            ],
+            "statusCode": 500
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/546c26b186f845d89b1929c9a4c44a05/retrieveUnderWriters')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '546c26b186f845d89b1929c9a4c44a05')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), '546c26b186f845d89b1929c9a4c44a05', '627dfdca4634611330f0d8b3')]"
+      ],
+      "properties": {
+        "displayName": "Retrieve an underwriter",
+        "method": "GET",
+        "urlTemplate": "/underwriter/{underwriterId}",
+        "description": "This operation retrieves a specified underwriter from the Policy system",
+        "templateParameters": [
+          {
+            "name": "underwriterId",
+            "description": "Format - int32. This is system generated unique identifier for an Underwriter",
+            "type": "integer",
+            "required": true,
+            "values": []
+          }
+        ],
+        "responses": [
+          {
+            "description": "Successful operation",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfdca4634611330f0d8b3",
+                "typeName": "UnderWriter",
+                "sample": "{\r\n  \"sourceSystemUserId\": \"string\",\r\n  \"sourceSystemCode\": \"string\",\r\n  \"sourceSystemRequestNo\": 0,\r\n  \"underwriterId\": 0,\r\n  \"underwriterCode\": \"string\",\r\n  \"underwriterName\": \"string\",\r\n  \"userId\": \"string\",\r\n  \"expirationDate\": \"string\",\r\n  \"isExpired\": \"Y\",\r\n  \"addressLine\": \"string\",\r\n  \"city\": \"string\",\r\n  \"state\": \"string\",\r\n  \"zipCode\": \"string\",\r\n  \"country\": \"string\",\r\n  \"telephone\": \"string\",\r\n  \"email\": \"string\",\r\n  \"licenseId\": \"string\"\r\n}"
+              }
+            ],
+            "statusCode": 200
+          },
+          {
+            "description": "Bad Request",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfdca4634611330f0d8b3",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreinfo\": \"http://sampledomain/errors/ERR-001\"\r\n}"
+              }
+            ],
+            "statusCode": 400
+          },
+          {
+            "description": "Resource not found",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfdca4634611330f0d8b3",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreinfo\": \"http://sampledomain/errors/ERR-001\"\r\n}"
+              }
+            ],
+            "statusCode": 404
+          },
+          {
+            "description": "Server not available.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfdca4634611330f0d8b3",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreinfo\": \"http://sampledomain/errors/ERR-001\"\r\n}"
+              }
+            ],
+            "statusCode": 500
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/546c26b186f845d89b1929c9a4c44a05/delete/Insured')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '546c26b186f845d89b1929c9a4c44a05', 'delete')]"
+      ],
+      "properties": {
+        "displayName": "Insured"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/546c26b186f845d89b1929c9a4c44a05/listUwAssignments/Underwriter')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '546c26b186f845d89b1929c9a4c44a05', 'listUwAssignments')]"
+      ],
+      "properties": {
+        "displayName": "Underwriter"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/546c26b186f845d89b1929c9a4c44a05/listUnderWriters/Underwriter')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '546c26b186f845d89b1929c9a4c44a05', 'listUnderWriters')]"
+      ],
+      "properties": {
+        "displayName": "Underwriter"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/546c26b186f845d89b1929c9a4c44a05/retrieveUnderWriters/Underwriter')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '546c26b186f845d89b1929c9a4c44a05', 'retrieveUnderWriters')]"
+      ],
+      "properties": {
+        "displayName": "Underwriter"
+      }
+    }
+  ]
+}

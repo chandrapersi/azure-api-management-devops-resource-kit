@@ -1,0 +1,497 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "apimServiceName": {
+      "type": "string"
+    },
+    "policyXMLBaseUrl": {
+      "type": "string"
+    },
+    "apiLoggerId": {
+      "type": "object"
+    }
+  },
+  "resources": [
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis",
+      "name": "[concat(parameters('apimServiceName'), '/cf0871e6ebbd4b218f992d974a1c51c1')]",
+      "dependsOn": [],
+      "properties": {
+        "description": "unified-search API has the operation to get all policies based on Entity provided to search. \n[http://swagger.io](http://swagger.io) or on\n[irc.freenode.net, #swagger](http://swagger.io/irc/).\n",
+        "authenticationSettings": {
+          "subscriptionKeyRequired": false
+        },
+        "subscriptionKeyParameterNames": {
+          "header": "Ocp-Apim-Subscription-Key",
+          "query": "subscription-key"
+        },
+        "apiRevision": "1",
+        "isCurrent": true,
+        "subscriptionRequired": true,
+        "displayName": "Unified Search of policies for Entity",
+        "serviceUrl": "https://suite-test1.cloudinsurer.com/mic/api/oas/policy-search/v1/unified",
+        "path": "Search",
+        "protocols": [
+          "https"
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/schemas",
+      "name": "[concat(parameters('apimServiceName'), '/cf0871e6ebbd4b218f992d974a1c51c1/627dfe944634611330f0d8d9')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), 'cf0871e6ebbd4b218f992d974a1c51c1')]"
+      ],
+      "properties": {
+        "contentType": "application/vnd.oai.openapi.components+json",
+        "document": {
+          "components": {
+            "schemas": {
+              "filters": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/filter"
+                }
+              },
+              "filter": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "description": "Key for the filter"
+                  },
+                  "value": {
+                    "type": "string",
+                    "description": "Value for the filter"
+                  }
+                }
+              },
+              "searchRequest": {
+                "type": "object",
+                "properties": {
+                  "sourceSystemUserId": {
+                    "type": "string",
+                    "description": "ID of the user for data segmentation"
+                  },
+                  "searchType": {
+                    "enum": [
+                      "STARTSWITH",
+                      "CONTAINS"
+                    ],
+                    "type": "string",
+                    "description": "STARTSWITH or CONTAINS"
+                  },
+                  "searchText": {
+                    "type": "string",
+                    "description": "text to be searched"
+                  },
+                  "searchEntityId": {
+                    "type": "string",
+                    "description": "Entity to be searched - POLICY, CLAIMS, INSURED etc"
+                  },
+                  "startIndex": {
+                    "type": "integer",
+                    "description": "Pagination - Start Record #."
+                  },
+                  "endIndex": {
+                    "type": "integer",
+                    "description": "Pagination - End Record #"
+                  },
+                  "sortCol": {
+                    "type": "string",
+                    "description": "sorting on column"
+                  },
+                  "sortOrder": {
+                    "enum": [
+                      "ASC",
+                      "DESC"
+                    ],
+                    "type": "string",
+                    "description": "DESCENDING / ASCENDING"
+                  },
+                  "filters": {
+                    "$ref": "#/components/schemas/filters"
+                  }
+                }
+              },
+              "Error": {
+                "required": [
+                  "message",
+                  "status",
+                  "statuscode"
+                ],
+                "type": "object",
+                "properties": {
+                  "statuscode": {
+                    "type": "string",
+                    "description": "HTTP Status code for example 200/400/500",
+                    "example": "http-status-code"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "Short status description",
+                    "example": "Example status message"
+                  },
+                  "message": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Error_message"
+                    },
+                    "description": "Detailed error messages"
+                  },
+                  "moreinfo": {
+                    "type": "string",
+                    "description": "HTTP Link to more information page.",
+                    "example": "http://sampledomain/errors/ERR-001"
+                  }
+                }
+              },
+              "Message": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "Custom message code in case of success."
+                  },
+                  "description": {
+                    "maxLength": 1000,
+                    "type": "string",
+                    "description": "Custom message details in case of success."
+                  }
+                }
+              },
+              "Error_message": {
+                "type": "object",
+                "properties": {
+                  "systemerrcode": {
+                    "type": "string",
+                    "description": "System/Application error code",
+                    "example": "ERR-001"
+                  },
+                  "developer": {
+                    "type": "string",
+                    "description": "Verbose, plain language description of the problem for the app developer with hints about how to fix it.",
+                    "example": "Message for app developer"
+                  },
+                  "user": {
+                    "type": "string",
+                    "description": "Pass this message on to the app user if needed.",
+                    "example": "Message for end user"
+                  }
+                }
+              },
+              "searchResponse": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "string",
+                    "description": "serach results"
+                  },
+                  "startIndex": {
+                    "type": "integer"
+                  },
+                  "sortColumn": {
+                    "type": "string"
+                  },
+                  "displayMode": {
+                    "type": "string"
+                  },
+                  "searchText": {
+                    "type": "string"
+                  },
+                  "searchType": {
+                    "type": "string"
+                  },
+                  "sortOrder": {
+                    "type": "string"
+                  },
+                  "sourceSystemUserId": {
+                    "type": "string"
+                  },
+                  "searchEntityId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "searchCountResponse": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "string"
+                  },
+                  "startIndex": {
+                    "type": "integer"
+                  },
+                  "sortColumn": {
+                    "type": "string"
+                  },
+                  "displayMode": {
+                    "type": "string"
+                  },
+                  "searchText": {
+                    "type": "string"
+                  },
+                  "searchType": {
+                    "type": "string"
+                  },
+                  "sortOrder": {
+                    "type": "string"
+                  },
+                  "sourceSystemUserId": {
+                    "type": "string"
+                  },
+                  "searchEntityId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/diagnostics",
+      "name": "[concat(parameters('apimServiceName'), '/applicationinsights')]",
+      "dependsOn": [],
+      "properties": {
+        "alwaysLog": "allErrors",
+        "loggerId": "[parameters('apiLoggerId').applicationinsights]",
+        "httpCorrelationProtocol": "Legacy",
+        "logClientIp": true,
+        "sampling": {
+          "samplingType": "fixed",
+          "percentage": 100.0
+        },
+        "frontend": {
+          "request": {}
+        },
+        "backend": {
+          "request": {}
+        }
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/diagnostics",
+      "name": "[concat(parameters('apimServiceName'), '/azuremonitor')]",
+      "dependsOn": [],
+      "properties": {
+        "loggerId": "[parameters('apiLoggerId').azuremonitor]",
+        "logClientIp": true,
+        "sampling": {
+          "samplingType": "fixed",
+          "percentage": 100.0
+        },
+        "frontend": {
+          "request": {}
+        },
+        "backend": {
+          "request": {}
+        }
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/b6fe748ccac64a22841df03cc28b3d26/cf0871e6ebbd4b218f992d974a1c51c1')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), 'cf0871e6ebbd4b218f992d974a1c51c1')]"
+      ],
+      "properties": {
+        "displayName": "Quote Transaction",
+        "description": "product giving access to Quote Transaction api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/cf0871e6ebbd4b218f992d974a1c51c1/getSearchCount')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), 'cf0871e6ebbd4b218f992d974a1c51c1')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), 'cf0871e6ebbd4b218f992d974a1c51c1', '627dfe944634611330f0d8d9')]"
+      ],
+      "properties": {
+        "displayName": "retrieve count of policies",
+        "method": "POST",
+        "urlTemplate": "/getSearchCount",
+        "description": "retrieve count of policies",
+        "templateParameters": [],
+        "request": {
+          "description": "Search request object",
+          "headers": [],
+          "queryParameters": [],
+          "representations": [
+            {
+              "contentType": "application/json",
+              "schemaId": "627dfe944634611330f0d8d9",
+              "typeName": "searchRequest",
+              "sample": "{\r\n  \"sourceSystemUserId\": \"string\",\r\n  \"searchType\": \"STARTSWITH\",\r\n  \"searchText\": \"string\",\r\n  \"searchEntityId\": \"string\",\r\n  \"startIndex\": 0,\r\n  \"endIndex\": 0,\r\n  \"sortCol\": \"string\",\r\n  \"sortOrder\": \"ASC\",\r\n  \"filters\": [\r\n    {\r\n      \"key\": \"string\",\r\n      \"value\": \"string\"\r\n    }\r\n  ]\r\n}"
+            }
+          ]
+        },
+        "responses": [
+          {
+            "description": "successful operation",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json"
+              }
+            ],
+            "statusCode": 200
+          },
+          {
+            "description": "Bad Request",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfe944634611330f0d8d9",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreinfo\": \"http://sampledomain/errors/ERR-001\"\r\n}"
+              }
+            ],
+            "statusCode": 400
+          },
+          {
+            "description": "Resource not found",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfe944634611330f0d8d9",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreinfo\": \"http://sampledomain/errors/ERR-001\"\r\n}"
+              }
+            ],
+            "statusCode": 404
+          },
+          {
+            "description": "Server not available.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfe944634611330f0d8d9",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreinfo\": \"http://sampledomain/errors/ERR-001\"\r\n}"
+              }
+            ],
+            "statusCode": 500
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/cf0871e6ebbd4b218f992d974a1c51c1/search')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), 'cf0871e6ebbd4b218f992d974a1c51c1')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), 'cf0871e6ebbd4b218f992d974a1c51c1', '627dfe944634611330f0d8d9')]"
+      ],
+      "properties": {
+        "displayName": "retrieve list of policies",
+        "method": "POST",
+        "urlTemplate": "/search",
+        "description": "retrieve list of policies",
+        "templateParameters": [],
+        "request": {
+          "description": "Search request object",
+          "headers": [],
+          "queryParameters": [],
+          "representations": [
+            {
+              "contentType": "application/json",
+              "schemaId": "627dfe944634611330f0d8d9",
+              "typeName": "searchRequest",
+              "sample": "{\r\n  \"sourceSystemUserId\": \"string\",\r\n  \"searchType\": \"STARTSWITH\",\r\n  \"searchText\": \"string\",\r\n  \"searchEntityId\": \"string\",\r\n  \"startIndex\": 0,\r\n  \"endIndex\": 0,\r\n  \"sortCol\": \"string\",\r\n  \"sortOrder\": \"ASC\",\r\n  \"filters\": [\r\n    {\r\n      \"key\": \"string\",\r\n      \"value\": \"string\"\r\n    }\r\n  ]\r\n}"
+            }
+          ]
+        },
+        "responses": [
+          {
+            "description": "successful operation",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json"
+              }
+            ],
+            "statusCode": 200
+          },
+          {
+            "description": "Bad Request",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfe944634611330f0d8d9",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreinfo\": \"http://sampledomain/errors/ERR-001\"\r\n}"
+              }
+            ],
+            "statusCode": 400
+          },
+          {
+            "description": "Resource not found",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfe944634611330f0d8d9",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreinfo\": \"http://sampledomain/errors/ERR-001\"\r\n}"
+              }
+            ],
+            "statusCode": 404
+          },
+          {
+            "description": "Server not available.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfe944634611330f0d8d9",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreinfo\": \"http://sampledomain/errors/ERR-001\"\r\n}"
+              }
+            ],
+            "statusCode": 500
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/cf0871e6ebbd4b218f992d974a1c51c1/getSearchCount/search-count')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), 'cf0871e6ebbd4b218f992d974a1c51c1', 'getSearchCount')]"
+      ],
+      "properties": {
+        "displayName": "search count"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/cf0871e6ebbd4b218f992d974a1c51c1/search/search')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), 'cf0871e6ebbd4b218f992d974a1c51c1', 'search')]"
+      ],
+      "properties": {
+        "displayName": "search"
+      }
+    }
+  ]
+}

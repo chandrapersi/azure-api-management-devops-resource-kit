@@ -1,0 +1,275 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "apimServiceName": {
+      "type": "string"
+    },
+    "policyXMLBaseUrl": {
+      "type": "string"
+    },
+    "apiLoggerId": {
+      "type": "object"
+    }
+  },
+  "resources": [
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis",
+      "name": "[concat(parameters('apimServiceName'), '/17aa653519204c628b3e1d9bce2717b1')]",
+      "dependsOn": [],
+      "properties": {
+        "description": "This API provides operations to retrieve and download hourly count report for Claim related information like FNOL, Claim, Loss Payments, Expense Payments, Letters, Reserves, Features, Approvals Requested, Approvals Responded, Notes, Assignments, Arbitrations, Attachments, Litigations, Negotiations, Subrogations, Claims Scorecard updates, etc.",
+        "authenticationSettings": {
+          "subscriptionKeyRequired": false
+        },
+        "subscriptionKeyParameterNames": {
+          "header": "Ocp-Apim-Subscription-Key",
+          "query": "subscription-key"
+        },
+        "apiRevision": "1",
+        "isCurrent": true,
+        "subscriptionRequired": true,
+        "displayName": "Claim Related Information API",
+        "serviceUrl": "https://developer.cloudinsurerapi.com/ClaimsICDService/services/rest/oas/claim-related-information/v1",
+        "path": "ClaimRelatedInformation",
+        "protocols": [
+          "https"
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/schemas",
+      "name": "[concat(parameters('apimServiceName'), '/17aa653519204c628b3e1d9bce2717b1/627dff404634611330f0d8fc')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '17aa653519204c628b3e1d9bce2717b1')]"
+      ],
+      "properties": {
+        "contentType": "application/vnd.oai.openapi.components+json",
+        "document": {
+          "components": {
+            "schemas": {
+              "Error": {
+                "required": [
+                  "message",
+                  "status",
+                  "statuscode"
+                ],
+                "type": "object",
+                "properties": {
+                  "statuscode": {
+                    "type": "string",
+                    "description": "HTTP Status code for example 200/400/500",
+                    "example": "http-status-code"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "Short status description",
+                    "example": "Example status message"
+                  },
+                  "message": {
+                    "type": "array",
+                    "items": {
+                      "required": [
+                        "systemerrcode"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "systemerrcode": {
+                          "type": "string",
+                          "description": "System/Application error code",
+                          "example": "ERR-001"
+                        },
+                        "developer": {
+                          "type": "string",
+                          "description": "Verbose, plain language description of the problem for the app developer with hints about how to fix it.",
+                          "example": "Message for app developer"
+                        },
+                        "user": {
+                          "type": "string",
+                          "description": "Pass this message on to the app user if needed.",
+                          "example": "Message for end user"
+                        }
+                      }
+                    },
+                    "description": "Detailed error messages"
+                  },
+                  "moreinfo": {
+                    "type": "string",
+                    "description": "HTTP Link to more information page.",
+                    "example": "http://sampledomain/errors/ERR-001"
+                  }
+                }
+              },
+              "DownloadCountByHourGet200ApplicationPdfResponse": {
+                "type": "string",
+                "format": "binary",
+                "x-apim-inline": true
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/diagnostics",
+      "name": "[concat(parameters('apimServiceName'), '/applicationinsights')]",
+      "dependsOn": [],
+      "properties": {
+        "alwaysLog": "allErrors",
+        "loggerId": "[parameters('apiLoggerId').applicationinsights]",
+        "httpCorrelationProtocol": "Legacy",
+        "logClientIp": true,
+        "sampling": {
+          "samplingType": "fixed",
+          "percentage": 100.0
+        },
+        "frontend": {
+          "request": {}
+        },
+        "backend": {
+          "request": {}
+        }
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/diagnostics",
+      "name": "[concat(parameters('apimServiceName'), '/azuremonitor')]",
+      "dependsOn": [],
+      "properties": {
+        "loggerId": "[parameters('apiLoggerId').azuremonitor]",
+        "logClientIp": true,
+        "sampling": {
+          "samplingType": "fixed",
+          "percentage": 100.0
+        },
+        "frontend": {
+          "request": {}
+        },
+        "backend": {
+          "request": {}
+        }
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/ebc85f59525346658fc94c164afcd86b/17aa653519204c628b3e1d9bce2717b1')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '17aa653519204c628b3e1d9bce2717b1')]"
+      ],
+      "properties": {
+        "displayName": "P&C Claims",
+        "description": "product giving access to P&C Claims api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/17aa653519204c628b3e1d9bce2717b1/retrieveClaimRelatedInformation')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '17aa653519204c628b3e1d9bce2717b1')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), '17aa653519204c628b3e1d9bce2717b1', '627dff404634611330f0d8fc')]"
+      ],
+      "properties": {
+        "displayName": "Retrieves the count of transactions by hour as per the parameters passed",
+        "method": "GET",
+        "urlTemplate": "/downloadCountByHour?transFromDate={transFromDate}&transToDate={transToDate}&transactionType={transactionType}",
+        "description": "This operation will retrieve count of transactions by hour as per the parameters passed.",
+        "templateParameters": [
+          {
+            "name": "transFromDate",
+            "description": "Format - date (as full-date in RFC3339). Transaction from date for the starting period for the report to be fetched.",
+            "type": "string",
+            "required": true,
+            "values": []
+          },
+          {
+            "name": "transToDate",
+            "description": "Format - date (as full-date in RFC3339). Transaction to date for the ending period for the report to be fetched.",
+            "type": "string",
+            "required": true,
+            "values": []
+          },
+          {
+            "name": "transactionType",
+            "description": "List of transaction types to be fetched. \"ALL\" supercedes other values. Should be pipe separated.",
+            "type": "string",
+            "required": true,
+            "values": []
+          }
+        ],
+        "responses": [
+          {
+            "description": "Successful operation",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/pdf",
+                "schemaId": "627dff404634611330f0d8fc",
+                "typeName": "DownloadCountByHourGet200ApplicationPdfResponse"
+              }
+            ],
+            "statusCode": 200
+          },
+          {
+            "description": "Bad Request",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dff404634611330f0d8fc",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreinfo\": \"http://sampledomain/errors/ERR-001\"\r\n}"
+              }
+            ],
+            "statusCode": 400
+          },
+          {
+            "description": "Resource not found",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dff404634611330f0d8fc",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreinfo\": \"http://sampledomain/errors/ERR-001\"\r\n}"
+              }
+            ],
+            "statusCode": 404
+          },
+          {
+            "description": "Server not available.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dff404634611330f0d8fc",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreinfo\": \"http://sampledomain/errors/ERR-001\"\r\n}"
+              }
+            ],
+            "statusCode": 500
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/17aa653519204c628b3e1d9bce2717b1/retrieveClaimRelatedInformation/Count-by-Hour')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '17aa653519204c628b3e1d9bce2717b1', 'retrieveClaimRelatedInformation')]"
+      ],
+      "properties": {
+        "displayName": "Count by Hour"
+      }
+    }
+  ]
+}

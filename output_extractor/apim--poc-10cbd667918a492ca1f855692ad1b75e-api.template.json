@@ -1,0 +1,1738 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "apimServiceName": {
+      "type": "string"
+    },
+    "policyXMLBaseUrl": {
+      "type": "string"
+    },
+    "apiLoggerId": {
+      "type": "object"
+    }
+  },
+  "resources": [
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis",
+      "name": "[concat(parameters('apimServiceName'), '/10cbd667918a492ca1f855692ad1b75e')]",
+      "dependsOn": [],
+      "properties": {
+        "description": "L&A Billing Entity Setup API has operations to setup, update and retrieve various global entities like Account, Broker, Member, Insured, Additional Insured etc.",
+        "authenticationSettings": {
+          "subscriptionKeyRequired": false
+        },
+        "subscriptionKeyParameterNames": {
+          "header": "Ocp-Apim-Subscription-Key",
+          "query": "subscription-key"
+        },
+        "apiRevision": "1",
+        "isCurrent": true,
+        "subscriptionRequired": true,
+        "displayName": "L&A Billing Entity Setup API",
+        "serviceUrl": "https://confluenceapidocs.blob.core.windows.net/lna/L&Abilling/v1",
+        "path": "EntityInterface",
+        "protocols": [
+          "https"
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/schemas",
+      "name": "[concat(parameters('apimServiceName'), '/10cbd667918a492ca1f855692ad1b75e/627dfcb64634611330f0d84e')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '10cbd667918a492ca1f855692ad1b75e')]"
+      ],
+      "properties": {
+        "contentType": "application/vnd.oai.openapi.components+json",
+        "document": {
+          "components": {
+            "schemas": {
+              "InsuredDetails": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Insured"
+                },
+                "description": "This contains insured details"
+              },
+              "Insured": {
+                "title": "Insured",
+                "type": "object",
+                "properties": {
+                  "sourceSystemEntityCode": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "Code assigned to the entity in the source system.",
+                    "example": "IS_R50_SC01"
+                  },
+                  "sourceSystemUserId": {
+                    "maxLength": 30,
+                    "type": "string",
+                    "description": "User id sent by source system.",
+                    "example": "SYSADMIN"
+                  },
+                  "entityType": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "Entity type associated with Entity.",
+                    "example": "INSURED"
+                  },
+                  "doingBusinessAsName": {
+                    "maxLength": 90,
+                    "type": "string",
+                    "description": "DBA name.",
+                    "example": "IS_R50_SC01_DBA"
+                  },
+                  "sourceSystem": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "Originating system from where entity is interfaced to the billing system.",
+                    "example": "BILLING"
+                  },
+                  "sourceSystemPrimaryKey": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "sourceSystemPrimaryKey associated with Insured.",
+                    "example": "IS_R50_SC01_PK"
+                  },
+                  "ssn": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "Social Security number SSN of the entity.This is only for reference.",
+                    "example": "001-003 NH"
+                  },
+                  "relationship": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "Relationship with the Insured.",
+                    "example": "SELF"
+                  },
+                  "state": {
+                    "maxLength": 5,
+                    "type": "string",
+                    "description": "State to which entity belongs.",
+                    "example": "CA"
+                  },
+                  "country": {
+                    "maxLength": 60,
+                    "type": "string",
+                    "description": "Country to which entity belongs.",
+                    "example": "USA"
+                  },
+                  "cobraIndicator": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Flag to indicate whether entity is on cobra or not.",
+                    "example": "N"
+                  },
+                  "outputDeliveryMethod": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "outputDeliveryMethod.",
+                    "example": "FAX"
+                  },
+                  "userRemarks": {
+                    "maxLength": 1000,
+                    "type": "string",
+                    "description": "UserRemarks of Insured.",
+                    "example": "Insured Creation"
+                  },
+                  "addressDetails": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Address"
+                    },
+                    "description": "This contains multiple instances of Address object. This is an address object which will capture address details of an entity."
+                  }
+                },
+                "description": "This object will have insured details in billing system."
+              },
+              "MemberDetails": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Member"
+                },
+                "description": "This contains member details"
+              },
+              "Member": {
+                "title": "Member",
+                "type": "object",
+                "properties": {
+                  "sourceSystemEntityCode": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "Code assigned to the entity in the source system.",
+                    "example": "MS_R50_SC01"
+                  },
+                  "sourceSystemUserId": {
+                    "maxLength": 30,
+                    "type": "string",
+                    "description": "User id sent by source system.",
+                    "example": "SYSADMIN"
+                  },
+                  "entityType": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "Entity type associated with Entity.",
+                    "example": "MEMBER"
+                  },
+                  "doingBusinessAsName": {
+                    "maxLength": 90,
+                    "type": "string",
+                    "description": "DBA name.",
+                    "example": "MS_R50_SC01_DBA"
+                  },
+                  "sourceSystem": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "Originating system from where entity is interfaced to the billing system.",
+                    "example": "BILLING"
+                  },
+                  "sourceSystemPrimaryKey": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "sourceSystemPrimaryKey associated with Insured.",
+                    "example": "MS_R50_SC01_PK"
+                  },
+                  "memberID": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "Member Id interfaced with an Member. Used in Group context to denote employee id.",
+                    "example": "MS_R50_SC01_M1id"
+                  },
+                  "state": {
+                    "maxLength": 5,
+                    "type": "string",
+                    "description": "State to which entity belongs.",
+                    "example": "CA"
+                  },
+                  "ssn": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "Social Security number SSN of the entity.This is only for reference.",
+                    "example": "001-003 NH"
+                  },
+                  "country": {
+                    "maxLength": 60,
+                    "type": "string",
+                    "description": "Country to which entity belongs.",
+                    "example": "USA"
+                  },
+                  "cobraIndicator": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Flag to indicate whether entity is on cobra or not.",
+                    "example": "N"
+                  },
+                  "outputDeliveryMethod": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "outputDeliveryMethod.",
+                    "example": "FAX"
+                  },
+                  "specialHandlingIndicator": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Flag to indicate whether auto lapse is applicable for an entity or not.",
+                    "example": "N"
+                  },
+                  "userRemarks": {
+                    "maxLength": 1000,
+                    "type": "string",
+                    "description": "UserRemarks of Member.",
+                    "example": "Member Creation"
+                  },
+                  "dateOfBirth": {
+                    "type": "string",
+                    "description": "DOB of Member.",
+                    "format": "date",
+                    "example": "1987-01-01"
+                  },
+                  "ageIssued": {
+                    "maxLength": 3,
+                    "type": "string",
+                    "description": "Age of Member.",
+                    "example": "24"
+                  },
+                  "dateOfHire": {
+                    "type": "string",
+                    "description": "DateofHire of Member.",
+                    "format": "date",
+                    "example": "2014-01-01"
+                  },
+                  "lastWorkingDay": {
+                    "type": "string",
+                    "description": "Last Working Day for Member.",
+                    "format": "date",
+                    "example": "2016-01-01"
+                  },
+                  "employeeId": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "Employee Id of Member.",
+                    "example": "12602"
+                  },
+                  "otherId": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "Other Id of Member (Passport No, Tax Id).",
+                    "example": "F1696149"
+                  },
+                  "addressDetails": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Address"
+                    },
+                    "description": "This contains multiple instances of Address object. This is an address object which will capture address details of an entity."
+                  }
+                },
+                "description": "This object will have new member details in billing system."
+              },
+              "AccountDetails": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Account"
+                },
+                "description": "This contains Account details"
+              },
+              "Account": {
+                "title": "Account",
+                "type": "object",
+                "properties": {
+                  "effectiveDate": {
+                    "type": "string",
+                    "description": "Effective date of entity.",
+                    "format": "date",
+                    "example": "2019-01-01"
+                  },
+                  "anniversaryDate": {
+                    "type": "string",
+                    "description": "Anniversary date of entity.",
+                    "format": "date",
+                    "example": "2020-01-01"
+                  },
+                  "sourceSystemEntityCode": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "Code assigned to the entity in the source system.",
+                    "example": "AS_R50_SC41"
+                  },
+                  "sourceSystemUserId": {
+                    "maxLength": 30,
+                    "type": "string",
+                    "description": "User id sent by source system.",
+                    "example": "SYSADMIN"
+                  },
+                  "doingBusinessAsName": {
+                    "maxLength": 90,
+                    "type": "string",
+                    "description": "DBA name.",
+                    "example": "AS_R50_SC41_DBA"
+                  },
+                  "sourceSystem": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "Originating system from where entity is interfaced to the billing system.",
+                    "example": "MAJESCOPAS"
+                  },
+                  "state": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "State to which entity belongs.",
+                    "example": "CA"
+                  },
+                  "country": {
+                    "maxLength": 60,
+                    "type": "string",
+                    "description": "Country to which entity belongs.",
+                    "example": "USA"
+                  },
+                  "cobraIndicator": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Flag to indicate whether entity is on cobra.",
+                    "example": "N"
+                  },
+                  "billingFrequency": {
+                    "maxLength": 60,
+                    "type": "string",
+                    "description": "Billing Frequency details of entity.",
+                    "example": "MONTHLY"
+                  },
+                  "billMethod": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "Bill Method details of entity.",
+                    "example": "ACCOUNT"
+                  },
+                  "billDeliveryMethod": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "Bill Delivery Method of entity.",
+                    "example": "EMAIL"
+                  },
+                  "billSendOption": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "Bill Send Option of entity.",
+                    "example": "SEND"
+                  },
+                  "billingFormat": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "Statement Format details of entity.",
+                    "example": "PDF"
+                  },
+                  "billDueDay": {
+                    "maxLength": 2,
+                    "type": "number",
+                    "description": "Statement Due Day.",
+                    "example": "1"
+                  },
+                  "statementMailingDay": {
+                    "maxLength": 2,
+                    "type": "string",
+                    "description": "Statement Mailing Day.",
+                    "example": "1"
+                  },
+                  "billingCycleDay": {
+                    "maxLength": 2,
+                    "type": "string",
+                    "description": "Billing Cycle Day.",
+                    "example": "1"
+                  },
+                  "billLeadDays": {
+                    "maxLength": 3,
+                    "type": "number",
+                    "description": "Credit Term Days.",
+                    "example": "10"
+                  },
+                  "billDueDay1": {
+                    "maxLength": 2,
+                    "type": "string",
+                    "description": "Bill Due  Day1.",
+                    "example": "1"
+                  },
+                  "billDueDay2": {
+                    "maxLength": 2,
+                    "type": "string",
+                    "description": "Bill Due Day2.",
+                    "example": "15"
+                  },
+                  "PaymentMethod": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "Payment Method details of entity.",
+                    "example": "CHECK"
+                  },
+                  "operatingCompany": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "Alphanumeric code identifying the operating company on the entity.",
+                    "example": "01"
+                  },
+                  "underwritingCompany": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "Alphanumeric code identifying the underwriting company on the entity.",
+                    "example": "01"
+                  },
+                  "addressDetails": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Address"
+                    },
+                    "description": "This contains multiple instances of Address object. This is an address object which will capture address details of an entity."
+                  },
+                  "bankDetails": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/BankDetails"
+                    },
+                    "description": "This contains multiple instances of bank detail object. This is an bank detail object which will capture bank details of an entity for EFT payment method."
+                  }
+                }
+              },
+              "BankDetails": {
+                "type": "object",
+                "properties": {
+                  "defaultYN": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Bank detail to be marked as Default.",
+                    "example": "Y"
+                  },
+                  "instrumentBankName": {
+                    "maxLength": 180,
+                    "type": "string",
+                    "description": "Bank Name.",
+                    "example": "hdfc"
+                  },
+                  "instrumentHolderName": {
+                    "maxLength": 60,
+                    "type": "string",
+                    "description": "Name of Account Holder.",
+                    "example": "Mike Thomas"
+                  },
+                  "instrumentNo": {
+                    "maxLength": 22,
+                    "type": "string",
+                    "description": "Bank Account no.",
+                    "example": "19564778"
+                  },
+                  "instrumentSecurityCode": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "Routing No.",
+                    "example": "000000000"
+                  },
+                  "instrumentSubType": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "Bank Account Type.",
+                    "example": "SAVING"
+                  },
+                  "instrumentTitle": {
+                    "maxLength": 180,
+                    "type": "string",
+                    "description": "Title name given while registering Bank.",
+                    "example": "hdfc1"
+                  },
+                  "address1": {
+                    "maxLength": 40,
+                    "type": "string",
+                    "description": "First line of address.",
+                    "example": "109 Rail road Street"
+                  },
+                  "address2": {
+                    "maxLength": 40,
+                    "type": "string",
+                    "description": "Second line of address.",
+                    "example": "phi phi land"
+                  },
+                  "state": {
+                    "maxLength": 5,
+                    "type": "string",
+                    "description": "State code.",
+                    "example": "CA"
+                  },
+                  "city": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "City code.",
+                    "example": "Iron River"
+                  },
+                  "zipCode": {
+                    "maxLength": 15,
+                    "type": "string",
+                    "description": "Zip Code.",
+                    "example": "USA"
+                  },
+                  "phoneNo": {
+                    "maxLength": 16,
+                    "type": "string",
+                    "description": "Primary phone no on the address type.",
+                    "example": "8458877445"
+                  },
+                  "emailId": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "Email id details.",
+                    "example": "pank.g@gmail.com"
+                  }
+                }
+              },
+              "AccountEditDetails": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AccountEdit"
+                },
+                "description": "This contains Account details"
+              },
+              "AccountEdit": {
+                "title": "AccountEdit",
+                "type": "object",
+                "properties": {
+                  "effectiveDate": {
+                    "type": "string",
+                    "description": "Effective date of entity.",
+                    "format": "date",
+                    "example": "2019-01-01"
+                  },
+                  "anniversaryDate": {
+                    "type": "string",
+                    "description": "Anniversary date of entity.",
+                    "format": "date",
+                    "example": "2020-01-01"
+                  },
+                  "sourceSystemEntityCode": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "Code assigned to the entity in the source system.",
+                    "example": "AS_R50_SC41"
+                  },
+                  "sourceSystemUserId": {
+                    "maxLength": 30,
+                    "type": "string",
+                    "description": "User id sent by source system.",
+                    "example": "SYSADMIN"
+                  },
+                  "doingBusinessAsName": {
+                    "maxLength": 90,
+                    "type": "string",
+                    "description": "DBA name.",
+                    "example": "AS_R50_SC41_DBA"
+                  },
+                  "sourceSystem": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "Originating system from where entity is interfaced to the billing system.",
+                    "example": "MAJESCOPAS"
+                  },
+                  "state": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "State to which entity belongs.",
+                    "example": "CA"
+                  },
+                  "country": {
+                    "maxLength": 60,
+                    "type": "string",
+                    "description": "Country to which entity belongs.",
+                    "example": "USA"
+                  },
+                  "cobraIndicator": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Flag to indicate whether entity is on cobra.",
+                    "example": "N"
+                  },
+                  "operatingCompany": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "Alphanumeric code identifying the operating company on the entity.",
+                    "example": "01"
+                  },
+                  "underwritingCompany": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "Alphanumeric code identifying the underwriting company on the entity.",
+                    "example": "01"
+                  },
+                  "addressDetails": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Address"
+                    },
+                    "description": "This contains multiple instances of Address object. This is an address object which will capture address details of an entity."
+                  }
+                }
+              },
+              "TPADetails": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/TPA"
+                },
+                "description": "This contains TPA details"
+              },
+              "TPA": {
+                "title": "TPA",
+                "type": "object",
+                "properties": {
+                  "sourceSystemEntityCode": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "Code assigned to the TPA entity in the source system.",
+                    "example": "TPA_R50_SC41"
+                  },
+                  "entityType": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "Entity type associated with Entity.",
+                    "example": "OTHER_TPA"
+                  },
+                  "effectiveDate": {
+                    "type": "string",
+                    "description": "Effective date of TPA entity.",
+                    "format": "date",
+                    "example": "2019-01-01"
+                  },
+                  "sourceSystemPrimaryKey": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "Code assigned to the entity in the source system.",
+                    "example": "TPA_R50_SC41_SPK"
+                  },
+                  "sourceSystemUserId": {
+                    "maxLength": 30,
+                    "type": "string",
+                    "description": "User id sent by source system.",
+                    "example": "SYSADMIN"
+                  },
+                  "doingBusinessAsName": {
+                    "maxLength": 90,
+                    "type": "string",
+                    "description": "DBA name.",
+                    "example": "TPA_R50_SC41_DBA"
+                  },
+                  "sourceSystem": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "Originating system from where entity is interfaced to the billing system.",
+                    "example": "MAJESCOPAS"
+                  },
+                  "state": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "State to which entity belongs.",
+                    "example": "CA"
+                  },
+                  "country": {
+                    "maxLength": 60,
+                    "type": "string",
+                    "description": "Country to which entity belongs.",
+                    "example": "USA"
+                  },
+                  "billDeliveryMethod": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "Bill Delivery Method of entity.",
+                    "example": "EMAIL"
+                  },
+                  "statementFormat": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "Statement Format details of entity.",
+                    "example": "PDF"
+                  },
+                  "paymentMethod": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "Payment Method details of entity.",
+                    "example": "CHECK"
+                  },
+                  "migratedYN": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Applicable for Migrated Data.",
+                    "example": "N"
+                  },
+                  "allianceCode": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "Alliance Code associated with entity.",
+                    "example": "TPA_R50_SC41"
+                  },
+                  "userRemarks": {
+                    "maxLength": 1000,
+                    "type": "string",
+                    "description": "Remarks sent from the source system.",
+                    "example": "TPA Created"
+                  },
+                  "ssn": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "Social Security number SSN of the entity.This is only for reference.",
+                    "example": "001-003 NH"
+                  },
+                  "parentEntityType": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "Parent entity type, if applicable on the entity.",
+                    "example": null
+                  },
+                  "parentEntityCode": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "Parent entity code, if applicable on the entity.",
+                    "example": null
+                  },
+                  "transactionReason": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "TransactionReason.",
+                    "example": "TPA_SETUP"
+                  },
+                  "operatingCompany": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "Alphanumeric code identifying the operating company on the entity.",
+                    "example": "01"
+                  },
+                  "underwritingCompany": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "Alphanumeric code identifying the underwriting company on the entity.",
+                    "example": "01"
+                  },
+                  "addressDetails": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Address"
+                    },
+                    "description": "This contains multiple instances of Address object. This is an address object which will capture address details of an entity."
+                  }
+                }
+              },
+              "BrokerDetails": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Broker"
+                },
+                "description": "This contains Broker details"
+              },
+              "Broker": {
+                "title": "Broker",
+                "type": "object",
+                "properties": {
+                  "sourceSystemEntityCode": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "Code assigned to the Broker entity in the source system.",
+                    "example": "BRO_R50_SC41"
+                  },
+                  "sourceSystemPrimaryKey": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "Code assigned to the entity in the source system.",
+                    "example": "BRO_R50_SC41_SPK"
+                  },
+                  "sourceSystemUserId": {
+                    "maxLength": 30,
+                    "type": "string",
+                    "description": "User id sent by source system.",
+                    "example": "SYSADMIN"
+                  },
+                  "doingBusinessAsName": {
+                    "maxLength": 90,
+                    "type": "string",
+                    "description": "DBA name.",
+                    "example": "BRO_R50_SC41_DBA"
+                  },
+                  "sourceSystem": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "Originating system from where entity is interfaced to the billing system.",
+                    "example": "MAJESCOPAS"
+                  },
+                  "state": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "State to which entity belongs.",
+                    "example": "CA"
+                  },
+                  "country": {
+                    "maxLength": 60,
+                    "type": "string",
+                    "description": "Country to which entity belongs.",
+                    "example": "USA"
+                  },
+                  "billDeliveryMethod": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "Bill Delivery Method of entity.",
+                    "example": "EMAIL"
+                  },
+                  "outputDeliveryMethod": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "Delivery method for sending the output forms to the entity.",
+                    "example": "EMAIL"
+                  },
+                  "statementFormat": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "Statement Format details of entity.",
+                    "example": "PDF"
+                  },
+                  "paymentMethod": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "Payment Method details of entity.",
+                    "example": "CHECK"
+                  },
+                  "migratedYN": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Applicable for Migrated Data.",
+                    "example": "N"
+                  },
+                  "allianceCode": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "Alliance Code associated with entity.",
+                    "example": "BRO_R50_SC41"
+                  },
+                  "userRemarks": {
+                    "maxLength": 1000,
+                    "type": "string",
+                    "description": "Remarks sent from the source system.",
+                    "example": "Broker Created"
+                  },
+                  "ssn": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "Social Security number SSN of the entity.This is only for reference.",
+                    "example": "001-003 NH"
+                  },
+                  "parentEntityType": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "Parent entity type, if applicable on the entity.",
+                    "example": null
+                  },
+                  "parentEntityCode": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "Parent entity code, if applicable on the entity.",
+                    "example": null
+                  },
+                  "transactionReason": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "TransactionReason.",
+                    "example": "BROKER_SETUP"
+                  },
+                  "externalEntityYN": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "External Entity Flag for External Agents.",
+                    "example": "N"
+                  },
+                  "addressDetails": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Address"
+                    },
+                    "description": "This contains multiple instances of Address object. This is an address object which will capture address details of an entity."
+                  }
+                }
+              },
+              "Address": {
+                "type": "object",
+                "properties": {
+                  "addressType": {
+                    "maxLength": 20,
+                    "type": "string",
+                    "description": "Type of address like MAILING, BILLING, BUSINESS etc.",
+                    "example": "MAILING"
+                  },
+                  "namePrefix": {
+                    "maxLength": 5,
+                    "type": "string",
+                    "description": "Prefix.",
+                    "example": "MR"
+                  },
+                  "nameSuffix": {
+                    "maxLength": 5,
+                    "type": "string",
+                    "description": "Prefix.",
+                    "example": "MN"
+                  },
+                  "firstName": {
+                    "maxLength": 60,
+                    "type": "string",
+                    "description": "First name of the entity.  In case of groups, the contact person first name to be sent in this field.",
+                    "example": "Manohar"
+                  },
+                  "middleName": {
+                    "maxLength": 60,
+                    "type": "string",
+                    "description": "Middle name of the entity.In case of groups, the contact person middle name to be sent in this field.",
+                    "example": "N"
+                  },
+                  "lastName": {
+                    "maxLength": 60,
+                    "type": "string",
+                    "description": "Last name of the entity.  In case of groups, the contact person last name to be sent in this field.",
+                    "example": "Nalam"
+                  },
+                  "fullName": {
+                    "maxLength": 180,
+                    "type": "string",
+                    "description": "Full name of the entity.  In case of groups, the contact person full name to be sent in this field.",
+                    "example": "MANOHAR N NALAM"
+                  },
+                  "address1": {
+                    "maxLength": 40,
+                    "type": "string",
+                    "description": "First line of address for the address type.",
+                    "example": "109 Rail road Street"
+                  },
+                  "address2": {
+                    "maxLength": 40,
+                    "type": "string",
+                    "description": "Second line of address for the address type.",
+                    "example": "phi phi land"
+                  },
+                  "state": {
+                    "maxLength": 5,
+                    "type": "string",
+                    "description": "State to which entity belongs.",
+                    "example": "CA"
+                  },
+                  "country": {
+                    "maxLength": 60,
+                    "type": "string",
+                    "description": "Country to which entity belongs.",
+                    "example": "USA"
+                  },
+                  "city": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "City to which entity belongs.",
+                    "example": "Iron River"
+                  },
+                  "zipCode": {
+                    "maxLength": 15,
+                    "type": "string",
+                    "description": "Zip Code to which entity belongs.",
+                    "example": "10008"
+                  },
+                  "county": {
+                    "maxLength": 15,
+                    "type": "string",
+                    "description": "county to which entity belongs.",
+                    "example": "2246"
+                  },
+                  "primaryPhoneNo": {
+                    "maxLength": 16,
+                    "type": "string",
+                    "description": "Primary phone no on the address type.",
+                    "example": "8458877445"
+                  },
+                  "primaryEmailId": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "Primary email id on the address type.",
+                    "example": "manu.n@gmail.com"
+                  },
+                  "primaryFaxNo": {
+                    "maxLength": 16,
+                    "type": "string",
+                    "description": "Primary fax no on the address type.",
+                    "example": "456788"
+                  },
+                  "alternatePhoneNo": {
+                    "maxLength": 16,
+                    "type": "string",
+                    "description": "Alternate phone no on the address type.",
+                    "example": "8458877446"
+                  },
+                  "alternateEmailId": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "Alternate email id on the address type.",
+                    "example": "manu1.g@gmail.com"
+                  },
+                  "alternateFaxNo": {
+                    "maxLength": 16,
+                    "type": "string",
+                    "description": "Alternate fax no on the address type.",
+                    "example": "456789"
+                  },
+                  "primaryAddressYN": {
+                    "maxLength": 1,
+                    "type": "string",
+                    "description": "Flag to indicate if the address is to be considered as Primary address.",
+                    "example": "Y"
+                  }
+                }
+              },
+              "Message": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "maxLength": 50,
+                    "type": "string",
+                    "description": "Custom message code in case of success."
+                  },
+                  "description": {
+                    "maxLength": 1000,
+                    "type": "string",
+                    "description": "Custom message details in case of success."
+                  },
+                  "type": {
+                    "maxLength": 10,
+                    "type": "string",
+                    "description": "Type of Message example ERROR, WARNING etc."
+                  }
+                }
+              },
+              "Error": {
+                "required": [
+                  "statuscode",
+                  "status",
+                  "message"
+                ],
+                "type": "object",
+                "properties": {
+                  "statuscode": {
+                    "type": "string",
+                    "description": "HTTP Status code for example 200/400/500.",
+                    "example": "http-status-code"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "Short status description.",
+                    "example": "Example status message"
+                  },
+                  "message": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Error_message"
+                    },
+                    "description": "Detailed error messages."
+                  }
+                }
+              },
+              "Error_message": {
+                "type": "object",
+                "properties": {
+                  "systemerrcode": {
+                    "type": "string",
+                    "description": "System/Application error code.",
+                    "example": "ERR-001"
+                  },
+                  "developer": {
+                    "type": "string",
+                    "description": "Verbose, plain language description of the problem for the app developer with hints about how to fix it.",
+                    "example": "Message for app developer"
+                  },
+                  "user": {
+                    "type": "string",
+                    "description": "Pass this message on to the app user if needed.",
+                    "example": "Message for end user"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/diagnostics",
+      "name": "[concat(parameters('apimServiceName'), '/applicationinsights')]",
+      "dependsOn": [],
+      "properties": {
+        "alwaysLog": "allErrors",
+        "loggerId": "[parameters('apiLoggerId').applicationinsights]",
+        "httpCorrelationProtocol": "Legacy",
+        "logClientIp": true,
+        "sampling": {
+          "samplingType": "fixed",
+          "percentage": 100.0
+        },
+        "frontend": {
+          "request": {}
+        },
+        "backend": {
+          "request": {}
+        }
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/diagnostics",
+      "name": "[concat(parameters('apimServiceName'), '/azuremonitor')]",
+      "dependsOn": [],
+      "properties": {
+        "loggerId": "[parameters('apiLoggerId').azuremonitor]",
+        "logClientIp": true,
+        "sampling": {
+          "samplingType": "fixed",
+          "percentage": 100.0
+        },
+        "frontend": {
+          "request": {}
+        },
+        "backend": {
+          "request": {}
+        }
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/b005c097f75b4033ae9db0b8524bea0a/10cbd667918a492ca1f855692ad1b75e')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '10cbd667918a492ca1f855692ad1b75e')]"
+      ],
+      "properties": {
+        "displayName": "L&A Billing",
+        "description": "product giving access to L&A Billing api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/10cbd667918a492ca1f855692ad1b75e/addAccount')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '10cbd667918a492ca1f855692ad1b75e')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), '10cbd667918a492ca1f855692ad1b75e', '627dfcb64634611330f0d84e')]"
+      ],
+      "properties": {
+        "displayName": "Post Create Account",
+        "method": "POST",
+        "urlTemplate": "/entity-setup/createaccount",
+        "description": "This operation will create a new Account in billing system.",
+        "templateParameters": [],
+        "request": {
+          "description": "Request to create Account.",
+          "headers": [],
+          "queryParameters": [],
+          "representations": [
+            {
+              "contentType": "application/json",
+              "schemaId": "627dfcb64634611330f0d84e",
+              "typeName": "AccountDetails",
+              "sample": "[\r\n  {\r\n    \"effectiveDate\": \"2019-01-01\",\r\n    \"anniversaryDate\": \"2020-01-01\",\r\n    \"sourceSystemEntityCode\": \"AS_R50_SC41\",\r\n    \"sourceSystemUserId\": \"SYSADMIN\",\r\n    \"doingBusinessAsName\": \"AS_R50_SC41_DBA\",\r\n    \"sourceSystem\": \"MAJESCOPAS\",\r\n    \"state\": \"CA\",\r\n    \"country\": \"USA\",\r\n    \"cobraIndicator\": \"N\",\r\n    \"billingFrequency\": \"MONTHLY\",\r\n    \"billMethod\": \"ACCOUNT\",\r\n    \"billDeliveryMethod\": \"EMAIL\",\r\n    \"billSendOption\": \"SEND\",\r\n    \"billingFormat\": \"PDF\",\r\n    \"billDueDay\": \"1\",\r\n    \"statementMailingDay\": \"1\",\r\n    \"billingCycleDay\": \"1\",\r\n    \"billLeadDays\": \"10\",\r\n    \"billDueDay1\": \"1\",\r\n    \"billDueDay2\": \"15\",\r\n    \"PaymentMethod\": \"CHECK\",\r\n    \"operatingCompany\": \"01\",\r\n    \"underwritingCompany\": \"01\",\r\n    \"addressDetails\": [\r\n      {\r\n        \"addressType\": \"MAILING\",\r\n        \"namePrefix\": \"MR\",\r\n        \"nameSuffix\": \"MN\",\r\n        \"firstName\": \"Manohar\",\r\n        \"middleName\": \"N\",\r\n        \"lastName\": \"Nalam\",\r\n        \"fullName\": \"MANOHAR N NALAM\",\r\n        \"address1\": \"109 Rail road Street\",\r\n        \"address2\": \"phi phi land\",\r\n        \"state\": \"CA\",\r\n        \"country\": \"USA\",\r\n        \"city\": \"Iron River\",\r\n        \"zipCode\": \"10008\",\r\n        \"county\": \"2246\",\r\n        \"primaryPhoneNo\": \"8458877445\",\r\n        \"primaryEmailId\": \"manu.n@gmail.com\",\r\n        \"primaryFaxNo\": \"456788\",\r\n        \"alternatePhoneNo\": \"8458877446\",\r\n        \"alternateEmailId\": \"manu1.g@gmail.com\",\r\n        \"alternateFaxNo\": \"456789\",\r\n        \"primaryAddressYN\": \"Y\"\r\n      }\r\n    ],\r\n    \"bankDetails\": [\r\n      {\r\n        \"defaultYN\": \"Y\",\r\n        \"instrumentBankName\": \"hdfc\",\r\n        \"instrumentHolderName\": \"Mike Thomas\",\r\n        \"instrumentNo\": \"19564778\",\r\n        \"instrumentSecurityCode\": \"000000000\",\r\n        \"instrumentSubType\": \"SAVING\",\r\n        \"instrumentTitle\": \"hdfc1\",\r\n        \"address1\": \"109 Rail road Street\",\r\n        \"address2\": \"phi phi land\",\r\n        \"state\": \"CA\",\r\n        \"city\": \"Iron River\",\r\n        \"zipCode\": \"USA\",\r\n        \"phoneNo\": \"8458877445\",\r\n        \"emailId\": \"pank.g@gmail.com\"\r\n      }\r\n    ]\r\n  }\r\n]"
+            }
+          ]
+        },
+        "responses": [
+          {
+            "description": "Successful operation.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfcb64634611330f0d84e",
+                "typeName": "Message",
+                "sample": "{\r\n  \"code\": \"string\",\r\n  \"description\": \"string\",\r\n  \"type\": \"string\"\r\n}"
+              }
+            ],
+            "statusCode": 200
+          },
+          {
+            "description": "Bad Request.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfcb64634611330f0d84e",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ]\r\n}"
+              }
+            ],
+            "statusCode": 400
+          },
+          {
+            "description": "Resource not found.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfcb64634611330f0d84e",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ]\r\n}"
+              }
+            ],
+            "statusCode": 404
+          },
+          {
+            "description": "Server not available.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfcb64634611330f0d84e",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ]\r\n}"
+              }
+            ],
+            "statusCode": 500
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/10cbd667918a492ca1f855692ad1b75e/addBroker')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '10cbd667918a492ca1f855692ad1b75e')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), '10cbd667918a492ca1f855692ad1b75e', '627dfcb64634611330f0d84e')]"
+      ],
+      "properties": {
+        "displayName": "Post Create Broker",
+        "method": "POST",
+        "urlTemplate": "/entity-setup/createbroker",
+        "description": "This operation will create a new broker in billing system.",
+        "templateParameters": [],
+        "request": {
+          "description": "Request to create Broker.",
+          "headers": [],
+          "queryParameters": [],
+          "representations": [
+            {
+              "contentType": "application/json",
+              "schemaId": "627dfcb64634611330f0d84e",
+              "typeName": "BrokerDetails",
+              "sample": "[\r\n  {\r\n    \"sourceSystemEntityCode\": \"BRO_R50_SC41\",\r\n    \"sourceSystemPrimaryKey\": \"BRO_R50_SC41_SPK\",\r\n    \"sourceSystemUserId\": \"SYSADMIN\",\r\n    \"doingBusinessAsName\": \"BRO_R50_SC41_DBA\",\r\n    \"sourceSystem\": \"MAJESCOPAS\",\r\n    \"state\": \"CA\",\r\n    \"country\": \"USA\",\r\n    \"billDeliveryMethod\": \"EMAIL\",\r\n    \"outputDeliveryMethod\": \"EMAIL\",\r\n    \"statementFormat\": \"PDF\",\r\n    \"paymentMethod\": \"CHECK\",\r\n    \"migratedYN\": \"N\",\r\n    \"allianceCode\": \"BRO_R50_SC41\",\r\n    \"userRemarks\": \"Broker Created\",\r\n    \"ssn\": \"001-003 NH\",\r\n    \"parentEntityType\": null,\r\n    \"parentEntityCode\": null,\r\n    \"transactionReason\": \"BROKER_SETUP\",\r\n    \"externalEntityYN\": \"N\",\r\n    \"addressDetails\": [\r\n      {\r\n        \"addressType\": \"MAILING\",\r\n        \"namePrefix\": \"MR\",\r\n        \"nameSuffix\": \"MN\",\r\n        \"firstName\": \"Manohar\",\r\n        \"middleName\": \"N\",\r\n        \"lastName\": \"Nalam\",\r\n        \"fullName\": \"MANOHAR N NALAM\",\r\n        \"address1\": \"109 Rail road Street\",\r\n        \"address2\": \"phi phi land\",\r\n        \"state\": \"CA\",\r\n        \"country\": \"USA\",\r\n        \"city\": \"Iron River\",\r\n        \"zipCode\": \"10008\",\r\n        \"county\": \"2246\",\r\n        \"primaryPhoneNo\": \"8458877445\",\r\n        \"primaryEmailId\": \"manu.n@gmail.com\",\r\n        \"primaryFaxNo\": \"456788\",\r\n        \"alternatePhoneNo\": \"8458877446\",\r\n        \"alternateEmailId\": \"manu1.g@gmail.com\",\r\n        \"alternateFaxNo\": \"456789\",\r\n        \"primaryAddressYN\": \"Y\"\r\n      }\r\n    ]\r\n  }\r\n]"
+            }
+          ]
+        },
+        "responses": [
+          {
+            "description": "Successful operation.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfcb64634611330f0d84e",
+                "typeName": "Message",
+                "sample": "{\r\n  \"code\": \"string\",\r\n  \"description\": \"string\",\r\n  \"type\": \"string\"\r\n}"
+              }
+            ],
+            "statusCode": 200
+          },
+          {
+            "description": "Bad Request.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfcb64634611330f0d84e",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ]\r\n}"
+              }
+            ],
+            "statusCode": 400
+          },
+          {
+            "description": "Resource not found.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfcb64634611330f0d84e",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ]\r\n}"
+              }
+            ],
+            "statusCode": 404
+          },
+          {
+            "description": "Server not available.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfcb64634611330f0d84e",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ]\r\n}"
+              }
+            ],
+            "statusCode": 500
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/10cbd667918a492ca1f855692ad1b75e/addInsured')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '10cbd667918a492ca1f855692ad1b75e')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), '10cbd667918a492ca1f855692ad1b75e', '627dfcb64634611330f0d84e')]"
+      ],
+      "properties": {
+        "displayName": "Post Create Insured",
+        "method": "POST",
+        "urlTemplate": "/entity-setup/createinsured",
+        "description": "This operation will create a new insured in billing system.",
+        "templateParameters": [],
+        "request": {
+          "description": "Request to create insured.",
+          "headers": [],
+          "queryParameters": [],
+          "representations": [
+            {
+              "contentType": "application/json",
+              "schemaId": "627dfcb64634611330f0d84e",
+              "typeName": "InsuredDetails",
+              "sample": "[\r\n  {\r\n    \"sourceSystemEntityCode\": \"IS_R50_SC01\",\r\n    \"sourceSystemUserId\": \"SYSADMIN\",\r\n    \"entityType\": \"INSURED\",\r\n    \"doingBusinessAsName\": \"IS_R50_SC01_DBA\",\r\n    \"sourceSystem\": \"BILLING\",\r\n    \"sourceSystemPrimaryKey\": \"IS_R50_SC01_PK\",\r\n    \"ssn\": \"001-003 NH\",\r\n    \"relationship\": \"SELF\",\r\n    \"state\": \"CA\",\r\n    \"country\": \"USA\",\r\n    \"cobraIndicator\": \"N\",\r\n    \"outputDeliveryMethod\": \"FAX\",\r\n    \"userRemarks\": \"Insured Creation\",\r\n    \"addressDetails\": [\r\n      {\r\n        \"addressType\": \"MAILING\",\r\n        \"namePrefix\": \"MR\",\r\n        \"nameSuffix\": \"MN\",\r\n        \"firstName\": \"Manohar\",\r\n        \"middleName\": \"N\",\r\n        \"lastName\": \"Nalam\",\r\n        \"fullName\": \"MANOHAR N NALAM\",\r\n        \"address1\": \"109 Rail road Street\",\r\n        \"address2\": \"phi phi land\",\r\n        \"state\": \"CA\",\r\n        \"country\": \"USA\",\r\n        \"city\": \"Iron River\",\r\n        \"zipCode\": \"10008\",\r\n        \"county\": \"2246\",\r\n        \"primaryPhoneNo\": \"8458877445\",\r\n        \"primaryEmailId\": \"manu.n@gmail.com\",\r\n        \"primaryFaxNo\": \"456788\",\r\n        \"alternatePhoneNo\": \"8458877446\",\r\n        \"alternateEmailId\": \"manu1.g@gmail.com\",\r\n        \"alternateFaxNo\": \"456789\",\r\n        \"primaryAddressYN\": \"Y\"\r\n      }\r\n    ]\r\n  }\r\n]"
+            }
+          ]
+        },
+        "responses": [
+          {
+            "description": "Successful operation.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfcb64634611330f0d84e",
+                "typeName": "Message",
+                "sample": "{\r\n  \"code\": \"string\",\r\n  \"description\": \"string\",\r\n  \"type\": \"string\"\r\n}"
+              }
+            ],
+            "statusCode": 200
+          },
+          {
+            "description": "Bad Request.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfcb64634611330f0d84e",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ]\r\n}"
+              }
+            ],
+            "statusCode": 400
+          },
+          {
+            "description": "Resource not found.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfcb64634611330f0d84e",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ]\r\n}"
+              }
+            ],
+            "statusCode": 404
+          },
+          {
+            "description": "Server not available.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfcb64634611330f0d84e",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ]\r\n}"
+              }
+            ],
+            "statusCode": 500
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/10cbd667918a492ca1f855692ad1b75e/addMember')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '10cbd667918a492ca1f855692ad1b75e')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), '10cbd667918a492ca1f855692ad1b75e', '627dfcb64634611330f0d84e')]"
+      ],
+      "properties": {
+        "displayName": "Post Create Member",
+        "method": "POST",
+        "urlTemplate": "/entity-setup/createmember",
+        "description": "This operation will create a new member in billing system.",
+        "templateParameters": [],
+        "request": {
+          "description": "Request to create member.",
+          "headers": [],
+          "queryParameters": [],
+          "representations": [
+            {
+              "contentType": "application/json",
+              "schemaId": "627dfcb64634611330f0d84e",
+              "typeName": "MemberDetails",
+              "sample": "[\r\n  {\r\n    \"sourceSystemEntityCode\": \"MS_R50_SC01\",\r\n    \"sourceSystemUserId\": \"SYSADMIN\",\r\n    \"entityType\": \"MEMBER\",\r\n    \"doingBusinessAsName\": \"MS_R50_SC01_DBA\",\r\n    \"sourceSystem\": \"BILLING\",\r\n    \"sourceSystemPrimaryKey\": \"MS_R50_SC01_PK\",\r\n    \"memberID\": \"MS_R50_SC01_M1id\",\r\n    \"state\": \"CA\",\r\n    \"ssn\": \"001-003 NH\",\r\n    \"country\": \"USA\",\r\n    \"cobraIndicator\": \"N\",\r\n    \"outputDeliveryMethod\": \"FAX\",\r\n    \"specialHandlingIndicator\": \"N\",\r\n    \"userRemarks\": \"Member Creation\",\r\n    \"dateOfBirth\": \"1987-01-01\",\r\n    \"ageIssued\": \"24\",\r\n    \"dateOfHire\": \"2014-01-01\",\r\n    \"lastWorkingDay\": \"2016-01-01\",\r\n    \"employeeId\": \"12602\",\r\n    \"otherId\": \"F1696149\",\r\n    \"addressDetails\": [\r\n      {\r\n        \"addressType\": \"MAILING\",\r\n        \"namePrefix\": \"MR\",\r\n        \"nameSuffix\": \"MN\",\r\n        \"firstName\": \"Manohar\",\r\n        \"middleName\": \"N\",\r\n        \"lastName\": \"Nalam\",\r\n        \"fullName\": \"MANOHAR N NALAM\",\r\n        \"address1\": \"109 Rail road Street\",\r\n        \"address2\": \"phi phi land\",\r\n        \"state\": \"CA\",\r\n        \"country\": \"USA\",\r\n        \"city\": \"Iron River\",\r\n        \"zipCode\": \"10008\",\r\n        \"county\": \"2246\",\r\n        \"primaryPhoneNo\": \"8458877445\",\r\n        \"primaryEmailId\": \"manu.n@gmail.com\",\r\n        \"primaryFaxNo\": \"456788\",\r\n        \"alternatePhoneNo\": \"8458877446\",\r\n        \"alternateEmailId\": \"manu1.g@gmail.com\",\r\n        \"alternateFaxNo\": \"456789\",\r\n        \"primaryAddressYN\": \"Y\"\r\n      }\r\n    ]\r\n  }\r\n]"
+            }
+          ]
+        },
+        "responses": [
+          {
+            "description": "Successful operation.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfcb64634611330f0d84e",
+                "typeName": "Message",
+                "sample": "{\r\n  \"code\": \"string\",\r\n  \"description\": \"string\",\r\n  \"type\": \"string\"\r\n}"
+              }
+            ],
+            "statusCode": 200
+          },
+          {
+            "description": "Bad Request.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfcb64634611330f0d84e",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ]\r\n}"
+              }
+            ],
+            "statusCode": 400
+          },
+          {
+            "description": "Resource not found.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfcb64634611330f0d84e",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ]\r\n}"
+              }
+            ],
+            "statusCode": 404
+          },
+          {
+            "description": "Server not available.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfcb64634611330f0d84e",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ]\r\n}"
+              }
+            ],
+            "statusCode": 500
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/10cbd667918a492ca1f855692ad1b75e/addTPA')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '10cbd667918a492ca1f855692ad1b75e')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), '10cbd667918a492ca1f855692ad1b75e', '627dfcb64634611330f0d84e')]"
+      ],
+      "properties": {
+        "displayName": "Post Create TPA",
+        "method": "POST",
+        "urlTemplate": "/entity-setup/createtpa",
+        "description": "This operation will create a new TPA in billing system.",
+        "templateParameters": [],
+        "request": {
+          "description": "Request to create TPA.",
+          "headers": [],
+          "queryParameters": [],
+          "representations": [
+            {
+              "contentType": "application/json",
+              "schemaId": "627dfcb64634611330f0d84e",
+              "typeName": "TPADetails",
+              "sample": "[\r\n  {\r\n    \"sourceSystemEntityCode\": \"TPA_R50_SC41\",\r\n    \"entityType\": \"OTHER_TPA\",\r\n    \"effectiveDate\": \"2019-01-01\",\r\n    \"sourceSystemPrimaryKey\": \"TPA_R50_SC41_SPK\",\r\n    \"sourceSystemUserId\": \"SYSADMIN\",\r\n    \"doingBusinessAsName\": \"TPA_R50_SC41_DBA\",\r\n    \"sourceSystem\": \"MAJESCOPAS\",\r\n    \"state\": \"CA\",\r\n    \"country\": \"USA\",\r\n    \"billDeliveryMethod\": \"EMAIL\",\r\n    \"statementFormat\": \"PDF\",\r\n    \"paymentMethod\": \"CHECK\",\r\n    \"migratedYN\": \"N\",\r\n    \"allianceCode\": \"TPA_R50_SC41\",\r\n    \"userRemarks\": \"TPA Created\",\r\n    \"ssn\": \"001-003 NH\",\r\n    \"parentEntityType\": null,\r\n    \"parentEntityCode\": null,\r\n    \"transactionReason\": \"TPA_SETUP\",\r\n    \"operatingCompany\": \"01\",\r\n    \"underwritingCompany\": \"01\",\r\n    \"addressDetails\": [\r\n      {\r\n        \"addressType\": \"MAILING\",\r\n        \"namePrefix\": \"MR\",\r\n        \"nameSuffix\": \"MN\",\r\n        \"firstName\": \"Manohar\",\r\n        \"middleName\": \"N\",\r\n        \"lastName\": \"Nalam\",\r\n        \"fullName\": \"MANOHAR N NALAM\",\r\n        \"address1\": \"109 Rail road Street\",\r\n        \"address2\": \"phi phi land\",\r\n        \"state\": \"CA\",\r\n        \"country\": \"USA\",\r\n        \"city\": \"Iron River\",\r\n        \"zipCode\": \"10008\",\r\n        \"county\": \"2246\",\r\n        \"primaryPhoneNo\": \"8458877445\",\r\n        \"primaryEmailId\": \"manu.n@gmail.com\",\r\n        \"primaryFaxNo\": \"456788\",\r\n        \"alternatePhoneNo\": \"8458877446\",\r\n        \"alternateEmailId\": \"manu1.g@gmail.com\",\r\n        \"alternateFaxNo\": \"456789\",\r\n        \"primaryAddressYN\": \"Y\"\r\n      }\r\n    ]\r\n  }\r\n]"
+            }
+          ]
+        },
+        "responses": [
+          {
+            "description": "Successful operation.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfcb64634611330f0d84e",
+                "typeName": "Message",
+                "sample": "{\r\n  \"code\": \"string\",\r\n  \"description\": \"string\",\r\n  \"type\": \"string\"\r\n}"
+              }
+            ],
+            "statusCode": 200
+          },
+          {
+            "description": "Bad Request.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfcb64634611330f0d84e",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ]\r\n}"
+              }
+            ],
+            "statusCode": 400
+          },
+          {
+            "description": "Resource not found.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfcb64634611330f0d84e",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ]\r\n}"
+              }
+            ],
+            "statusCode": 404
+          },
+          {
+            "description": "Server not available.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfcb64634611330f0d84e",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ]\r\n}"
+              }
+            ],
+            "statusCode": 500
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/10cbd667918a492ca1f855692ad1b75e/updateAccount')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), '10cbd667918a492ca1f855692ad1b75e')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), '10cbd667918a492ca1f855692ad1b75e', '627dfcb64634611330f0d84e')]"
+      ],
+      "properties": {
+        "displayName": "Post Update Account",
+        "method": "POST",
+        "urlTemplate": "/entity-setup/updateaccount",
+        "description": "This operation will update Account details like Name and address in billing system.",
+        "templateParameters": [],
+        "request": {
+          "description": "Request to update Account.",
+          "headers": [],
+          "queryParameters": [],
+          "representations": [
+            {
+              "contentType": "application/json",
+              "schemaId": "627dfcb64634611330f0d84e",
+              "typeName": "AccountEditDetails",
+              "sample": "[\r\n  {\r\n    \"effectiveDate\": \"2019-01-01\",\r\n    \"anniversaryDate\": \"2020-01-01\",\r\n    \"sourceSystemEntityCode\": \"AS_R50_SC41\",\r\n    \"sourceSystemUserId\": \"SYSADMIN\",\r\n    \"doingBusinessAsName\": \"AS_R50_SC41_DBA\",\r\n    \"sourceSystem\": \"MAJESCOPAS\",\r\n    \"state\": \"CA\",\r\n    \"country\": \"USA\",\r\n    \"cobraIndicator\": \"N\",\r\n    \"operatingCompany\": \"01\",\r\n    \"underwritingCompany\": \"01\",\r\n    \"addressDetails\": [\r\n      {\r\n        \"addressType\": \"MAILING\",\r\n        \"namePrefix\": \"MR\",\r\n        \"nameSuffix\": \"MN\",\r\n        \"firstName\": \"Manohar\",\r\n        \"middleName\": \"N\",\r\n        \"lastName\": \"Nalam\",\r\n        \"fullName\": \"MANOHAR N NALAM\",\r\n        \"address1\": \"109 Rail road Street\",\r\n        \"address2\": \"phi phi land\",\r\n        \"state\": \"CA\",\r\n        \"country\": \"USA\",\r\n        \"city\": \"Iron River\",\r\n        \"zipCode\": \"10008\",\r\n        \"county\": \"2246\",\r\n        \"primaryPhoneNo\": \"8458877445\",\r\n        \"primaryEmailId\": \"manu.n@gmail.com\",\r\n        \"primaryFaxNo\": \"456788\",\r\n        \"alternatePhoneNo\": \"8458877446\",\r\n        \"alternateEmailId\": \"manu1.g@gmail.com\",\r\n        \"alternateFaxNo\": \"456789\",\r\n        \"primaryAddressYN\": \"Y\"\r\n      }\r\n    ]\r\n  }\r\n]"
+            }
+          ]
+        },
+        "responses": [
+          {
+            "description": "Successful operation.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfcb64634611330f0d84e",
+                "typeName": "Message",
+                "sample": "{\r\n  \"code\": \"string\",\r\n  \"description\": \"string\",\r\n  \"type\": \"string\"\r\n}"
+              }
+            ],
+            "statusCode": 200
+          },
+          {
+            "description": "Bad Request.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfcb64634611330f0d84e",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ]\r\n}"
+              }
+            ],
+            "statusCode": 400
+          },
+          {
+            "description": "Resource not found.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfcb64634611330f0d84e",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ]\r\n}"
+              }
+            ],
+            "statusCode": 404
+          },
+          {
+            "description": "Server not available.",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dfcb64634611330f0d84e",
+                "typeName": "Error",
+                "sample": "{\r\n  \"statuscode\": \"http-status-code\",\r\n  \"status\": \"Example status message\",\r\n  \"message\": [\r\n    {\r\n      \"systemerrcode\": \"ERR-001\",\r\n      \"developer\": \"Message for app developer\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ]\r\n}"
+              }
+            ],
+            "statusCode": 500
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/10cbd667918a492ca1f855692ad1b75e/addAccount/Entity')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '10cbd667918a492ca1f855692ad1b75e', 'addAccount')]"
+      ],
+      "properties": {
+        "displayName": "Entity"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/10cbd667918a492ca1f855692ad1b75e/addBroker/Entity')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '10cbd667918a492ca1f855692ad1b75e', 'addBroker')]"
+      ],
+      "properties": {
+        "displayName": "Entity"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/10cbd667918a492ca1f855692ad1b75e/addInsured/Entity')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '10cbd667918a492ca1f855692ad1b75e', 'addInsured')]"
+      ],
+      "properties": {
+        "displayName": "Entity"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/10cbd667918a492ca1f855692ad1b75e/addMember/Entity')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '10cbd667918a492ca1f855692ad1b75e', 'addMember')]"
+      ],
+      "properties": {
+        "displayName": "Entity"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/10cbd667918a492ca1f855692ad1b75e/addTPA/Entity')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '10cbd667918a492ca1f855692ad1b75e', 'addTPA')]"
+      ],
+      "properties": {
+        "displayName": "Entity"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/10cbd667918a492ca1f855692ad1b75e/updateAccount/Entity')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), '10cbd667918a492ca1f855692ad1b75e', 'updateAccount')]"
+      ],
+      "properties": {
+        "displayName": "Entity"
+      }
+    }
+  ]
+}

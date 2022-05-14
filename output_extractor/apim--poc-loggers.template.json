@@ -1,0 +1,34 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "apimServiceName": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/loggers",
+      "name": "[concat(parameters('apimServiceName'), '/app-instight-apim')]",
+      "properties": {
+        "loggerType": "applicationInsights",
+        "credentials": {
+          "instrumentationKey": "{{Logger-Credentials--627dcfe04634611330f0d514}}"
+        },
+        "isBuffered": true,
+        "resourceId": "[parameters('loggerResourceId').appinstightapim]"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/loggers",
+      "name": "[concat(parameters('apimServiceName'), '/azuremonitor')]",
+      "properties": {
+        "loggerType": "azureMonitor",
+        "isBuffered": true,
+        "resourceId": "[parameters('loggerResourceId').azuremonitor]"
+      }
+    }
+  ]
+}

@@ -1,0 +1,1899 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "apimServiceName": {
+      "type": "string"
+    },
+    "policyXMLBaseUrl": {
+      "type": "string"
+    },
+    "apiLoggerId": {
+      "type": "object"
+    }
+  },
+  "resources": [
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis",
+      "name": "[concat(parameters('apimServiceName'), '/fa50a1a2128b42f7ba803fe1763e8cae')]",
+      "dependsOn": [],
+      "properties": {
+        "description": "Security API has operations for create, update, delete and query for resources like users, roles, applications, authentication and directories.",
+        "authenticationSettings": {
+          "subscriptionKeyRequired": false
+        },
+        "subscriptionKeyParameterNames": {
+          "header": "Ocp-Apim-Subscription-Key",
+          "query": "subscription-key"
+        },
+        "apiRevision": "1",
+        "isCurrent": true,
+        "subscriptionRequired": true,
+        "displayName": "Security",
+        "serviceUrl": "https://services.exmple.it/base/path",
+        "path": "CoreSecutiryOpenAPI",
+        "protocols": [
+          "https"
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/schemas",
+      "name": "[concat(parameters('apimServiceName'), '/fa50a1a2128b42f7ba803fe1763e8cae/627dff644634611330f0d902')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), 'fa50a1a2128b42f7ba803fe1763e8cae')]"
+      ],
+      "properties": {
+        "contentType": "application/vnd.oai.openapi.components+json",
+        "document": {
+          "components": {
+            "schemas": {
+              "NsAllowedAttributeDTO": {
+                "type": "object",
+                "properties": {
+                  "createDate": {
+                    "type": "string",
+                    "description": "Creation date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "createdBy": {
+                    "type": "integer",
+                    "description": "Database id of user who created the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "modifiedBy": {
+                    "type": "integer",
+                    "description": "Database id of user who modified the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "modifiedDate": {
+                    "type": "string",
+                    "description": "Modification date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "nsAuditUser": {
+                    "$ref": "#/components/schemas/NsAuditUser"
+                  }
+                },
+                "description": "This DTO holds allowed attribute details"
+              },
+              "NsAuditUser": {
+                "type": "object",
+                "properties": {
+                  "domain": {
+                    "maxLength": 150,
+                    "type": "string",
+                    "description": "Domain selected by the user during authentication"
+                  },
+                  "email": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "Email of the user"
+                  },
+                  "id": {
+                    "type": "integer",
+                    "description": "Database unique id",
+                    "format": "int64"
+                  },
+                  "name": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "Name of the user"
+                  },
+                  "userId": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "Unique user id"
+                  }
+                },
+                "description": "This DTO holds user audit details"
+              },
+              "NsDLSCriteriaContainerDTO": {
+                "type": "object",
+                "properties": {
+                  "createDate": {
+                    "type": "string",
+                    "description": "Creation date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "createdBy": {
+                    "type": "integer",
+                    "description": "Database id of user who created the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "modifiedBy": {
+                    "type": "integer",
+                    "description": "Database id of user who modified the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "modifiedDate": {
+                    "type": "string",
+                    "description": "Modification date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "nsAuditUser": {
+                    "$ref": "#/components/schemas/NsAuditUser"
+                  }
+                },
+                "description": "This DTO holds DLS (Data Level Security ) information"
+              },
+              "NsDomainsListDTO": {
+                "type": "object",
+                "properties": {
+                  "createDate": {
+                    "type": "string",
+                    "description": "Creation date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "createdBy": {
+                    "type": "integer",
+                    "description": "Database id of user who created the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "modifiedBy": {
+                    "type": "integer",
+                    "description": "Database id of user who modified the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "modifiedDate": {
+                    "type": "string",
+                    "description": "Modification date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "nsAuditUser": {
+                    "$ref": "#/components/schemas/NsAuditUser"
+                  },
+                  "totalNumberOfRecords": {
+                    "type": "integer",
+                    "format": "int64"
+                  }
+                },
+                "description": "This DTO holds domain list"
+              },
+              "NsIdentityConnectAttrDTO": {
+                "type": "object",
+                "properties": {
+                  "attrName": {
+                    "maxLength": 45,
+                    "type": "string",
+                    "description": "User directory connection attributename",
+                    "example": "IdpRestEndPoint"
+                  },
+                  "attrValue": {
+                    "maxLength": 300,
+                    "type": "string",
+                    "description": "User directory connection attribute value",
+                    "example": "http://localhost:8080/security-user-dir-db/rest"
+                  },
+                  "createDate": {
+                    "type": "string",
+                    "description": "Creation date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "createdBy": {
+                    "type": "integer",
+                    "description": "Database id of user who created the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "id": {
+                    "type": "integer",
+                    "description": "User directory connection attribute id",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "modifiedBy": {
+                    "type": "integer",
+                    "description": "Database id of user who modified the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "modifiedDate": {
+                    "type": "string",
+                    "description": "Modification date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "nsAuditUser": {
+                    "$ref": "#/components/schemas/NsAuditUser"
+                  }
+                },
+                "description": "This DTO holds user directory connection attribute details and information related to essential user directory connection attributes ."
+              },
+              "NsIdentityConnectAttrListDTO": {
+                "type": "object",
+                "properties": {
+                  "createDate": {
+                    "type": "string",
+                    "description": "Creation date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "createdBy": {
+                    "type": "integer",
+                    "description": "Database id of user who created the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "modifiedBy": {
+                    "type": "integer",
+                    "description": "Database id of user who modified the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "modifiedDate": {
+                    "type": "string",
+                    "description": "Modification date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "nsAuditUser": {
+                    "$ref": "#/components/schemas/NsAuditUser"
+                  },
+                  "nsIdentityConnectAttrDTOList": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/NsIdentityConnectAttrDTO"
+                    }
+                  },
+                  "totalNumberOfRecords": {
+                    "type": "integer",
+                    "format": "int64"
+                  }
+                },
+                "description": "Holds the connection attribute information for the user directory"
+              },
+              "NsIdentityStoreDTO": {
+                "required": [
+                  "storeName"
+                ],
+                "type": "object",
+                "properties": {
+                  "authServiceUrl": {
+                    "maxLength": 300,
+                    "type": "string",
+                    "description": "Authentication service URL",
+                    "example": "http://ind-mhp2v24w211/security-delegate-auth-dir/rest"
+                  },
+                  "createDate": {
+                    "type": "string",
+                    "description": "Creation date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "createdBy": {
+                    "type": "integer",
+                    "description": "Database id of user who created the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "description": {
+                    "maxLength": 45,
+                    "type": "string",
+                    "description": "Description about the user directory",
+                    "example": "Delegate Authentication Azure ADFS"
+                  },
+                  "id": {
+                    "type": "integer",
+                    "description": "Database unique user directory id",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "identityStoreTypeId": {
+                    "type": "integer",
+                    "description": "Store type id",
+                    "format": "int64",
+                    "example": 5.0
+                  },
+                  "modifiedBy": {
+                    "type": "integer",
+                    "description": "Database id of user who modified the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "modifiedDate": {
+                    "type": "string",
+                    "description": "Modification date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "nsAuditUser": {
+                    "$ref": "#/components/schemas/NsAuditUser"
+                  },
+                  "nsIdentityConnectAttrDTOList": {
+                    "$ref": "#/components/schemas/NsIdentityConnectAttrListDTO"
+                  },
+                  "nsIdentityStorePolicyDTO": {
+                    "$ref": "#/components/schemas/NsIdentityStorePolicyDTO"
+                  },
+                  "nsSecurityPolicyListDTO": {
+                    "$ref": "#/components/schemas/NsSecurityPolicyListDTO"
+                  },
+                  "storeName": {
+                    "maxLength": 45,
+                    "type": "string",
+                    "description": "User directory name",
+                    "example": "Azure ADFS"
+                  },
+                  "storeType": {
+                    "enum": [
+                      "STORETYPE_AD",
+                      "STORETYPE_DATABASE",
+                      "STORETYPE_LDAP",
+                      "STORETYPE_REST",
+                      "STORETYPE_SITEMINDER",
+                      "STORETYPE_AZURE_ADFS"
+                    ],
+                    "type": "string",
+                    "description": "Store type",
+                    "example": "STORETYPE_AZURE_ADFS"
+                  },
+                  "superAdmin": {
+                    "type": "boolean",
+                    "description": "Is super user",
+                    "example": false
+                  }
+                },
+                "description": "This DTO holds user directory details"
+              },
+              "NsIdentityStorePolicyDTO": {
+                "type": "object",
+                "properties": {
+                  "allowDigitsAtEnd": {
+                    "type": "boolean"
+                  },
+                  "allowDigitsOnStart": {
+                    "type": "boolean"
+                  },
+                  "changePasswordAssignedByAdmin": {
+                    "type": "boolean"
+                  },
+                  "createDate": {
+                    "type": "string",
+                    "description": "Creation date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "createdBy": {
+                    "type": "integer",
+                    "description": "Database id of user who created the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "minimumDigitsinPassword": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "modifiedBy": {
+                    "type": "integer",
+                    "description": "Database id of user who modified the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "modifiedDate": {
+                    "type": "string",
+                    "description": "Modification date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "nsAuditUser": {
+                    "$ref": "#/components/schemas/NsAuditUser"
+                  },
+                  "numOfOldPasswordsForbidden": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "passMaxLength": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "passMinLength": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "passwordEncryptionPolicy": {
+                    "enum": [
+                      "SHA1",
+                      "SHA256",
+                      "SHA384",
+                      "SHA512",
+                      "MD5",
+                      "MD2",
+                      "PBEWithMD5AndDES",
+                      "DES",
+                      "AES"
+                    ],
+                    "type": "string"
+                  },
+                  "passwordValidDuration": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                },
+                "description": "This DTO holds information for user directory"
+              },
+              "NsLoginAuditDTO": {
+                "type": "object",
+                "properties": {
+                  "clientIp": {
+                    "type": "string",
+                    "description": "Client IP Address"
+                  },
+                  "createDate": {
+                    "type": "string",
+                    "description": "Creation date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "createdBy": {
+                    "type": "integer",
+                    "description": "Database id of user who created the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "domain": {
+                    "type": "string",
+                    "description": "Domain name"
+                  },
+                  "id": {
+                    "type": "integer",
+                    "description": "Database unique audit id",
+                    "format": "int64"
+                  },
+                  "lastFailedLoginDate": {
+                    "type": "string",
+                    "description": "Last failed login date",
+                    "example": "1562129848872"
+                  },
+                  "lastLoginDate": {
+                    "type": "string",
+                    "description": "Last login date",
+                    "example": "1562129848872"
+                  },
+                  "message": {
+                    "type": "string",
+                    "description": "Message"
+                  },
+                  "modifiedBy": {
+                    "type": "integer",
+                    "description": "Database id of user who modified the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "modifiedDate": {
+                    "type": "string",
+                    "description": "Modification date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "nsAuditUser": {
+                    "$ref": "#/components/schemas/NsAuditUser"
+                  },
+                  "serverIp": {
+                    "type": "string",
+                    "description": "Server IP Address"
+                  },
+                  "serviceName": {
+                    "type": "string",
+                    "description": "Service name"
+                  },
+                  "status": {
+                    "enum": [
+                      "AUTHENTICATION_FAILED",
+                      "AUTHENTICATION_SUCCESS"
+                    ],
+                    "type": "string",
+                    "description": "Login status"
+                  },
+                  "totalFailedLoginCount": {
+                    "type": "integer",
+                    "description": "Total failed login count",
+                    "format": "int32"
+                  },
+                  "userId": {
+                    "type": "string",
+                    "description": "User id"
+                  },
+                  "userName": {
+                    "type": "string",
+                    "description": "User name"
+                  }
+                },
+                "description": "This DTO holds login audit details"
+              },
+              "NsOpenApiErrorDTO": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/NsOpenApiErrorMessageDTO"
+                    },
+                    "description": "Error message list"
+                  },
+                  "moreInfo": {
+                    "type": "string",
+                    "description": "Additional information if any"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "Http error status",
+                    "example": "INTERNAL SERVER ERROR"
+                  },
+                  "statusCode": {
+                    "type": "string",
+                    "description": "Http error status code",
+                    "example": "500"
+                  }
+                },
+                "description": "This DTO holds error and error message details"
+              },
+              "NsOpenApiErrorMessageDTO": {
+                "type": "object",
+                "properties": {
+                  "developer": {
+                    "type": "string",
+                    "description": "Verbose, plain language description of the problem for the app developer with hints about how to fix it",
+                    "example": "Message for app developer"
+                  },
+                  "systemerrcode": {
+                    "type": "string",
+                    "description": "System/Application error Code",
+                    "example": "SECERROR-001"
+                  },
+                  "user": {
+                    "type": "string",
+                    "description": "Pass this message on to the app user if needed",
+                    "example": "Message for end user"
+                  }
+                },
+                "description": "This DTO holds error message details"
+              },
+              "NsOperationDTO": {
+                "type": "object",
+                "properties": {
+                  "appResourceId": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "Application Resource Id",
+                    "example": "ICD_PROFILEPOLICY_(I)"
+                  },
+                  "createDate": {
+                    "type": "string",
+                    "description": "Creation date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "createdBy": {
+                    "type": "integer",
+                    "description": "Database id of user who created the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "description": {
+                    "maxLength": 300,
+                    "type": "string",
+                    "description": "Description about the operation",
+                    "example": "View Application"
+                  },
+                  "displayName": {
+                    "type": "string",
+                    "description": "Display Name RESOURCE_NAME-OPERATION_NAME"
+                  },
+                  "id": {
+                    "type": "integer",
+                    "description": "Database unique operation id",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "modifiedBy": {
+                    "type": "integer",
+                    "description": "Database id of user who modified the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "modifiedDate": {
+                    "type": "string",
+                    "description": "Modification date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "nsAuditUser": {
+                    "$ref": "#/components/schemas/NsAuditUser"
+                  },
+                  "operationName": {
+                    "maxLength": 45,
+                    "type": "string",
+                    "description": "Operation Name",
+                    "example": "View"
+                  },
+                  "parentOperationDTO": {
+                    "$ref": "#/components/schemas/NsOperationDTO"
+                  },
+                  "resourceId": {
+                    "type": "integer",
+                    "description": "Resource Id",
+                    "format": "int64",
+                    "example": 500.0
+                  },
+                  "resourceName": {
+                    "maxLength": 150,
+                    "type": "string",
+                    "description": "Resource Name",
+                    "example": "PROFILEPOLICY"
+                  },
+                  "serviceName": {
+                    "maxLength": 255,
+                    "type": "string",
+                    "description": "Service Name",
+                    "example": "MIC"
+                  }
+                },
+                "description": "This DTO holds operation details"
+              },
+              "NsOperationListDTO": {
+                "type": "object",
+                "properties": {
+                  "createDate": {
+                    "type": "string",
+                    "description": "Creation date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "createdBy": {
+                    "type": "integer",
+                    "description": "Database id of user who created the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "modifiedBy": {
+                    "type": "integer",
+                    "description": "Database id of user who modified the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "modifiedDate": {
+                    "type": "string",
+                    "description": "Modification date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "nsAuditUser": {
+                    "$ref": "#/components/schemas/NsAuditUser"
+                  },
+                  "nsOperationDTOList": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/NsOperationDTO"
+                    },
+                    "description": "Multiple NsOperationDTO objects"
+                  },
+                  "nsServicePolicyDTOList": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/NsServicePolicyDTO"
+                    },
+                    "description": "Multiple security policy defined for application while import only"
+                  },
+                  "totalNumberOfRecords": {
+                    "type": "integer",
+                    "format": "int64"
+                  }
+                },
+                "description": "This DTO holds opeartions list"
+              },
+              "NsRoleContainerDTO": {
+                "type": "object",
+                "properties": {
+                  "createDate": {
+                    "type": "string",
+                    "description": "Creation date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "createdBy": {
+                    "type": "integer",
+                    "description": "Database id of user who created the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "modifiedBy": {
+                    "type": "integer",
+                    "description": "Database id of user who modified the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "modifiedDate": {
+                    "type": "string",
+                    "description": "Modification date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "nsAuditUser": {
+                    "$ref": "#/components/schemas/NsAuditUser"
+                  },
+                  "nsOperationDTOList": {
+                    "$ref": "#/components/schemas/NsOperationListDTO"
+                  },
+                  "nsRolesDTO": {
+                    "$ref": "#/components/schemas/NsRolesDTO"
+                  },
+                  "nsServiceDTOList": {
+                    "$ref": "#/components/schemas/NsServiceListDTO"
+                  },
+                  "parentRolesListDTO": {
+                    "$ref": "#/components/schemas/NsRolesListDTO"
+                  },
+                  "roleDLSCriteriaContainerMap": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "$ref": "#/components/schemas/NsDLSCriteriaContainerDTO"
+                    },
+                    "description": "Data level security (DLS) criteria details"
+                  }
+                },
+                "description": "This DTO holds role, permissions and parent role information associated with the role"
+              },
+              "NsRolesDTO": {
+                "required": [
+                  "roleName"
+                ],
+                "type": "object",
+                "properties": {
+                  "createDate": {
+                    "type": "string",
+                    "description": "Creation date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "createdBy": {
+                    "type": "integer",
+                    "description": "Database id of user who created the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "criteria": {
+                    "maxLength": 355,
+                    "type": "string",
+                    "description": "Condition or Rule"
+                  },
+                  "description": {
+                    "maxLength": 125,
+                    "type": "string",
+                    "description": "Description about the role",
+                    "example": "Customer role"
+                  },
+                  "globalCriteria": {
+                    "maxLength": 355,
+                    "type": "string",
+                    "description": "Global Conditions"
+                  },
+                  "id": {
+                    "type": "integer",
+                    "description": "Database unique role id",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "modifiedBy": {
+                    "type": "integer",
+                    "description": "Database id of user who modified the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "modifiedDate": {
+                    "type": "string",
+                    "description": "Modification date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "nsAuditUser": {
+                    "$ref": "#/components/schemas/NsAuditUser"
+                  },
+                  "roleName": {
+                    "maxLength": 125,
+                    "type": "string",
+                    "description": "Role Name",
+                    "example": "customrole"
+                  },
+                  "roleNameWithoutType": {
+                    "type": "string",
+                    "description": "Role Name without type"
+                  },
+                  "roleType": {
+                    "enum": [
+                      "USER_DEFINED",
+                      "USER_ROLE",
+                      "SERVICE"
+                    ],
+                    "type": "string",
+                    "description": "Role Type",
+                    "example": "USER_DEFINED"
+                  },
+                  "systemRole": {
+                    "type": "boolean",
+                    "description": "System Role",
+                    "example": true
+                  }
+                },
+                "description": "This DTO holds role details"
+              },
+              "NsRolesListDTO": {
+                "type": "object",
+                "properties": {
+                  "createDate": {
+                    "type": "string",
+                    "description": "Creation date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "createdBy": {
+                    "type": "integer",
+                    "description": "Database id of user who created the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "modifiedBy": {
+                    "type": "integer",
+                    "description": "Database id of user who modified the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "modifiedDate": {
+                    "type": "string",
+                    "description": "Modification date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "nsAuditUser": {
+                    "$ref": "#/components/schemas/NsAuditUser"
+                  },
+                  "nsRolesDTOList": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/NsRolesDTO"
+                    },
+                    "description": "Multiple NsRoleDTO objects"
+                  },
+                  "totalNumberOfRecords": {
+                    "type": "integer",
+                    "format": "int64"
+                  }
+                },
+                "description": "This DTO holds roles list"
+              },
+              "NsSecurityPolicyListDTO": {
+                "type": "object",
+                "properties": {
+                  "createDate": {
+                    "type": "string",
+                    "description": "Creation date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "createdBy": {
+                    "type": "integer",
+                    "description": "Database id of user who created the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "modifiedBy": {
+                    "type": "integer",
+                    "description": "Database id of user who modified the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "modifiedDate": {
+                    "type": "string",
+                    "description": "Modification date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "nsAuditUser": {
+                    "$ref": "#/components/schemas/NsAuditUser"
+                  }
+                },
+                "description": "This DTO holds security policy list"
+              },
+              "NsServiceDTO": {
+                "required": [
+                  "name",
+                  "serviceUrl"
+                ],
+                "type": "object",
+                "properties": {
+                  "allowedToProxy": {
+                    "type": "boolean",
+                    "description": "Is proxy allowed",
+                    "example": true
+                  },
+                  "anonymousAccess": {
+                    "type": "boolean",
+                    "description": "Is anonymous access granted",
+                    "example": true
+                  },
+                  "cannotDelete": {
+                    "type": "boolean",
+                    "description": "Is delete operation not allowed",
+                    "example": false
+                  },
+                  "createDate": {
+                    "type": "string",
+                    "description": "Creation date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "createdBy": {
+                    "type": "integer",
+                    "description": "Database id of user who created the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "description": {
+                    "maxLength": 255,
+                    "type": "string",
+                    "description": "Service description",
+                    "example": "Majesco Billing Application"
+                  },
+                  "enabled": {
+                    "type": "boolean",
+                    "description": "Is service enabled",
+                    "example": true
+                  },
+                  "evaluationOrder": {
+                    "type": "integer",
+                    "description": "Evaluation order for the service",
+                    "format": "int32",
+                    "example": 0
+                  },
+                  "id": {
+                    "type": "integer",
+                    "description": "Unique id of the service",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "ignoreAttributes": {
+                    "type": "boolean",
+                    "description": "Is ignoring attributes allowed",
+                    "example": true
+                  },
+                  "modifiedBy": {
+                    "type": "integer",
+                    "description": "Database id of user who modified the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "modifiedDate": {
+                    "type": "string",
+                    "description": "Modification date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "name": {
+                    "maxLength": 255,
+                    "type": "string",
+                    "description": "Name of the service",
+                    "example": "MajescoBilling"
+                  },
+                  "noOfLicenseUsers": {
+                    "type": "integer",
+                    "description": "No of licensed users",
+                    "format": "int64",
+                    "example": 10000.0
+                  },
+                  "nsAllowedAttributeDTOList": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/NsAllowedAttributeDTO"
+                    },
+                    "description": "Allowed attributes information"
+                  },
+                  "nsAuditUser": {
+                    "$ref": "#/components/schemas/NsAuditUser"
+                  },
+                  "serviceAppUrl": {
+                    "maxLength": 300,
+                    "type": "string",
+                    "description": "Service application url",
+                    "example": "http*://*.majesco.com*/MajescoBilling/**"
+                  },
+                  "serviceExtensionId": {
+                    "type": "integer",
+                    "description": "Unique id for service extension which is mapped against the service",
+                    "format": "int64"
+                  },
+                  "serviceUrl": {
+                    "maxLength": 300,
+                    "type": "string",
+                    "description": "Service Url",
+                    "example": "http*://*.majesco.com*/MajescoBilling/**"
+                  },
+                  "ssoEnabled": {
+                    "type": "boolean",
+                    "description": "Is sso enabled",
+                    "example": true
+                  },
+                  "supportadvancedDlsCriteria": {
+                    "type": "boolean",
+                    "description": "Is advance dls criteria supported",
+                    "example": true
+                  },
+                  "theme": {
+                    "maxLength": 255,
+                    "type": "string",
+                    "description": "Service theme"
+                  },
+                  "uniqueKey": {
+                    "maxLength": 300,
+                    "type": "string",
+                    "description": "Unique key provided for encryption",
+                    "example": "xMZFyxeuQqmoTZhhqrgwAw=="
+                  },
+                  "uniqueKeyAlgo": {
+                    "maxLength": 45,
+                    "type": "string",
+                    "description": "Unique key Algorithm",
+                    "example": "DES"
+                  }
+                },
+                "description": "This DTO holds application details"
+              },
+              "NsServiceListDTO": {
+                "type": "object",
+                "properties": {
+                  "createDate": {
+                    "type": "string",
+                    "description": "Creation date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "createdBy": {
+                    "type": "integer",
+                    "description": "Database id of user who created the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "modifiedBy": {
+                    "type": "integer",
+                    "description": "Database id of user who modified the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "modifiedDate": {
+                    "type": "string",
+                    "description": "Modification date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "nsAuditUser": {
+                    "$ref": "#/components/schemas/NsAuditUser"
+                  },
+                  "nsServiceDTOList": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/NsServiceDTO"
+                    },
+                    "description": "Get service list details"
+                  },
+                  "totalNumberOfRecords": {
+                    "type": "integer",
+                    "format": "int64"
+                  }
+                },
+                "description": "This DTO holds application list"
+              },
+              "NsServicePolicyDTO": {
+                "type": "object",
+                "properties": {
+                  "createDate": {
+                    "type": "string",
+                    "description": "Creation date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "createdBy": {
+                    "type": "integer",
+                    "description": "Database id of user who created the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "id": {
+                    "type": "integer",
+                    "description": "Unique database id of the application policy",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "modifiedBy": {
+                    "type": "integer",
+                    "description": "Database id of user who modified the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "modifiedDate": {
+                    "type": "string",
+                    "description": "Modification date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "nsAuditUser": {
+                    "$ref": "#/components/schemas/NsAuditUser"
+                  },
+                  "policyParam": {
+                    "maxLength": 60,
+                    "type": "string",
+                    "description": "Name of the policy parameter",
+                    "example": "inactivityPeriod"
+                  },
+                  "policyParamDesc": {
+                    "maxLength": 250,
+                    "type": "string",
+                    "description": "Description of the policy parameter",
+                    "example": "Inactivity lockout period (in minutes, 0 for never)"
+                  },
+                  "policyParamValue": {
+                    "maxLength": 80,
+                    "type": "string",
+                    "description": "Value of the policy parameter",
+                    "example": "1"
+                  },
+                  "serviceId": {
+                    "type": "integer",
+                    "description": "Application id against which the policy is mapped",
+                    "format": "int64",
+                    "example": 1.0
+                  }
+                },
+                "description": "This DTO holds information about policies defined for application/service"
+              },
+              "NsUserContainerDTO": {
+                "type": "object",
+                "properties": {
+                  "createDate": {
+                    "type": "string",
+                    "description": "Creation date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "createdBy": {
+                    "type": "integer",
+                    "description": "Database id of user who created the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "modifiedBy": {
+                    "type": "integer",
+                    "description": "Database id of user who modified the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "modifiedDate": {
+                    "type": "string",
+                    "description": "Modification date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "nsAuditUser": {
+                    "$ref": "#/components/schemas/NsAuditUser"
+                  },
+                  "nsDomainsDTOList": {
+                    "$ref": "#/components/schemas/NsDomainsListDTO"
+                  },
+                  "nsIdentityStoreDTO": {
+                    "$ref": "#/components/schemas/NsIdentityStoreDTO"
+                  },
+                  "nsLoginAuditDTO": {
+                    "$ref": "#/components/schemas/NsLoginAuditDTO"
+                  },
+                  "nsOperationListDTO": {
+                    "$ref": "#/components/schemas/NsOperationListDTO"
+                  },
+                  "nsRolesListDTO": {
+                    "$ref": "#/components/schemas/NsRolesListDTO"
+                  },
+                  "nsUsersDTO": {
+                    "$ref": "#/components/schemas/NsUsersDTO"
+                  },
+                  "userDLSCriteriaContainerMap": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "$ref": "#/components/schemas/NsDLSCriteriaContainerDTO"
+                    },
+                    "description": "Data level security (DLS) criteria details"
+                  }
+                },
+                "description": "This DTO holds user, roles, operations, domains and user directory details"
+              },
+              "NsUsersDTO": {
+                "required": [
+                  "email",
+                  "name",
+                  "password",
+                  "sourceIdentityStoreId",
+                  "userId"
+                ],
+                "type": "object",
+                "properties": {
+                  "addUpdateUserViaMicMigration": {
+                    "type": "boolean",
+                    "description": "Add update user via Mic migration",
+                    "example": false
+                  },
+                  "confirmedNewPassword": {
+                    "maxLength": 300,
+                    "type": "string",
+                    "description": "Confirm new password to be entered while updating password, should be same as new password",
+                    "example": "********"
+                  },
+                  "createDate": {
+                    "type": "string",
+                    "description": "Creation date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "createdBy": {
+                    "type": "integer",
+                    "description": "Database id of user who created the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "customerCode": {
+                    "type": "string",
+                    "description": "Customer code to identify the implementation",
+                    "example": "99"
+                  },
+                  "domain": {
+                    "maxLength": 150,
+                    "type": "string",
+                    "description": "Domain name",
+                    "example": "majesco.com"
+                  },
+                  "email": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "User email id",
+                    "example": "john.thomas@majesco.com"
+                  },
+                  "failedLoginAttemptCount": {
+                    "type": "integer",
+                    "description": "Number of failed login attempts made by the user",
+                    "format": "int64",
+                    "example": 2.0
+                  },
+                  "fax": {
+                    "type": "string",
+                    "description": "Fax details of the user",
+                    "example": "124415789"
+                  },
+                  "id": {
+                    "type": "integer",
+                    "description": "Database unique user id",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "isExternalUser": {
+                    "type": "boolean",
+                    "description": "Flag to determine whether user is external user or not.In case of external users, user mapping is applied to derive unique user id",
+                    "example": false
+                  },
+                  "isServiceUser": {
+                    "type": "boolean",
+                    "description": "Flag to determine whether user is a service user or not. Service users are by default blocked from login to core product via UI. ",
+                    "example": false
+                  },
+                  "isUnlock": {
+                    "type": "boolean",
+                    "description": "Flag to determine if System administrator unsuspends the suspended user from Core Security UI application. This flag is not maintained on database side and is only to check if sytem administrator has chosen to unsuspend the suspended user. If true, the suspended flag is set as false and user is unsuspended.",
+                    "example": true
+                  },
+                  "lastLoginDate": {
+                    "type": "string",
+                    "description": "Last login date in nunmeric (date time tick)",
+                    "format": "date-time"
+                  },
+                  "lastPasswordChangeDate": {
+                    "type": "string",
+                    "description": "Most recent date in numeric on which the password was updated . If password was never updated value will be returned as null",
+                    "format": "date-time"
+                  },
+                  "linkedUserId": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "Linked user id. Original external user id  stored for reverse mapping in case required",
+                    "example": "john.thomas@gmail.com"
+                  },
+                  "modifiedBy": {
+                    "type": "integer",
+                    "description": "Database id of user who modified the entity",
+                    "format": "int64",
+                    "example": 1.0
+                  },
+                  "modifiedDate": {
+                    "type": "string",
+                    "description": "Modification date of the entity in milliseconds",
+                    "example": "1562129848872"
+                  },
+                  "name": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "Fully qualified name of the user",
+                    "example": "JohnThomas"
+                  },
+                  "newPassword": {
+                    "maxLength": 300,
+                    "type": "string",
+                    "description": "New password to be entered while updating password",
+                    "example": "********"
+                  },
+                  "nsAuditUser": {
+                    "$ref": "#/components/schemas/NsAuditUser"
+                  },
+                  "password": {
+                    "maxLength": 300,
+                    "type": "string",
+                    "description": "Password",
+                    "example": "********"
+                  },
+                  "phoneNo": {
+                    "type": "string",
+                    "description": "Phone details of the user",
+                    "example": "123456789"
+                  },
+                  "sourceIdentityStoreId": {
+                    "type": "integer",
+                    "description": "User directory assigned to the user",
+                    "format": "int64",
+                    "example": 75.0
+                  },
+                  "status": {
+                    "type": "boolean",
+                    "description": "Flag to determine user is active or inactive , true: Active false : Inactive",
+                    "example": true
+                  },
+                  "suspended": {
+                    "type": "boolean",
+                    "description": "Flag to determine if user is suspended or not. User can be suspended in case the user exceeds maximum allowed failed login attempts. System administrator can unsuspend suspended user using Core-Security UI application.",
+                    "example": false
+                  },
+                  "userId": {
+                    "maxLength": 100,
+                    "type": "string",
+                    "description": "Unique user id",
+                    "example": "john.thomas@majesco.com"
+                  },
+                  "userIdWithoutDomain": {
+                    "type": "string",
+                    "description": "User Id without Domain",
+                    "example": "john"
+                  }
+                },
+                "description": "This DTO holds user profile details"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/diagnostics",
+      "name": "[concat(parameters('apimServiceName'), '/applicationinsights')]",
+      "dependsOn": [],
+      "properties": {
+        "alwaysLog": "allErrors",
+        "loggerId": "[parameters('apiLoggerId').applicationinsights]",
+        "httpCorrelationProtocol": "Legacy",
+        "logClientIp": true,
+        "sampling": {
+          "samplingType": "fixed",
+          "percentage": 100.0
+        },
+        "frontend": {
+          "request": {}
+        },
+        "backend": {
+          "request": {}
+        }
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/diagnostics",
+      "name": "[concat(parameters('apimServiceName'), '/azuremonitor')]",
+      "dependsOn": [],
+      "properties": {
+        "loggerId": "[parameters('apiLoggerId').azuremonitor]",
+        "logClientIp": true,
+        "sampling": {
+          "samplingType": "fixed",
+          "percentage": 100.0
+        },
+        "frontend": {
+          "request": {}
+        },
+        "backend": {
+          "request": {}
+        }
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "name": "[concat(parameters('apimServiceName'), '/d5778bc268cb4363a36f7722b8aed733/fa50a1a2128b42f7ba803fe1763e8cae')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), 'fa50a1a2128b42f7ba803fe1763e8cae')]"
+      ],
+      "properties": {
+        "displayName": "P&C Core Services APIs",
+        "description": "product giving access to P&C Core Services APIs api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "state": "published"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/fa50a1a2128b42f7ba803fe1763e8cae/getServiceByName')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), 'fa50a1a2128b42f7ba803fe1763e8cae')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), 'fa50a1a2128b42f7ba803fe1763e8cae', '627dff644634611330f0d902')]"
+      ],
+      "properties": {
+        "displayName": "This API will return application details based on the application name",
+        "method": "GET",
+        "urlTemplate": "/applications/{CUSTOMER_KEY}/{name}",
+        "description": "This API will return application details based on the application name",
+        "templateParameters": [
+          {
+            "name": "CUSTOMER_KEY",
+            "description": "Domain name eg: majesco.com",
+            "type": "string",
+            "required": true,
+            "values": []
+          },
+          {
+            "name": "name",
+            "description": "Application name eg: Security-UI",
+            "type": "string",
+            "required": true,
+            "values": []
+          }
+        ],
+        "responses": [
+          {
+            "description": "Successfull Operation",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dff644634611330f0d902",
+                "typeName": "NsServiceDTO",
+                "sample": "{\r\n  \"allowedToProxy\": true,\r\n  \"anonymousAccess\": true,\r\n  \"cannotDelete\": false,\r\n  \"createDate\": \"1562129848872\",\r\n  \"createdBy\": 1.0,\r\n  \"description\": \"Majesco Billing Application\",\r\n  \"enabled\": true,\r\n  \"evaluationOrder\": 0,\r\n  \"id\": 1.0,\r\n  \"ignoreAttributes\": true,\r\n  \"modifiedBy\": 1.0,\r\n  \"modifiedDate\": \"1562129848872\",\r\n  \"name\": \"MajescoBilling\",\r\n  \"noOfLicenseUsers\": 10000.0,\r\n  \"nsAllowedAttributeDTOList\": [\r\n    {\r\n      \"createDate\": \"1562129848872\",\r\n      \"createdBy\": 1.0,\r\n      \"modifiedBy\": 1.0,\r\n      \"modifiedDate\": \"1562129848872\",\r\n      \"nsAuditUser\": {\r\n        \"domain\": \"string\",\r\n        \"email\": \"string\",\r\n        \"id\": 0,\r\n        \"name\": \"string\",\r\n        \"userId\": \"string\"\r\n      }\r\n    }\r\n  ],\r\n  \"nsAuditUser\": {\r\n    \"domain\": \"string\",\r\n    \"email\": \"string\",\r\n    \"id\": 0,\r\n    \"name\": \"string\",\r\n    \"userId\": \"string\"\r\n  },\r\n  \"serviceAppUrl\": \"http*://*.majesco.com*/MajescoBilling/**\",\r\n  \"serviceExtensionId\": 0,\r\n  \"serviceUrl\": \"http*://*.majesco.com*/MajescoBilling/**\",\r\n  \"ssoEnabled\": true,\r\n  \"supportadvancedDlsCriteria\": true,\r\n  \"theme\": \"string\",\r\n  \"uniqueKey\": \"xMZFyxeuQqmoTZhhqrgwAw==\",\r\n  \"uniqueKeyAlgo\": \"DES\"\r\n}"
+              }
+            ],
+            "statusCode": 200
+          },
+          {
+            "description": "Bad Request",
+            "headers": [],
+            "representations": [],
+            "statusCode": 400
+          },
+          {
+            "description": "Unauthorized",
+            "headers": [],
+            "representations": [],
+            "statusCode": 401
+          },
+          {
+            "description": "Forbidden",
+            "headers": [],
+            "representations": [],
+            "statusCode": 403
+          },
+          {
+            "description": "Not Found",
+            "headers": [],
+            "representations": [],
+            "statusCode": 404
+          },
+          {
+            "description": "Internal Server error",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dff644634611330f0d902",
+                "typeName": "NsOpenApiErrorDTO",
+                "sample": "{\r\n  \"message\": [\r\n    {\r\n      \"developer\": \"Message for app developer\",\r\n      \"systemerrcode\": \"SECERROR-001\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreInfo\": \"string\",\r\n  \"status\": \"INTERNAL SERVER ERROR\",\r\n  \"statusCode\": \"500\"\r\n}"
+              }
+            ],
+            "statusCode": 500
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/fa50a1a2128b42f7ba803fe1763e8cae/getRoleDetailsByName')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), 'fa50a1a2128b42f7ba803fe1763e8cae')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), 'fa50a1a2128b42f7ba803fe1763e8cae', '627dff644634611330f0d902')]"
+      ],
+      "properties": {
+        "displayName": "This API will return role, permissions and parent role information associated with the role based on the name",
+        "method": "GET",
+        "urlTemplate": "/roles/{CUSTOMER_KEY}/{roleName}",
+        "description": "This API will return role, permissions and parent role information associated with the role based on the name",
+        "templateParameters": [
+          {
+            "name": "CUSTOMER_KEY",
+            "description": "Domain name eg: majesco.com",
+            "type": "string",
+            "required": true,
+            "values": []
+          },
+          {
+            "name": "roleName",
+            "description": "Role name eg: AdminRole",
+            "type": "string",
+            "required": true,
+            "values": []
+          }
+        ],
+        "responses": [
+          {
+            "description": "Successfull Operation",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dff644634611330f0d902",
+                "typeName": "NsRoleContainerDTO"
+              }
+            ],
+            "statusCode": 200
+          },
+          {
+            "description": "Bad Request",
+            "headers": [],
+            "representations": [],
+            "statusCode": 400
+          },
+          {
+            "description": "Unauthorized",
+            "headers": [],
+            "representations": [],
+            "statusCode": 401
+          },
+          {
+            "description": "Forbidden",
+            "headers": [],
+            "representations": [],
+            "statusCode": 403
+          },
+          {
+            "description": "Not Found",
+            "headers": [],
+            "representations": [],
+            "statusCode": 404
+          },
+          {
+            "description": "Internal Server error",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dff644634611330f0d902",
+                "typeName": "NsOpenApiErrorDTO",
+                "sample": "{\r\n  \"message\": [\r\n    {\r\n      \"developer\": \"Message for app developer\",\r\n      \"systemerrcode\": \"SECERROR-001\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreInfo\": \"string\",\r\n  \"status\": \"INTERNAL SERVER ERROR\",\r\n  \"statusCode\": \"500\"\r\n}"
+              }
+            ],
+            "statusCode": 500
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/fa50a1a2128b42f7ba803fe1763e8cae/getIdentityStoreByName')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), 'fa50a1a2128b42f7ba803fe1763e8cae')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), 'fa50a1a2128b42f7ba803fe1763e8cae', '627dff644634611330f0d902')]"
+      ],
+      "properties": {
+        "displayName": "This API will return user directory details based on the directory name",
+        "method": "GET",
+        "urlTemplate": "/userdirectories/{CUSTOMER_KEY}/{name}",
+        "description": "This API will return user directory details based on the directory name",
+        "templateParameters": [
+          {
+            "name": "CUSTOMER_KEY",
+            "description": "Domain name eg: majesco.com",
+            "type": "string",
+            "required": true,
+            "values": []
+          },
+          {
+            "name": "name",
+            "description": "User directory name eg: Cover-All",
+            "type": "string",
+            "required": true,
+            "values": []
+          }
+        ],
+        "responses": [
+          {
+            "description": "Successfull Operation",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dff644634611330f0d902",
+                "typeName": "NsIdentityStoreDTO",
+                "sample": "{\r\n  \"authServiceUrl\": \"http://ind-mhp2v24w211/security-delegate-auth-dir/rest\",\r\n  \"createDate\": \"1562129848872\",\r\n  \"createdBy\": 1.0,\r\n  \"description\": \"Delegate Authentication Azure ADFS\",\r\n  \"id\": 1.0,\r\n  \"identityStoreTypeId\": 5.0,\r\n  \"modifiedBy\": 1.0,\r\n  \"modifiedDate\": \"1562129848872\",\r\n  \"nsAuditUser\": {\r\n    \"domain\": \"string\",\r\n    \"email\": \"string\",\r\n    \"id\": 0,\r\n    \"name\": \"string\",\r\n    \"userId\": \"string\"\r\n  },\r\n  \"nsIdentityConnectAttrDTOList\": {\r\n    \"createDate\": \"1562129848872\",\r\n    \"createdBy\": 1.0,\r\n    \"modifiedBy\": 1.0,\r\n    \"modifiedDate\": \"1562129848872\",\r\n    \"nsAuditUser\": {\r\n      \"domain\": \"string\",\r\n      \"email\": \"string\",\r\n      \"id\": 0,\r\n      \"name\": \"string\",\r\n      \"userId\": \"string\"\r\n    },\r\n    \"nsIdentityConnectAttrDTOList\": [\r\n      {\r\n        \"attrName\": \"IdpRestEndPoint\",\r\n        \"attrValue\": \"http://localhost:8080/security-user-dir-db/rest\",\r\n        \"createDate\": \"1562129848872\",\r\n        \"createdBy\": 1.0,\r\n        \"id\": 1.0,\r\n        \"modifiedBy\": 1.0,\r\n        \"modifiedDate\": \"1562129848872\",\r\n        \"nsAuditUser\": {\r\n          \"domain\": \"string\",\r\n          \"email\": \"string\",\r\n          \"id\": 0,\r\n          \"name\": \"string\",\r\n          \"userId\": \"string\"\r\n        }\r\n      }\r\n    ],\r\n    \"totalNumberOfRecords\": 0\r\n  },\r\n  \"nsIdentityStorePolicyDTO\": {\r\n    \"allowDigitsAtEnd\": true,\r\n    \"allowDigitsOnStart\": true,\r\n    \"changePasswordAssignedByAdmin\": true,\r\n    \"createDate\": \"1562129848872\",\r\n    \"createdBy\": 1.0,\r\n    \"minimumDigitsinPassword\": 0,\r\n    \"modifiedBy\": 1.0,\r\n    \"modifiedDate\": \"1562129848872\",\r\n    \"nsAuditUser\": {\r\n      \"domain\": \"string\",\r\n      \"email\": \"string\",\r\n      \"id\": 0,\r\n      \"name\": \"string\",\r\n      \"userId\": \"string\"\r\n    },\r\n    \"numOfOldPasswordsForbidden\": 0,\r\n    \"passMaxLength\": 0,\r\n    \"passMinLength\": 0,\r\n    \"passwordEncryptionPolicy\": \"SHA1\",\r\n    \"passwordValidDuration\": 0\r\n  },\r\n  \"nsSecurityPolicyListDTO\": {\r\n    \"createDate\": \"1562129848872\",\r\n    \"createdBy\": 1.0,\r\n    \"modifiedBy\": 1.0,\r\n    \"modifiedDate\": \"1562129848872\",\r\n    \"nsAuditUser\": {\r\n      \"domain\": \"string\",\r\n      \"email\": \"string\",\r\n      \"id\": 0,\r\n      \"name\": \"string\",\r\n      \"userId\": \"string\"\r\n    }\r\n  },\r\n  \"storeName\": \"Azure ADFS\",\r\n  \"storeType\": \"STORETYPE_AZURE_ADFS\",\r\n  \"superAdmin\": false\r\n}"
+              }
+            ],
+            "statusCode": 200
+          },
+          {
+            "description": "Bad Request",
+            "headers": [],
+            "representations": [],
+            "statusCode": 400
+          },
+          {
+            "description": "Unauthorized",
+            "headers": [],
+            "representations": [],
+            "statusCode": 401
+          },
+          {
+            "description": "Forbidden",
+            "headers": [],
+            "representations": [],
+            "statusCode": 403
+          },
+          {
+            "description": "Not Found",
+            "headers": [],
+            "representations": [],
+            "statusCode": 404
+          },
+          {
+            "description": "Internal Server error",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dff644634611330f0d902",
+                "typeName": "NsOpenApiErrorDTO",
+                "sample": "{\r\n  \"message\": [\r\n    {\r\n      \"developer\": \"Message for app developer\",\r\n      \"systemerrcode\": \"SECERROR-001\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreInfo\": \"string\",\r\n  \"status\": \"INTERNAL SERVER ERROR\",\r\n  \"statusCode\": \"500\"\r\n}"
+              }
+            ],
+            "statusCode": 500
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/fa50a1a2128b42f7ba803fe1763e8cae/getUserDetailsByName')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), 'fa50a1a2128b42f7ba803fe1763e8cae')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), 'fa50a1a2128b42f7ba803fe1763e8cae', '627dff644634611330f0d902')]"
+      ],
+      "properties": {
+        "displayName": "This API will return user profile associated with given user name along with all the roles and permissions assigned to this user",
+        "method": "GET",
+        "urlTemplate": "/users/profile/{CUSTOMER_KEY}/{name}",
+        "description": "This API will return user profile associated with given user name along with all the roles and permissions assigned to this user",
+        "templateParameters": [
+          {
+            "name": "CUSTOMER_KEY",
+            "description": "Domain name eg: majesco.com",
+            "type": "string",
+            "required": true,
+            "values": []
+          },
+          {
+            "name": "name",
+            "description": "Name of the user eg: user@majesco.com",
+            "type": "string",
+            "required": true,
+            "values": []
+          }
+        ],
+        "responses": [
+          {
+            "description": "Successfull Operation",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dff644634611330f0d902",
+                "typeName": "NsUserContainerDTO"
+              }
+            ],
+            "statusCode": 200
+          },
+          {
+            "description": "Bad Request",
+            "headers": [],
+            "representations": [],
+            "statusCode": 400
+          },
+          {
+            "description": "Unauthorized",
+            "headers": [],
+            "representations": [],
+            "statusCode": 401
+          },
+          {
+            "description": "Forbidden",
+            "headers": [],
+            "representations": [],
+            "statusCode": 403
+          },
+          {
+            "description": "Not Found",
+            "headers": [],
+            "representations": [],
+            "statusCode": 404
+          },
+          {
+            "description": "Internal Server error",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dff644634611330f0d902",
+                "typeName": "NsOpenApiErrorDTO",
+                "sample": "{\r\n  \"message\": [\r\n    {\r\n      \"developer\": \"Message for app developer\",\r\n      \"systemerrcode\": \"SECERROR-001\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreInfo\": \"string\",\r\n  \"status\": \"INTERNAL SERVER ERROR\",\r\n  \"statusCode\": \"500\"\r\n}"
+              }
+            ],
+            "statusCode": 500
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "name": "[concat(parameters('apimServiceName'), '/fa50a1a2128b42f7ba803fe1763e8cae/getUserByName')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apimServiceName'), 'fa50a1a2128b42f7ba803fe1763e8cae')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('apimServiceName'), 'fa50a1a2128b42f7ba803fe1763e8cae', '627dff644634611330f0d902')]"
+      ],
+      "properties": {
+        "displayName": "This API will return user profile details associated with given user name",
+        "method": "GET",
+        "urlTemplate": "/users/{CUSTOMER_KEY}/{name}",
+        "description": "This API will return user profile details associated with given user name",
+        "templateParameters": [
+          {
+            "name": "CUSTOMER_KEY",
+            "description": "Domain name eg: majesco.com",
+            "type": "string",
+            "required": true,
+            "values": []
+          },
+          {
+            "name": "name",
+            "description": "Name of the user eg: user@majesco.com",
+            "type": "string",
+            "required": true,
+            "values": []
+          }
+        ],
+        "responses": [
+          {
+            "description": "Successfull Operation",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dff644634611330f0d902",
+                "typeName": "NsUsersDTO",
+                "sample": "{\r\n  \"addUpdateUserViaMicMigration\": false,\r\n  \"confirmedNewPassword\": \"********\",\r\n  \"createDate\": \"1562129848872\",\r\n  \"createdBy\": 1.0,\r\n  \"customerCode\": \"99\",\r\n  \"domain\": \"majesco.com\",\r\n  \"email\": \"john.thomas@majesco.com\",\r\n  \"failedLoginAttemptCount\": 2.0,\r\n  \"fax\": \"124415789\",\r\n  \"id\": 1.0,\r\n  \"isExternalUser\": false,\r\n  \"isServiceUser\": false,\r\n  \"isUnlock\": true,\r\n  \"lastLoginDate\": \"string\",\r\n  \"lastPasswordChangeDate\": \"string\",\r\n  \"linkedUserId\": \"john.thomas@gmail.com\",\r\n  \"modifiedBy\": 1.0,\r\n  \"modifiedDate\": \"1562129848872\",\r\n  \"name\": \"JohnThomas\",\r\n  \"newPassword\": \"********\",\r\n  \"nsAuditUser\": {\r\n    \"domain\": \"string\",\r\n    \"email\": \"string\",\r\n    \"id\": 0,\r\n    \"name\": \"string\",\r\n    \"userId\": \"string\"\r\n  },\r\n  \"password\": \"********\",\r\n  \"phoneNo\": \"123456789\",\r\n  \"sourceIdentityStoreId\": 75.0,\r\n  \"status\": true,\r\n  \"suspended\": false,\r\n  \"userId\": \"john.thomas@majesco.com\",\r\n  \"userIdWithoutDomain\": \"john\"\r\n}"
+              }
+            ],
+            "statusCode": 200
+          },
+          {
+            "description": "Bad Request",
+            "headers": [],
+            "representations": [],
+            "statusCode": 400
+          },
+          {
+            "description": "Unauthorized",
+            "headers": [],
+            "representations": [],
+            "statusCode": 401
+          },
+          {
+            "description": "Forbidden",
+            "headers": [],
+            "representations": [],
+            "statusCode": 403
+          },
+          {
+            "description": "Not Found",
+            "headers": [],
+            "representations": [],
+            "statusCode": 404
+          },
+          {
+            "description": "Internal Server error",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "627dff644634611330f0d902",
+                "typeName": "NsOpenApiErrorDTO",
+                "sample": "{\r\n  \"message\": [\r\n    {\r\n      \"developer\": \"Message for app developer\",\r\n      \"systemerrcode\": \"SECERROR-001\",\r\n      \"user\": \"Message for end user\"\r\n    }\r\n  ],\r\n  \"moreInfo\": \"string\",\r\n  \"status\": \"INTERNAL SERVER ERROR\",\r\n  \"statusCode\": \"500\"\r\n}"
+              }
+            ],
+            "statusCode": 500
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/fa50a1a2128b42f7ba803fe1763e8cae/getServiceByName/Applications')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), 'fa50a1a2128b42f7ba803fe1763e8cae', 'getServiceByName')]"
+      ],
+      "properties": {
+        "displayName": "Applications"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/fa50a1a2128b42f7ba803fe1763e8cae/getRoleDetailsByName/Roles')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), 'fa50a1a2128b42f7ba803fe1763e8cae', 'getRoleDetailsByName')]"
+      ],
+      "properties": {
+        "displayName": "Roles"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/fa50a1a2128b42f7ba803fe1763e8cae/getIdentityStoreByName/User-Directories')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), 'fa50a1a2128b42f7ba803fe1763e8cae', 'getIdentityStoreByName')]"
+      ],
+      "properties": {
+        "displayName": "User Directories"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/fa50a1a2128b42f7ba803fe1763e8cae/getUserDetailsByName/Users')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), 'fa50a1a2128b42f7ba803fe1763e8cae', 'getUserDetailsByName')]"
+      ],
+      "properties": {
+        "displayName": "Users"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/apis/operations/tags",
+      "name": "[concat(parameters('apimServiceName'), '/fa50a1a2128b42f7ba803fe1763e8cae/getUserByName/Users')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apimServiceName'), 'fa50a1a2128b42f7ba803fe1763e8cae', 'getUserByName')]"
+      ],
+      "properties": {
+        "displayName": "Users"
+      }
+    }
+  ]
+}

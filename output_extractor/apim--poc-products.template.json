@@ -1,0 +1,459 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "apimServiceName": {
+      "type": "string"
+    },
+    "policyXMLBaseUrl": {
+      "type": "string"
+    },
+    "apiLoggerId": {
+      "type": "object"
+    }
+  },
+  "resources": [
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products",
+      "name": "[concat(parameters('apimServiceName'), '/31a8092bd7024c24b5603c96f2124b1d')]",
+      "properties": {
+        "description": "product giving access to Distribution Management api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "subscriptionsLimit": 10,
+        "state": "published",
+        "displayName": "Distribution Management"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products",
+      "name": "[concat(parameters('apimServiceName'), '/b005c097f75b4033ae9db0b8524bea0a')]",
+      "properties": {
+        "description": "product giving access to L&A Billing api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "subscriptionsLimit": 10,
+        "state": "published",
+        "displayName": "L&A Billing"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products",
+      "name": "[concat(parameters('apimServiceName'), '/6d515498aab041e4aa558cbf4bcfe95f')]",
+      "properties": {
+        "description": "product giving access to L&A Claims api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "subscriptionsLimit": 10,
+        "state": "published",
+        "displayName": "L&A Claims"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products",
+      "name": "[concat(parameters('apimServiceName'), '/a67eb9c0d93d40f3891847ed4dcfda69')]",
+      "properties": {
+        "description": "product giving access to L&A Common APIs api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "subscriptionsLimit": 10,
+        "state": "published",
+        "displayName": "L&A Common APIs"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products",
+      "name": "[concat(parameters('apimServiceName'), '/d9379faa7db14c20906614f51b1bd938')]",
+      "properties": {
+        "description": "product giving access to L&A Policy api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "subscriptionsLimit": 10,
+        "state": "published",
+        "displayName": "L&A Policy"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products",
+      "name": "[concat(parameters('apimServiceName'), '/4de49919fb51437b9760ecceae88b1f8')]",
+      "properties": {
+        "description": "product giving access to P&C Billing api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "subscriptionsLimit": 10,
+        "state": "published",
+        "displayName": "P&C Billing"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products",
+      "name": "[concat(parameters('apimServiceName'), '/ebc85f59525346658fc94c164afcd86b')]",
+      "properties": {
+        "description": "product giving access to P&C Claims api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "subscriptionsLimit": 10,
+        "state": "published",
+        "displayName": "P&C Claims"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products",
+      "name": "[concat(parameters('apimServiceName'), '/d5778bc268cb4363a36f7722b8aed733')]",
+      "properties": {
+        "description": "product giving access to P&C Core Services APIs api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "subscriptionsLimit": 10,
+        "state": "published",
+        "displayName": "P&C Core Services APIs"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products",
+      "name": "[concat(parameters('apimServiceName'), '/fd107d6dd36344dd88a6f8adbf170919')]",
+      "properties": {
+        "description": "product giving access to P&C Policy api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "subscriptionsLimit": 10,
+        "state": "published",
+        "displayName": "P&C Policy"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products",
+      "name": "[concat(parameters('apimServiceName'), '/3c591c7492d04316a401fc1d3a44e154')]",
+      "properties": {
+        "description": "product giving access to Policy Transactions api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "subscriptionsLimit": 10,
+        "state": "published",
+        "displayName": "Policy Transactions"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products",
+      "name": "[concat(parameters('apimServiceName'), '/b6fe748ccac64a22841df03cc28b3d26')]",
+      "properties": {
+        "description": "product giving access to Quote Transaction api",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "subscriptionsLimit": 10,
+        "state": "published",
+        "displayName": "Quote Transaction"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products",
+      "name": "[concat(parameters('apimServiceName'), '/starter')]",
+      "properties": {
+        "description": "Subscribers will be able to run 5 calls/minute up to a maximum of 100 calls/week.",
+        "terms": "",
+        "subscriptionRequired": true,
+        "approvalRequired": false,
+        "subscriptionsLimit": 1,
+        "state": "published",
+        "displayName": "Starter"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products",
+      "name": "[concat(parameters('apimServiceName'), '/unlimited')]",
+      "properties": {
+        "description": "Subscribers have completely unlimited access to the API. Administrator approval is required.",
+        "subscriptionRequired": true,
+        "approvalRequired": true,
+        "subscriptionsLimit": 1,
+        "state": "published",
+        "displayName": "Unlimited"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/tags",
+      "name": "[concat(parameters('apimServiceName'), '/4de49919fb51437b9760ecceae88b1f8/billingtag')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products', parameters('apimServiceName'), '4de49919fb51437b9760ecceae88b1f8')]"
+      ],
+      "properties": {
+        "displayName": "billingtag"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/tags",
+      "name": "[concat(parameters('apimServiceName'), '/3c591c7492d04316a401fc1d3a44e154/busowner')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products', parameters('apimServiceName'), '3c591c7492d04316a401fc1d3a44e154')]"
+      ],
+      "properties": {
+        "displayName": "busowner"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/groups",
+      "name": "[concat(parameters('apimServiceName'), '/31a8092bd7024c24b5603c96f2124b1d/administrators')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products', parameters('apimServiceName'), '31a8092bd7024c24b5603c96f2124b1d')]"
+      ],
+      "properties": {
+        "description": "Administrators is a built-in group. Its membership is managed by the system. Microsoft Azure subscription administrators fall into this group.",
+        "displayName": "Administrators",
+        "type": "system",
+        "builtIn": true
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/groups",
+      "name": "[concat(parameters('apimServiceName'), '/b005c097f75b4033ae9db0b8524bea0a/administrators')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products', parameters('apimServiceName'), 'b005c097f75b4033ae9db0b8524bea0a')]"
+      ],
+      "properties": {
+        "description": "Administrators is a built-in group. Its membership is managed by the system. Microsoft Azure subscription administrators fall into this group.",
+        "displayName": "Administrators",
+        "type": "system",
+        "builtIn": true
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/groups",
+      "name": "[concat(parameters('apimServiceName'), '/6d515498aab041e4aa558cbf4bcfe95f/administrators')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products', parameters('apimServiceName'), '6d515498aab041e4aa558cbf4bcfe95f')]"
+      ],
+      "properties": {
+        "description": "Administrators is a built-in group. Its membership is managed by the system. Microsoft Azure subscription administrators fall into this group.",
+        "displayName": "Administrators",
+        "type": "system",
+        "builtIn": true
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/groups",
+      "name": "[concat(parameters('apimServiceName'), '/a67eb9c0d93d40f3891847ed4dcfda69/administrators')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products', parameters('apimServiceName'), 'a67eb9c0d93d40f3891847ed4dcfda69')]"
+      ],
+      "properties": {
+        "description": "Administrators is a built-in group. Its membership is managed by the system. Microsoft Azure subscription administrators fall into this group.",
+        "displayName": "Administrators",
+        "type": "system",
+        "builtIn": true
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/groups",
+      "name": "[concat(parameters('apimServiceName'), '/d9379faa7db14c20906614f51b1bd938/administrators')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products', parameters('apimServiceName'), 'd9379faa7db14c20906614f51b1bd938')]"
+      ],
+      "properties": {
+        "description": "Administrators is a built-in group. Its membership is managed by the system. Microsoft Azure subscription administrators fall into this group.",
+        "displayName": "Administrators",
+        "type": "system",
+        "builtIn": true
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/groups",
+      "name": "[concat(parameters('apimServiceName'), '/4de49919fb51437b9760ecceae88b1f8/administrators')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products', parameters('apimServiceName'), '4de49919fb51437b9760ecceae88b1f8')]"
+      ],
+      "properties": {
+        "description": "Administrators is a built-in group. Its membership is managed by the system. Microsoft Azure subscription administrators fall into this group.",
+        "displayName": "Administrators",
+        "type": "system",
+        "builtIn": true
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/groups",
+      "name": "[concat(parameters('apimServiceName'), '/ebc85f59525346658fc94c164afcd86b/administrators')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products', parameters('apimServiceName'), 'ebc85f59525346658fc94c164afcd86b')]"
+      ],
+      "properties": {
+        "description": "Administrators is a built-in group. Its membership is managed by the system. Microsoft Azure subscription administrators fall into this group.",
+        "displayName": "Administrators",
+        "type": "system",
+        "builtIn": true
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/groups",
+      "name": "[concat(parameters('apimServiceName'), '/d5778bc268cb4363a36f7722b8aed733/administrators')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products', parameters('apimServiceName'), 'd5778bc268cb4363a36f7722b8aed733')]"
+      ],
+      "properties": {
+        "description": "Administrators is a built-in group. Its membership is managed by the system. Microsoft Azure subscription administrators fall into this group.",
+        "displayName": "Administrators",
+        "type": "system",
+        "builtIn": true
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/groups",
+      "name": "[concat(parameters('apimServiceName'), '/fd107d6dd36344dd88a6f8adbf170919/administrators')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products', parameters('apimServiceName'), 'fd107d6dd36344dd88a6f8adbf170919')]"
+      ],
+      "properties": {
+        "description": "Administrators is a built-in group. Its membership is managed by the system. Microsoft Azure subscription administrators fall into this group.",
+        "displayName": "Administrators",
+        "type": "system",
+        "builtIn": true
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/groups",
+      "name": "[concat(parameters('apimServiceName'), '/3c591c7492d04316a401fc1d3a44e154/administrators')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products', parameters('apimServiceName'), '3c591c7492d04316a401fc1d3a44e154')]"
+      ],
+      "properties": {
+        "description": "Administrators is a built-in group. Its membership is managed by the system. Microsoft Azure subscription administrators fall into this group.",
+        "displayName": "Administrators",
+        "type": "system",
+        "builtIn": true
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/groups",
+      "name": "[concat(parameters('apimServiceName'), '/b6fe748ccac64a22841df03cc28b3d26/administrators')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products', parameters('apimServiceName'), 'b6fe748ccac64a22841df03cc28b3d26')]"
+      ],
+      "properties": {
+        "description": "Administrators is a built-in group. Its membership is managed by the system. Microsoft Azure subscription administrators fall into this group.",
+        "displayName": "Administrators",
+        "type": "system",
+        "builtIn": true
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/groups",
+      "name": "[concat(parameters('apimServiceName'), '/starter/administrators')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products', parameters('apimServiceName'), 'starter')]"
+      ],
+      "properties": {
+        "description": "Administrators is a built-in group. Its membership is managed by the system. Microsoft Azure subscription administrators fall into this group.",
+        "displayName": "Administrators",
+        "type": "system",
+        "builtIn": true
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/groups",
+      "name": "[concat(parameters('apimServiceName'), '/starter/developers')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products', parameters('apimServiceName'), 'starter')]"
+      ],
+      "properties": {
+        "description": "Developers is a built-in group. Its membership is managed by the system. Signed-in users fall into this group.",
+        "displayName": "Developers",
+        "type": "system",
+        "builtIn": true
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/groups",
+      "name": "[concat(parameters('apimServiceName'), '/starter/guests')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products', parameters('apimServiceName'), 'starter')]"
+      ],
+      "properties": {
+        "description": "Guests is a built-in group. Its membership is managed by the system. Unauthenticated users visiting the developer portal fall into this group.",
+        "displayName": "Guests",
+        "type": "system",
+        "builtIn": true
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/groups",
+      "name": "[concat(parameters('apimServiceName'), '/unlimited/administrators')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products', parameters('apimServiceName'), 'unlimited')]"
+      ],
+      "properties": {
+        "description": "Administrators is a built-in group. Its membership is managed by the system. Microsoft Azure subscription administrators fall into this group.",
+        "displayName": "Administrators",
+        "type": "system",
+        "builtIn": true
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/groups",
+      "name": "[concat(parameters('apimServiceName'), '/unlimited/developers')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products', parameters('apimServiceName'), 'unlimited')]"
+      ],
+      "properties": {
+        "description": "Developers is a built-in group. Its membership is managed by the system. Signed-in users fall into this group.",
+        "displayName": "Developers",
+        "type": "system",
+        "builtIn": true
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/groups",
+      "name": "[concat(parameters('apimServiceName'), '/unlimited/guests')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products', parameters('apimServiceName'), 'unlimited')]"
+      ],
+      "properties": {
+        "description": "Guests is a built-in group. Its membership is managed by the system. Unauthenticated users visiting the developer portal fall into this group.",
+        "displayName": "Guests",
+        "type": "system",
+        "builtIn": true
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/products/policies",
+      "name": "[concat(parameters('apimServiceName'), '/starter/policy')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/products', parameters('apimServiceName'), 'starter')]"
+      ],
+      "properties": {
+        "value": "[concat(parameters('policyXMLBaseUrl'), 'starter-productPolicy.xml')]",
+        "format": "rawxml-link"
+      }
+    }
+  ]
+}
