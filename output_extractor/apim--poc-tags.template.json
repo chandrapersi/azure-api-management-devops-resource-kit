@@ -14,6 +14,798 @@
       "properties": {
         "displayName": "a-apim-custom-tag"
       }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Accounts')]",
+      "properties": {
+        "displayName": "Accounts"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/action-controller')]",
+      "properties": {
+        "displayName": "action-controller"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Activity-Scheduler')]",
+      "properties": {
+        "displayName": "Activity Scheduler"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Adjustments')]",
+      "properties": {
+        "displayName": "Adjustments"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Agencies')]",
+      "properties": {
+        "displayName": "Agencies"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/agentInfo')]",
+      "properties": {
+        "displayName": "agentInfo"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/AllLines')]",
+      "properties": {
+        "displayName": "AllLines"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/allocation-history-controller')]",
+      "properties": {
+        "displayName": "allocation-history-controller"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/AmendmentService')]",
+      "properties": {
+        "displayName": "AmendmentService"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/AppFormService')]",
+      "properties": {
+        "displayName": "AppFormService"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Applications')]",
+      "properties": {
+        "displayName": "Applications"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Attachments')]",
+      "properties": {
+        "displayName": "Attachments"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/automation-task-monitor-controller')]",
+      "properties": {
+        "displayName": "automation-task-monitor-controller"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Background-Check')]",
+      "properties": {
+        "displayName": "Background Check"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/billing-controller')]",
+      "properties": {
+        "displayName": "billing-controller"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/billinginfo')]",
+      "properties": {
+        "displayName": "billinginfo"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/billingtag')]",
+      "properties": {
+        "displayName": "billingtag"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Business-Owners-FNOL')]",
+      "properties": {
+        "displayName": "Business Owners FNOL"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/busowner')]",
+      "properties": {
+        "displayName": "busowner"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Catastrophes')]",
+      "properties": {
+        "displayName": "Catastrophes"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/chandra-api-tag')]",
+      "properties": {
+        "displayName": "chandra-api-tag"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Claim-Assignments')]",
+      "properties": {
+        "displayName": "Claim Assignments"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Claim-Attachments')]",
+      "properties": {
+        "displayName": "Claim Attachments"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Claim-Contact')]",
+      "properties": {
+        "displayName": "Claim Contact"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Claim-Flags')]",
+      "properties": {
+        "displayName": "Claim Flags"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Claim-Notes')]",
+      "properties": {
+        "displayName": "Claim Notes"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Claim-Score')]",
+      "properties": {
+        "displayName": "Claim Score"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Claim-Search')]",
+      "properties": {
+        "displayName": "Claim Search"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Claim-Status')]",
+      "properties": {
+        "displayName": "Claim Status"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/claim-controller')]",
+      "properties": {
+        "displayName": "claim-controller"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/ClaimInterfaceServices')]",
+      "properties": {
+        "displayName": "ClaimInterfaceServices"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/ClaimSearchServices')]",
+      "properties": {
+        "displayName": "ClaimSearchServices"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/ClaimService')]",
+      "properties": {
+        "displayName": "ClaimService"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Claims-Team-Management')]",
+      "properties": {
+        "displayName": "Claims-Team Management"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/ClientService')]",
+      "properties": {
+        "displayName": "ClientService"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Collections')]",
+      "properties": {
+        "displayName": "Collections"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Commercial-Auto-Claim')]",
+      "properties": {
+        "displayName": "Commercial Auto Claim"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Commercial-Auto-FNOL')]",
+      "properties": {
+        "displayName": "Commercial Auto FNOL"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Commission')]",
+      "properties": {
+        "displayName": "Commission"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Commission-Detail')]",
+      "properties": {
+        "displayName": "Commission Detail"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Common-global-entities')]",
+      "properties": {
+        "displayName": "Common global entities"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Configuration')]",
+      "properties": {
+        "displayName": "Configuration"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Configuration-Details')]",
+      "properties": {
+        "displayName": "Configuration Details"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/configuration-controller')]",
+      "properties": {
+        "displayName": "configuration-controller"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Count-by-Hour')]",
+      "properties": {
+        "displayName": "Count by Hour"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/created-by-chandra')]",
+      "properties": {
+        "displayName": "created-by-chandra"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/customer')]",
+      "properties": {
+        "displayName": "customer"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/customer-controller')]",
+      "properties": {
+        "displayName": "customer-controller"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/customerDashboard')]",
+      "properties": {
+        "displayName": "customerDashboard"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/customerPoliciesQuotesReport')]",
+      "properties": {
+        "displayName": "customerPoliciesQuotesReport"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/customerQuotesReport')]",
+      "properties": {
+        "displayName": "customerQuotesReport"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Data-Segmentations')]",
+      "properties": {
+        "displayName": "Data Segmentations"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Delete-Expense-Payments')]",
+      "properties": {
+        "displayName": "Delete Expense Payments"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Delete-Loss-Payments')]",
+      "properties": {
+        "displayName": "Delete Loss Payments"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Details')]",
+      "properties": {
+        "displayName": "Details"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/DisabilityClaimService')]",
+      "properties": {
+        "displayName": "DisabilityClaimService"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/document-dtls-controller')]",
+      "properties": {
+        "displayName": "document-dtls-controller"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Dues')]",
+      "properties": {
+        "displayName": "Dues"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Dwelling-Fire-FNOL')]",
+      "properties": {
+        "displayName": "Dwelling Fire FNOL"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/EFT')]",
+      "properties": {
+        "displayName": "EFT"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/EndorsementService')]",
+      "properties": {
+        "displayName": "EndorsementService"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/EnrolmentService')]",
+      "properties": {
+        "displayName": "EnrolmentService"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Entities')]",
+      "properties": {
+        "displayName": "Entities"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Entity')]",
+      "properties": {
+        "displayName": "Entity"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Entity-Master')]",
+      "properties": {
+        "displayName": "Entity Master"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Entity-Setup-Transactions')]",
+      "properties": {
+        "displayName": "Entity Setup Transactions"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Entity-Status-Transactions')]",
+      "properties": {
+        "displayName": "Entity Status Transactions"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/escalation-matrix-controller')]",
+      "properties": {
+        "displayName": "escalation-matrix-controller"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/event-mapping-controller')]",
+      "properties": {
+        "displayName": "event-mapping-controller"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Events')]",
+      "properties": {
+        "displayName": "Events"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/events-controller')]",
+      "properties": {
+        "displayName": "events-controller"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Expense-Payments')]",
+      "properties": {
+        "displayName": "Expense Payments"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Expense-Reserves')]",
+      "properties": {
+        "displayName": "Expense Reserves"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/exportedby')]",
+      "properties": {
+        "displayName": "exportedby"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/FacilityService')]",
+      "properties": {
+        "displayName": "FacilityService"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Failed-Transactions')]",
+      "properties": {
+        "displayName": "Failed Transactions"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Feature-Assignments')]",
+      "properties": {
+        "displayName": "Feature Assignments"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Features')]",
+      "properties": {
+        "displayName": "Features"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Fnol')]",
+      "properties": {
+        "displayName": "Fnol"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Group')]",
+      "properties": {
+        "displayName": "Group"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Group-Master')]",
+      "properties": {
+        "displayName": "Group Master"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/group-controller')]",
+      "properties": {
+        "displayName": "group-controller"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/GroupService')]",
+      "properties": {
+        "displayName": "GroupService"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Homeowners-FNOL')]",
+      "properties": {
+        "displayName": "Homeowners FNOL"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/IdentificationCriteria')]",
+      "properties": {
+        "displayName": "IdentificationCriteria"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/import-log-controller')]",
+      "properties": {
+        "displayName": "import-log-controller"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Incentive-Contests')]",
+      "properties": {
+        "displayName": "Incentive Contests"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Insured')]",
+      "properties": {
+        "displayName": "Insured"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Jurisdiction')]",
+      "properties": {
+        "displayName": "Jurisdiction"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/LifeClaimService')]",
+      "properties": {
+        "displayName": "LifeClaimService"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Litigation')]",
+      "properties": {
+        "displayName": "Litigation"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Loss-Payments')]",
+      "properties": {
+        "displayName": "Loss Payments"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Loss-Reserves')]",
+      "properties": {
+        "displayName": "Loss Reserves"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/lov-controller')]",
+      "properties": {
+        "displayName": "lov-controller"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/models-controller')]",
+      "properties": {
+        "displayName": "models-controller"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/monthlyIssuedPoliciesSummary')]",
+      "properties": {
+        "displayName": "monthlyIssuedPoliciesSummary"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/monthlyWrittenPremiumSummary')]",
+      "properties": {
+        "displayName": "monthlyWrittenPremiumSummary"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Mortgagee')]",
+      "properties": {
+        "displayName": "Mortgagee"
+      }
+    },
+    {
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/myPerformanceListConf')]",
+      "properties": {
+        "displayName": "myPerformanceListConf"
+      }
     }
   ]
 }
