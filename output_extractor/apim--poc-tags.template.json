@@ -127,6 +127,14 @@
         "displayName": "Background Check"
       }
     },
+	{
+      "apiVersion": "2021-08-01",
+      "type": "Microsoft.ApiManagement/service/tags",
+      "name": "[concat(parameters('apimServiceName'), '/Partner-API')]",
+      "properties": {
+        "displayName": "Partner API"
+      }
+    },
     {
       "apiVersion": "2021-08-01",
       "type": "Microsoft.ApiManagement/service/tags",
